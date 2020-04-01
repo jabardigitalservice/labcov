@@ -17,7 +17,8 @@
 
                                         <p class="text-muted mt-1 mb-4">Silahkan masukan alamat email dan password anda.</p>
 
-                                        <form action="#" class="authentication-form">
+                                        <form action="{{ route('login') }}" method="post" class="authentication-form">
+                                            @csrf
                                             <div class="form-group">
                                                 <label class="form-control-label">Alamat Email</label>
                                                 @error('email')

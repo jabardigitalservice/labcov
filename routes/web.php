@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('logout', 'Auth\LoginController@logout');
 /*
 |--------------------------------------------------------------------------
 | Home Routes
@@ -17,4 +17,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->middleware('auth');
+Route::resource('registrasi', 'RegisterPasienController')->middleware('auth');
+Route::post('registrasi/{id}','RegisterPasienController@updatex')->middleware('auth');
+Route::get('registrasi/delete/{id}','RegisterPasienController@delete')->middleware('auth');

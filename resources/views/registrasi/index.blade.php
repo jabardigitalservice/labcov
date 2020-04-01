@@ -1,163 +1,136 @@
 @extends('layouts.web')
+@section('title','- Registrasi')
+@section('css')
+        <!-- plugin css -->
+        <link href="{{asset('assets/libs/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/libs/datatables/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/libs/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/libs/datatables/select.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" /> 
+
+@endsection
 @section('content')
 
             <div class="content">
                 <div class="container-fluid">
                     <div class="row page-title align-items-center">
                         <div class="col-sm-4 col-xl-6">
-                            <h4 class="mb-1 mt-0">Dashboard</h4>
+                            <h4 class="mb-1 mt-0">Register</h4>
                         </div>
                         <div class="col-sm-8 col-xl-6">
-                           
+                           <a href="{{url('registrasi/create')}}" class="btn btn-md btn-primary float-right ml-2"><i class="uil-plus"></i> Registrasi Baru</a>
+                           <a href="{{url('registrasi/')}}" class="btn btn-md btn-primary float-right"><i class="uil-upload"></i> Import Data</a>
                         </div>
                     </div>
 
                     <!-- content -->
                     <div class="row">
-                        <div class="col-md-6 col-xl-3">
+                        <div class="col-12">
                             <div class="card">
-                                <div class="card-body p-0">
-                                    <div class="media p-3">
-                                        <div class="media-body">
-                                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Today
-                                                Revenue</span>
-                                            <h2 class="mb-0">$2189</h2>
-                                        </div>
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-xl-3">
-                            <div class="card">
-                                <div class="card-body p-0">
-                                    <div class="media p-3">
-                                        <div class="media-body">
-                                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Product
-                                                Sold</span>
-                                            <h2 class="mb-0">1065</h2>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-xl-3">
-                            <div class="card">
-                                <div class="card-body p-0">
-                                    <div class="media p-3">
-                                        <div class="media-body">
-                                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">New
-                                                Customers</span>
-                                            <h2 class="mb-0">11</h2>
-                                        </div>
-                                      
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-xl-3">
-                            <div class="card">
-                                <div class="card-body p-0">
-                                    <div class="media p-3">
-                                        <div class="media-body">
-                                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">New
-                                                Visitors</span>
-                                            <h2 class="mb-0">750</h2>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-         
-            
-                    <!-- products -->
-                    <div class="row">
-                        <div class="col-xl-5">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title mt-0 mb-0 header-title">Sales By Category</h5>
-                                    <div id="sales-by-category-chart" class="apex-charts mb-0 mt-4" dir="ltr"></div>
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
-                        <div class="col-xl-7">
-                            <div class="card">
-                                <div class="card-body">
-                                    <a href="" class="btn btn-primary btn-sm float-right">
-                                        <i class='uil uil-export ml-1'></i> Export
-                                    </a>
-                                    <h5 class="card-title mt-0 mb-0 header-title">Recent Orders</h5>
-
-                                    <div class="table-responsive mt-4">
-                                        <table class="table table-hover table-nowrap mb-0">
+                                <div class="card-body">  
+                                    <h4 class="header-title mt-0 mb-1">Register Pasien</h4>
+                                    <p class="sub-header">
+                                        Register pasien dari berbagai rumah sakit dan fasyankes.
+                                    </p>
+                                        <table id="basic-datatable"  class="table table-striped dt-responsive table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Product</th>
-                                                    <th scope="col">Customer</th>
-                                                    <th scope="col">Price</th>
-                                                    <th scope="col">Status</th>
+                                                    <th>Informasi Pasien</th>
+                                                    <th>Pengirim Register</th>
+                                                    <th>Tanggal Input</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+                                                @foreach($reg as $r)
                                                 <tr>
-                                                    <td>#98754</td>
-                                                    <td>ASOS Ridley High</td>
-                                                    <td>Otto B</td>
-                                                    <td>$79.49</td>
-                                                    <td><span class="badge badge-soft-warning py-1">Pending</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>#98753</td>
-                                                    <td>Marco Lightweight Shirt</td>
-                                                    <td>Mark P</td>
-                                                    <td>$125.49</td>
-                                                    <td><span class="badge badge-soft-success py-1">Delivered</span>
+                                                    <td><p><b>Nomor Registrasi : </b>{{$r->reg_no}}</p>
+                                                        <p><b>NIK Pasien : </b>{{$r->reg_no}}</p>
+                                                        <p><b>Nama Pasien : </b>{{$r->reg_nama_pasien}} ({{$r->reg_usia}})</p>
+                                                    
                                                     </td>
+                                                    <td><p><b>Dinkes Pengirim : </b>{{$r->reg_dinkes_pengirim}}</p>
+                                                        <p><b>Fasyankes : </b> {{$r->reg_fasyankes_pengirim}} ({{$r->reg_nama_rs}})</p>
+                                                        <p><b>Dokter Penanggung Jawab : </b>{{$r->reg_nama_dokter}}</p></td>
+                                                        <td>{{ Carbon\Carbon::parse($r->created_date)->isoformat('d MMMM Y')}}</p>  </td>
+                                                    <td>
+                                                        <a href="{{url('registrasi/'.$r->regid)}}" class="btn btn-sm btn-primary"><i class="uil-info-circle"></i></a>
+                                                        <a href="{{url('registrasi/'.$r->regid.'/edit')}}" class="btn btn-sm btn-warning"><i class="uil-edit"></i></a>
+                                                        <button type="button" href="{{url('registrasi/delete/'.$r->regid)}}" class="deletebtn btn btn-sm btn-danger"><i class="uil-trash"></i></button></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>#98752</td>
-                                                    <td>Half Sleeve Shirt</td>
-                                                    <td>Dave B</td>
-                                                    <td>$35.49</td>
-                                                    <td><span class="badge badge-soft-danger py-1">Declined</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>#98751</td>
-                                                    <td>Lightweight Jacket</td>
-                                                    <td>Shreyu N</td>
-                                                    <td>$49.49</td>
-                                                    <td><span class="badge badge-soft-success py-1">Delivered</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>#98750</td>
-                                                    <td>Marco Shoes</td>
-                                                    <td>Rik N</td>
-                                                    <td>$69.49</td>
-                                                    <td><span class="badge badge-soft-danger py-1">Declined</span>
-                                                    </td>
-                                                </tr>
+                                                @endforeach
+                                               
+                                                
+                                               
                                             </tbody>
                                         </table>
-                                    </div> <!-- end table-responsive-->
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col-->
+
+                                       
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <!-- end row -->
+
+         
 
                 </div>
             </div> <!-- content -->
 
+@section('js')
+        <!-- datatable js -->
+        <script src="{{asset('assets/libs/datatables/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('assets/libs/datatables/dataTables.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('assets/libs/datatables/dataTables.responsive.min.js')}}"></script>
+        <script src="{{asset('assets/libs/datatables/responsive.bootstrap4.min.js')}}"></script>
+        
+        <script src="{{asset('assets/libs/datatables/dataTables.buttons.min.js')}}"></script>
+        <script src="{{asset('assets/libs/datatables/buttons.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('assets/libs/datatables/buttons.html5.min.js')}}"></script>
+        <script src="{{asset('assets/libs/datatables/buttons.flash.min.js')}}"></script>
+        <script src="{{asset('assets/libs/datatables/buttons.print.min.js')}}"></script>
 
+        <script src="{{asset('assets/libs/datatables/dataTables.keyTable.min.js')}}"></script>
+        <script src="{{asset('assets/libs/datatables/dataTables.select.min.js')}}"></script>
+<script>
+$(document).ready(function(){
+    
+
+    $(document).on('click', '.deletebtn', function(e) {
+       var href = $(this).attr('href');
+       Swal.fire({
+   title: 'Yakin untuk menghapus data ini ? ',
+   text: 'Data yang sudah dihapus tidak dapat dikembalikan!',
+   icon: 'warning',
+   showCancelButton: true,
+   confirmButtonColor: '#95000c',
+   confirmButtonText: 'Ya, Hapus!',
+   cancelButtonText: 'Tidak, batalkan'
+ }).then((result) => {
+   if (result.value) {
+      window.location.href = href;
+  
+   // For more information about handling dismissals please visit
+   // https://sweetalert2.github.io/#handling-dismissals
+   } else if (result.dismiss === Swal.DismissReason.cancel) {
+     Swal.fire(
+       'Dibatalkan',
+       'Data tidak jadi dihapus',
+       'error'
+     )
+   }
+ });
+ 
+      });
+ 
+  
+    $("#basic-datatable").DataTable({
+        language:{
+            paginate:{
+                previous:"<i class='uil uil-angle-left'>",
+                    next:"<i class='uil uil-angle-right'>"}}});
+                        });
+                        </script>
+@endsection
 
 @endsection
