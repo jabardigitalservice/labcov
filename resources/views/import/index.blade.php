@@ -1,5 +1,5 @@
 @extends('layouts.web')
-@section('title','- Registrasi')
+@section('title','- Impor Data Pasien')
 @section('css')
         <!-- plugin css -->
         <link href="{{asset('assets/libs/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
@@ -14,11 +14,10 @@
                 <div class="container-fluid">
                     <div class="row page-title align-items-center">
                         <div class="col-sm-4 col-xl-6">
-                            <h4 class="mb-1 mt-0">Register</h4>
+                            <h4 class="mb-1 mt-0">Impor Data Register</h4>
                         </div>
                         <div class="col-sm-8 col-xl-6">
-                           <a href="{{url('registrasi/create')}}" class="btn btn-md btn-primary float-right ml-2"><i class="uil-plus"></i> Registrasi Baru</a>
-                           <a href="{{url('import/')}}" class="btn btn-md btn-primary float-right"><i class="uil-upload"></i> Import Data</a>
+                         
                         </div>
                     </div>
 
@@ -27,44 +26,32 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">  
-                                    <h4 class="header-title mt-0 mb-1">Register Pasien</h4>
-                                    <p class="sub-header">
-                                        Register pasien dari berbagai rumah sakit dan fasyankes.
-                                    </p>
-                                        <table id="basic-datatable"  class="table table-striped dt-responsive table-bordered" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Informasi Pasien</th>
-                                                    <th>Pengirim Register</th>
-                                                    <th>Tanggal Input</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                @foreach($reg as $r)
-                                                <tr>
-                                                    <td><p><b>Nomor Registrasi : </b>{{$r->reg_no}}</p>
-                                                        <p><b>NIK Pasien : </b>{{$r->reg_nik}}</p>
-                                                        <p><b>Nama Pasien : </b>{{$r->reg_nama_pasien}} ({{$r->reg_usia}})</p>
-                                                    
-                                                    </td>
-                                                    <td><p><b>Dinkes Pengirim : </b>{{$r->reg_dinkes_pengirim}}</p>
-                                                        <p><b>Fasyankes : </b> {{$r->reg_fasyankes_pengirim}} ({{$r->reg_nama_rs}})</p>
-                                                        <p><b>Dokter Penanggung Jawab : </b>{{$r->reg_nama_dokter}}</p></td>
-                                                        <td>{{ Carbon\Carbon::parse($r->created_date)->isoformat('d MMMM Y')}}</p>  </td>
-                                                    <td>
-                                                        <a href="{{url('registrasi/'.$r->regid)}}" class="btn btn-sm btn-primary"><i class="uil-info-circle"></i></a>
-                                                        <a href="{{url('registrasi/'.$r->regid.'/edit')}}" class="btn btn-sm btn-warning"><i class="uil-edit"></i></a>
-                                                        <button type="button" href="{{url('registrasi/delete/'.$r->regid)}}" class="deletebtn btn btn-sm btn-danger"><i class="uil-trash"></i></button></td>
-                                                </tr>
-                                                @endforeach
-                                               
-                                                
-                                               
-                                            </tbody>
-                                        </table>
-
+                                    <h4 class="header-title mt-0 mb-1">Impor Data Register Pasien</h4>
+                                    
+                       
+                                    <p>Silahkan unggah file xlsx sesuai dengan format <a href="">Berikut</a>, ikuti panduan cara mengisi xlsx lalu unggah filenya disini</p>
+        <form method="post" action="{{url('import/reg')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                      <label class="control-label">File XLSX Register:</label>
+                      <input type="file" name="xlsregister">
+                      </div>
+                      <div class="form-group">
+                      <label class="control-label">File XLSX Riwayat Perawatan:</label>
+                      <input type="file" name="xlsriwayatperawatan">
+                      </div>
+                      <div class="form-group">
+                      <label class="control-label">File XLSX Riwayat Kunjungan Luar Negri:</label>
+                      <input type="file" name="xlsriwayatkunjungan">
+                      </div>
+                      <div class="form-group">
+                      <label class="control-label">File XLSX Riwayat Kontak Pasien:</label>
+                      <input type="file" name="xlsriwayatkontak">
+                      </div>
+                      <div class="form-group">
+                        <button ype="submit" class="btn btn-primary">Upload</button>
+                    </div>
+         </form>
                                        
                                 </div>
                             </div>

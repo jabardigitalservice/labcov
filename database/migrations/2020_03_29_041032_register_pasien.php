@@ -28,7 +28,7 @@ class RegisterPasien extends Migration
             // IDENTITAS PASIEN
             $table->string('reg_nama_pasien')->nullable();
             $table->date('reg_tanggallahir')->nullable();
-            $table->string('reg_usia')->nullable();
+            //$table->string('reg_usia')->nullable();
             $table->string('reg_kelamin')->nullable();
             $table->string('reg_hamil_pasca')->nullable();
             $table->string('reg_alamat')->nullable();

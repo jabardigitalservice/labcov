@@ -103,7 +103,7 @@
                 <div id="sidebar-menu" class="slimscroll-menu">
                     <ul class="metismenu" id="menu-bar">
                         <li>
-                            <a href="index.html">
+                            <a href="{{url('/')}}">
                                 <i data-feather="home"></i>
                                 <span> Dashboard </span>
                             </a>

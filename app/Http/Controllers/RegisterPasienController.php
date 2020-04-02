@@ -10,7 +10,10 @@ use App\KunjunganPergi;
 use Carbon\Carbon;
 use App\Logs;
 use Auth;
+use App\Imports\RegisterImport;
 use Illuminate\Database\QueryException as QE;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterPasienController extends Controller
 {
@@ -265,7 +268,4 @@ $update->put('reg_kontakterakhir', implode(",",$new_kontak));
             return redirect('registrasi');
     }
 
-    public function import(Request $request){
-
-    }
 }
