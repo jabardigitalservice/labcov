@@ -11,7 +11,7 @@ class AddStatusToRegister extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up() //membuat status register 
     {
         Schema::table('register', function (Blueprint $table) {
                 $table->integer('reg_statusreg')->nullable();

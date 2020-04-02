@@ -13,7 +13,7 @@ class HistoryKontakPasien extends Migration
      */
     public function up()
     {
-        Schema::create('historykontakpasien', function (Blueprint $table) {
+        Schema::create('historykontakpasien', function (Blueprint $table) { // history kontak pasien
             $table->increments('konid');
             $table->integer('kon_regid');
             $table->string('kon_namakon')->nullable();

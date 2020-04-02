@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,7 +13,7 @@ class HistoryBerpergian extends Migration
      */
     public function up()
     {
-        Schema::create('historykunjungan', function (Blueprint $table) {
+        Schema::create('historykunjungan', function (Blueprint $table) { // history bepergian 
             $table->increments('kunid');
             $table->integer('kun_regid');
             $table->date('kun_tanggalkunjungan')->nullable();

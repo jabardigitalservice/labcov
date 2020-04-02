@@ -11,7 +11,7 @@ class LogEdit extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up() //membuat log pasien 
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
