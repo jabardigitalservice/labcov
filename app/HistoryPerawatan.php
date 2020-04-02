@@ -24,11 +24,12 @@ class HistoryPerawatan extends Model
    /**
     * Attributes that should be mass-assignable.
     * @var array
-    
+
     */
+    // HISTORY PERAWATAN // 
    protected $fillable = ['his_regid',
    'his_tanggalrawat',
    'his_rsfasyankes',
    'created_at',
-   'updated_at'];  
+   'updated_at'];
 }

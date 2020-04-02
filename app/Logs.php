@@ -24,11 +24,12 @@ class Logs extends Model
    /**
     * Attributes that should be mass-assignable.
     * @var array
-    
+
     */
+    // LOGS PASIEN //
    protected $fillable = ['log_user',
    'log_item',
    'log_type',
    'created_at',
-   'updated_at']; 
+   'updated_at'];
 }

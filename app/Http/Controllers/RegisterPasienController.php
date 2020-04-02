@@ -43,12 +43,13 @@ class RegisterPasienController extends Controller
      */
     public function store(Request $request)
     {
+        // INSERT REGISTRASI PER DAERAH //
         $regis = collect($request->all());
         if($request->reg_dinkes_pengirim == "Other"){
             $regis->put('reg_dinkes_pengirim', $request->daerahlain);
         }
         $regis->put('reg_usia', $request->usiatahun." Tahun ".$request->usiabulan." Bulan");
-        
+
         // INSERT RAWAT //
         $hisvisit = array();
         if(!empty($request->tanggalrawat) || !is_null($request->tanggalrawat)){
@@ -63,7 +64,7 @@ class RegisterPasienController extends Controller
                  }catch(QE $e){  return $e; } //show db error message
             }
         }
-            // INSERT PERJALANAN//
+            // INSERT PERJALANAN //
             $kunvisit = array();
             if(!empty($request->tanggalkeluarnegri) || !is_null($request->tanggalkeluarnegri)){
                 for($i = 0; $i<count($request->tanggalkeluarnegri); $i++){
@@ -82,7 +83,7 @@ class RegisterPasienController extends Controller
               // INSERT PERJALANAN//
               $konvisit = array();
               if(!empty($request->namakontak) || !is_null($request->namakontak)){
-            
+
                 for($i = 0; $i<count($request->namakontak); $i++){
                     $q = new KontakPasien();
                     $q->kon_regid = $request->reg_no;
@@ -95,7 +96,7 @@ class RegisterPasienController extends Controller
                     array_push($konvisit,$q->konid);
                      }catch(QE $e){  return $e; } //show db error message
                 }
-                
+
             }
 $regis->put('reg_history_visit', implode(",",$hisvisit));
 $regis->put('reg_kunjunganluarnegri', implode(",",$kunvisit));
@@ -105,7 +106,7 @@ try{
     RegisterPasien::create($regis->all());
      }catch(QE $e){  return $e; } //show db error message
 
-     
+
      notify()->success('Register telah sukses ditambahkan !');
         return redirect('registrasi');
     }
@@ -123,7 +124,7 @@ try{
         $historykunjungan = KunjunganPergi::whereIn('kunid',explode(',',$reg->reg_kunjunganluarnegri))->get();
         $historykontak = KontakPasien::whereIn('konid',explode(',',$reg->reg_kontakterakhir))->get();
 
-    return view('registrasi.show')->with(compact('reg','historyperawatan','historykunjungan','historykontak'));    
+    return view('registrasi.show')->with(compact('reg','historyperawatan','historykunjungan','historykontak'));
     }
 
     /**
@@ -138,7 +139,7 @@ try{
         $historyperawatan = HistoryPerawatan::whereIn('hisid',explode(',',$edit->reg_history_visit))->get();
         $historykunjungan = KunjunganPergi::whereIn('kunid',explode(',',$edit->reg_kunjunganluarnegri))->get();
         $historykontak = KontakPasien::whereIn('konid',explode(',',$edit->reg_kontakterakhir))->get();
-    return view('registrasi.edit')->with(compact('edit','historyperawatan','historykunjungan','historykontak'));    
+    return view('registrasi.edit')->with(compact('edit','historyperawatan','historykunjungan','historykontak'));
     }
 
     /**
@@ -156,7 +157,7 @@ try{
             $update->put('reg_dinkes_pengirim', $request->daerahlain);
         }
         $update->put('reg_usia', $request->usiatahun." Tahun ".$request->usiabulan." Bulan");
-        
+
         // INSERT RAWAT //
         $hisvisit = array();
         $new_rawat = explode(",", $olddata->reg_history_visit);
@@ -171,7 +172,7 @@ try{
                    array_push($hisvisit,$history_perawatan->hisid);
                  }catch(QE $e){  return $e; } //show db error message
             }
-        } 
+        }
         if(!is_null($request->hapushis) || !empty($request->hapushis)){
        $new_rawat = array_diff($new_rawat,$request->hapushis);
           }
@@ -194,7 +195,7 @@ try{
                     array_push($kunvisit,$kunjungan_pergi->kunid);
                      }catch(QE $e){  return $e; } //show db error message
                 }
-              } 
+              }
               if(!is_null($request->hapuskun) || !empty($request->hapuskun)){
            $new_kunjungan =  array_diff($new_kunjungan, $request->hapuskun);
                }
@@ -206,7 +207,7 @@ try{
               $konvisit = array();
               $new_kontak = explode(",",$olddata->reg_kontakterakhir);
               if(!empty($request->namakontak) || !is_null($request->namakontak)){
-            
+
                 for($i = 0; $i<count($request->namakontak); $i++){
                     $kontak_pasien = new KontakPasien();
                     $kontak_pasien->kon_regid = $request->reg_no;
@@ -219,7 +220,7 @@ try{
                     array_push($konvisit,$kontak_pasien->konid);
                      }catch(QE $e){  return $e; } //show db error message
                 }
-         } 
+         }
          if(!is_null($request->hapuskon) || !empty($request->hapuskon)){
            $new_kontak =  array_diff($new_kontak, $request->hapuskon);
          }
@@ -234,7 +235,7 @@ $update->put('reg_kontakterakhir', implode(",",$new_kontak));
     try{
     $olddata->update($update->all());
      }catch(QE $e){  return $e; } //show db error message
-    
+
      try{
     $add_log = new Logs;
     $add_log->log_item = $olddata->regid;

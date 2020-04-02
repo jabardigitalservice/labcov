@@ -18,7 +18,7 @@ class ConfirmPasswordController extends Controller
     | this trait and override any functions that require customization.
     |
     */
-
+    // KONFIRMASI PASSWORD //
     use ConfirmsPasswords;
 
     /**

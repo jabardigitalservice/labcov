@@ -24,10 +24,10 @@ class RegisterPasien extends Model
    /**
     * Attributes that should be mass-assignable.
     * @var array
-    
+
     */
+    // DATA REGISTRASI PASIEN //
    protected $fillable = ['reg_no',
-   'reg_no',
    'reg_nik',
    'reg_dinkes_pengirim',
    'reg_fasyankes_pengirim',
@@ -79,5 +79,5 @@ class RegisterPasien extends Model
    'reg_dateinput',
    'reg_userid',
    'created_at',
-   'updated_at'];  
+   'updated_at'];
 }

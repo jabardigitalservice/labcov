@@ -24,13 +24,14 @@ class KontakPasien extends Model
    /**
     * Attributes that should be mass-assignable.
     * @var array
-    
+
     */
+    // HISTORY KONTAK //
    protected $fillable = ['kon_regid',
    'kon_namakon',
    'kon_alamatkon',
    'kon_hubungankon',
    'kon_tanggalkon',
    'created_at',
-   'updated_at'];  
+   'updated_at'];
 }
