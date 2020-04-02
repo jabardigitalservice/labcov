@@ -13,7 +13,7 @@ class HistoryKunjungan extends Migration
      */
     public function up()
     {
-        Schema::create('historyperawatan', function (Blueprint $table) {
+        Schema::create('historyperawatan', function (Blueprint $table) { //tabel history kunjungan
             $table->increments('hisid');
             $table->integer('his_regid');
             $table->date('his_tanggalrawat')->nullable();

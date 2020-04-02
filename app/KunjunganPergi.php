@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class KunjunganPergi extends Model
 {
-    
+
      /*
     **
     * The database table used by the model.
@@ -25,12 +25,13 @@ class KunjunganPergi extends Model
    /**
     * Attributes that should be mass-assignable.
     * @var array
-    
+
     */
+    // HISTORY KUNJUNGAN //
    protected $fillable = ['kun_regid',
    'kun_tanggalkunjungan',
    'kun_kotakunjungan',
    'kun_negarakunjungan',
    'created_at',
-   'updated_at'];  
+   'updated_at'];
 }
