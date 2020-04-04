@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterPasienController extends Controller
 {
+       
+    
     /**
      * Display a listing of the resource.
      *

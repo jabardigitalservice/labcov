@@ -115,23 +115,12 @@
                             </a>
                         </li>
                         <li>
-                            <a href="javascript: void(0);">
+                            <a  href="{{url('pengambilansampel')}}">
                                 <i class="uil-flask-potion "></i>
-                                <span>Pemeriksaan Sample </span>
-                                <span class="menu-arrow"></span>
+                                <span>Pengambilan Sample </span>
+                               
                             </a>
 
-                            <ul class="nav-second-level" aria-expanded="false">
-                                <li>
-                                    <a href="email-inbox.html">Inbox</a>
-                                </li>
-                                <li>
-                                    <a href="email-read.html">Read</a>
-                                </li>
-                                <li>
-                                    <a href="email-compose.html">Compose</a>
-                                </li>
-                            </ul>
                         </li>
                         <li>
                             <a href="javascript: void(0);">
