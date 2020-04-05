@@ -25,7 +25,7 @@ class KunjunganPergiImport implements ToCollection, WithHeadingRow
     {
         foreach ($rows as $row) 
         {   $kun = new KunjunganPergi;
-            $kun->create([
+            $kun->insertOrIgnore([
                 'kun_regid'  => $row['nomor_registrasi'],
                 'kun_tanggalkunjungan' => $row['tanggal_kunjungan'],
                 'kun_kotakunjungan'    => $row['kota_kunjungan'],

@@ -26,7 +26,7 @@ class HistoryPerawatanImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row) 
         {   
             $his = new HistoryPerawatan;
-            $his->create([
+            $his->insertOrIgnore([
             'his_regid'  => $row['nomor_registrasi'],
             'his_tanggalrawat' => $row['tanggal_rawat'],
             'his_rsfasyankes'    => $row['rs_fasyankes'],

@@ -70,7 +70,7 @@ class ImportExportController extends Controller
             
             notify()->success('File Riwayat Perawatan Berhasil di Import');
             }
-        }
+        } 
 
         if ($request->file('xlsriwayatkunjungan') != '' || $request->file('xlsriwayatkunjungan') !== null) {
             $importkun = new KunjunganPergiImport;
@@ -89,16 +89,17 @@ class ImportExportController extends Controller
             $ubah = KunjunganPergi::orderBy('kunid', 'desc')->take(count($importkun->getArray()))->get();
             foreach($ubah as $u){
                 $addtoreg = RegisterPasien::where('reg_no',$u->kun_regid)->first();
-                $arr = explode(",",$addtoreg->reg_kunjunganluarnegri);
+               $arr = explode(",",$addtoreg->reg_kunjunganluarnegri);
                 $arr[] = $u->kunid;
                 $addtoreg->reg_kunjunganluarnegri = implode(",", $arr);
                 $addtoreg->update();
             }
-            notify()->success('File Riwayat Kunjungan Berhasil di Import');
+           notify()->success('File Riwayat Kunjungan Berhasil di Import');
+        
             }
         }
 
-        if ($request->file('xlsriwayatkontak') != ''  || $request->file('xlsriwayatkontak') !== null) {
+      if ($request->file('xlsriwayatkontak') != ''  || $request->file('xlsriwayatkontak') !== null) {
             $importkon = new KontakPasienImport;
             $file = $request->file('xlsriwayatkontak');
             $fileArray = ['xlsriwayatkontak' => $file];
@@ -124,9 +125,9 @@ class ImportExportController extends Controller
             notify()->success('File Kontak Terakhir Berhasil di Import');
         }
      
-        }
+        } 
 
-        return redirect('register');
+         return redirect('registrasi');
 }
 
 }

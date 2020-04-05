@@ -26,7 +26,7 @@ class KontakPasienImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row) 
         {   
             $kon = new KontakPasien;
-            $kon->create([
+            $kon->insertOrIgnore([
             'kon_regid'  => $row['nomor_registrasi'],
             'kon_namakon' => $row['nama_kontak'],
             'kon_alamatkon' => $row['alamat_kontak'],
