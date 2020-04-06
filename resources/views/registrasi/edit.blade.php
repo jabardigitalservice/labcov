@@ -241,8 +241,31 @@
   <input class="form-check-input" type="radio" name="reg_gejpanas" value="Tidak" @if($edit->reg_gejpanas == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejpanas" value="Tidak Diisi" @if($edit->reg_gejpanas == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
+
+              <div class="form-group row mt-4">
+                <label class="col-md-2" >Tanda Pneumonia</label>
+                <div class="col-md-6">
+                <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejpanas" value="Ya" @if($edit->reg_gejpneumonia == "Ya") checked @endif>
+  <label class="form-check-label">Ya</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejpneumonia" value="Tidak" @if($edit->reg_gejpneumonia == "Tidak") checked @endif>
+  <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejpneumonia" value="Tidak Diisi" @if($edit->reg_gejpneumonia == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
+                </div>
+              </div>
+
               <div class="form-group row mt-4">
                 <label class="col-md-2" >Batuk</label>
                 <div class="col-md-6">
@@ -253,6 +276,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejbatuk" value="Tidak" @if($edit->reg_gejbatuk == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejbatuk" value="Tidak Diisi" @if($edit->reg_gejbatuk == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -265,6 +292,10 @@
 </div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejnyeritenggorokan" value="Tidak" @if($edit->reg_gejnyeritenggorokan == "Tidak") checked @endif>
+  <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejnyeritenggorokan" value="Tidak Diisi" @if($edit->reg_gejnyeritenggorokan == "Tidak Diisi") checked @endif>
   <label class="form-check-label">Tidak</label>
 </div>
                 </div>
@@ -280,6 +311,11 @@
   <input class="form-check-input" type="radio" name="reg_gejsesaknafas" value="Tidak" @if($edit->reg_gejsesaknafas == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejsesaknafas" value="Tidak Diisi" @if($edit->reg_gejsesaknafas == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
+        
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -292,6 +328,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejpilek" value="Tidak" @if($edit->reg_gejpilek == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejpilek" value="Tidak Diisi" @if($edit->reg_gejpilek == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -306,6 +346,10 @@
   <input class="form-check-input" type="radio" name="reg_gejlesu" value="Tidak" @if($edit->reg_gejlesu == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejlesu" value="Tidak Diisi" @if($edit->reg_gejlesu == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -318,6 +362,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejsakitkepala" value="Tidak" @if($edit->reg_gejsakitkepala == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejsakitkepala" value="Tidak Diisi" @if($edit->reg_gejsakitkepala == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -332,6 +380,10 @@
   <input class="form-check-input" type="radio" name="reg_gejdiare" value="Tidak" @if($edit->reg_gejdiare == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejdiare" value="Tidak Diisi" @if($edit->reg_gejdiare == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -344,6 +396,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejmualmuntah" value="Tidak" @if($edit->reg_gejmualmuntah == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejmualmuntah" value="Tidak Diisi" @if($edit->reg_gejmualmuntah == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -377,22 +433,32 @@
             </div>
             <div class="form-group row mt-4">
                 <label class="col-md-2" >Leukosit</label>
-                <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" name="reg_leukosit" value="{{$edit->reg_leukosit}}"/>
-                </div>
+                <div class="input-group col-md-3">
+               <input class="multisteps-form__input form-control" type="number" min="0" name="reg_leukosit" value="{{$edit->reg_leukosit}}"/>
+               <div class="input-group-append"> 
+                <span class="input-group-text">/ul</span>
+              </div>   
+              </div>
               </div>
               <div class="form-group row mt-4">
                 <label class="col-md-2" >Limfosit</label>
-                <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" name="reg_limfosit" placeholder="Limfosit" value="{{$edit->reg_limfosit}}"/>
-                </div>
+                <div class="input-group col-md-3">
+               <input class="multisteps-form__input form-control" type="number" min="0" name="reg_limfosit" value="{{$edit->reg_limfosit}}"/>
+               <div class="input-group-append"> 
+                <span class="input-group-text">/ul</span>
+              </div> 
+              </div>
               </div>
               <div class="form-group row mt-4">
                 <label class="col-md-2" >Trombosit</label>
-                <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" name="reg_trombosit" placeholder="Trombosit" value="{{$edit->reg_trombosit}}"/>
-                </div>
+                <div class="input-group col-md-3">
+               <input class="multisteps-form__input form-control" type="number" min="0" name="reg_trombosit"  value="{{$edit->reg_trombosit}}"/>
+               <div class="input-group-append"> 
+                <span class="input-group-text">/ul</span>
               </div>
+              </div>
+              </div>
+
             <div class="form-group row mt-4">
                 <label class="col-md-2" >Menggunakan Ventilator</label>
                 <div class="col-md-6">
@@ -423,6 +489,13 @@
 </div>
                 </div>
               </div>
+
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="reg_hasillablainnya">Hasil lab lainnya :</label>
+                <div class="col-md-10">
+  <textarea class="form-control" rows="5" name="reg_hasillablainnya">{{$edit->reg_hasillablainnya}}</textarea>
+                </div>
+            </div>
         </div>
         <div id="sw-default-step-5">
             <div class="form-group row mt-4">
@@ -544,6 +617,10 @@
   <input class="form-check-input" type="radio" name="reg_komorbidhipertensi" value="Tidak" @if($edit->reg_komorbidhipertensi == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidhipertensi" value="Tidak Diisi" @if($edit->reg_komorbidhipertensi == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -557,18 +634,26 @@
   <input class="form-check-input" type="radio" name="reg_komorbiddm" value="Tidak" @if($edit->reg_komorbiddm == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbiddm" value="Tidak Diisi" @if($edit->reg_komorbiddm == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
                 <label class="col-md-2" >Liver</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Ya" @if($edit->reg_komorbidliver== "Ya") checked @endif>
+  <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Ya" @if($edit->reg_komorbidliver == "Ya") checked @endif>
   <label class="form-check-label">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Tidak" @if($edit->reg_komorbidliver== "Tidak") checked @endif>
+  <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Tidak" @if($edit->reg_komorbidliver == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Tidak Diisi" @if($edit->reg_komorbidliver == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -583,6 +668,10 @@
   <input class="form-check-input" type="radio" name="reg_komorbidneurologi" value="Tidak" @if($edit->reg_komorbidneurologi == "Tidak") checked @endif> 
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidneurologi" value="Tidak Diisi" @if($edit->reg_komorbidneurologi == "Tidak Diisi") checked @endif> 
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -595,6 +684,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbidhiv" value="Tidak" @if($edit->reg_komorbidhiv == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidhiv" value="Tidak Diisi" @if($edit->reg_komorbidhiv == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -609,6 +702,10 @@
   <input class="form-check-input" type="radio" name="reg_komorbidparu" value="Tidak" @if($edit->reg_komorbidparu == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidparu" value="Tidak Diisi" @if($edit->reg_komorbidparu == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -621,6 +718,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbidginjal" value="Tidak" @if($edit->reg_komorbidginjal == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidginjal" value="Tidak Diisi" @if($edit->reg_komorbidginjal == "Tidak Diisi") checked @endif>
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>

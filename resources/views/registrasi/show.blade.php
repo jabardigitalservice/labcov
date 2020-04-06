@@ -133,6 +133,11 @@
     <td width="60%">{{$reg->reg_gejpanas}}</td>
     </tr>
     <tr>
+    <tr>
+    <td width="40%"><b>Tanda Pneumonia</b></td>
+    <td width="60%">{{$reg->reg_gejpneumonia}}</td>
+    </tr>
+    <tr>
     <td width="40%"><b>Batuk</b></td>
     <td width="60%">{{$reg->reg_gejbatuk}}</td>
     </tr>
@@ -188,15 +193,15 @@
     </tr>
     <tr>
     <td width="40%"><b>Leukosit</b></td>
-    <td width="60%">{{$reg->reg_leukosit}}</td>
+    <td width="60%">{{$reg->reg_leukosit}} /ul</td>
     </tr>
     <tr>
     <td width="40%"><b>Limfosit</b></td>
-    <td width="60%">{{$reg->reg_limfosit}}</td>
+    <td width="60%">{{$reg->reg_limfosit}} /ul</td>
     </tr>
     <tr>
     <td width="40%"><b>Trombosit</b></td>
-    <td width="60%">{{$reg->reg_trombosit}}</td>
+    <td width="60%">{{$reg->reg_trombosit}} /ul</td>
     </tr>
     <tr>
     <td width="40%"><b>Menggunakan Ventilator</b></td>
@@ -206,8 +211,11 @@
         <td width="40%"><b>Status Kesehatan Pasien</b></td>
         <td width="60%">{{$reg->reg_statuskes}}</td>
         </tr>
-    <tr>
     
+        <tr>
+          <td width="40%"><b>Hasil Lab Lainnya</b></td>
+          <td width="60%">{{$reg->reg_hasilllablainya}}</td>
+          </tr>
     </tbody>
     </table>                
 
@@ -296,35 +304,37 @@
     <table class="table">
         <tbody>
         <tr>
-        <td width="40%"><b>X-Ray Paru</b></td>
-        <td width="60%">{{$reg->reg_xrayparu}}</td>
+        <td width="40%"><b>Penyakit Kardiovaskuler/Hipertensi</b></td>
+        <td width="60%">{{$reg->reg_komorbidhipertensi}}</td>
         </tr>
         <tr>
-        <td width="40%"><b>Hasil X-Ray Paru</b></td>
-        <td width="60%">{{$reg->reg_hasilxray}}</td>
+        <td width="40%"><b>Diabetes Mellitus</b></td>
+        <td width="60%">{{$reg->reg_komorbiddm}}</td>
         </tr>
         <tr>
-        <td width="40%"><i>Hitung sel darah putih</i></td>
+        <td width="40%"><b>Liver</b></td>
+        <td width="60%">{{$reg->reg_komorbidliver}}</td>
         </tr>
         <tr>
-        <td width="40%"><b>Leukosit</b></td>
-        <td width="60%">{{$reg->reg_leukosit}}</td>
+        <td width="40%"><b>Kronik neurologi / neuromuskula</b></td>
+        <td width="60%">{{$reg->reg_komorbidneurologi}}</td>
         </tr>
         <tr>
-        <td width="40%"><b>Limfosit</b></td>
-        <td width="60%">{{$reg->reg_limfosit}}</td>
+        <td width="40%"><b>Imunodefisiensi / HIV</b></td>
+        <td width="60%">{{$reg->reg_komorbidhiv}}</td>
         </tr>
         <tr>
-        <td width="40%"><b>Trombosit</b></td>
-        <td width="60%">{{$reg->reg_trombosit}}</td>
+        <td width="40%"><b>Penyakit paru kronik</b></td>
+        <td width="60%">{{$reg->reg_komorbidparu}}</td>
         </tr>
         <tr>
-        <td width="40%"><b>Menggunakan Ventilator</b></td>
-        <td width="60%">{{$reg->reg_ventilator}}</td>
+        <td width="40%"><b>Penyakit Ginjal</b></td>
+        <td width="60%">{{$reg->reg_komorbidginjal}}</td>
         </tr>
+        
         <tr>
-            <td width="40%"><b>Status Kesehatan Pasien</b></td>
-            <td width="60%">{{$reg->reg_statuskes}}</td>
+            <td width="40%"><b>Penjelasan Lain</b></td>
+            <td width="60%">{{$reg->reg_penjelasanlain}}</td>
             </tr>
         <tr>
         

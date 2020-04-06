@@ -222,6 +222,27 @@
   <input class="form-check-input" type="radio" name="reg_gejpanas" value="Tidak">
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejpanas" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
+                </div>
+              </div>
+              <div class="form-group row mt-4">
+                <label class="col-md-2" >Tanda Pneumonia</label>
+                <div class="col-md-6">
+                <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejpneumonia" value="Ya">
+  <label class="form-check-label">Ya</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejpneumonia" value="Tidak">
+  <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejpneumonia" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -234,6 +255,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejbatuk" value="Tidak">
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejbatuk" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -248,6 +273,10 @@
   <input class="form-check-input" type="radio" name="reg_gejnyeritenggorokan" value="Tidak">
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejnyeritenggorokan" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -260,6 +289,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejsesaknafas" value="Tidak">
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejsesaknafas" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -274,6 +307,10 @@
   <input class="form-check-input" type="radio" name="reg_gejpilek" value="Tidak">
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejpilek" value="Tidak Disii">
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -286,6 +323,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejlesu" value="Tidak">
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejlesu" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -300,6 +341,10 @@
   <input class="form-check-input" type="radio" name="reg_gejsakitkepala" value="Tidak">
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejsakitkepala" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -313,6 +358,10 @@
   <input class="form-check-input" type="radio" name="reg_gejdiare" value="Tidak">
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejdiare" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -325,6 +374,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejmualmuntah" value="Tidak">
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_gejmualmuntah" value="Tidak">
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -357,23 +410,32 @@
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-md-2" >Leukosit</label>
-                <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" name="reg_leukosit" placeholder="Leukosit"/>
-                </div>
-              </div>
-              <div class="form-group row mt-4">
-                <label class="col-md-2" >Limfosit</label>
-                <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" name="reg_limfosit" placeholder="Limfosit"/>
-                </div>
-              </div>
-              <div class="form-group row mt-4">
-                <label class="col-md-2" >Trombosit</label>
-                <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" name="reg_trombosit" placeholder="Trombosit"/>
-                </div>
-              </div>
+              <label class="col-md-2" >Leukosit</label>
+              <div class="input-group col-md-3">
+             <input class="multisteps-form__input form-control" type="number" min="0" name="reg_leukosit" />
+             <div class="input-group-append"> 
+              <span class="input-group-text">/ul</span>
+            </div>   
+            </div>
+            </div>
+            <div class="form-group row mt-4">
+              <label class="col-md-2" >Limfosit</label>
+              <div class="input-group col-md-3">
+             <input class="multisteps-form__input form-control" type="number" min="0" name="reg_limfosit"/>
+             <div class="input-group-append"> 
+              <span class="input-group-text">/ul</span>
+            </div> 
+            </div>
+            </div>
+            <div class="form-group row mt-4">
+              <label class="col-md-2" >Trombosit</label>
+              <div class="input-group col-md-3">
+             <input class="multisteps-form__input form-control" type="number" min="0" name="reg_trombosit" />
+             <div class="input-group-append"> 
+              <span class="input-group-text">/ul</span>
+            </div>
+            </div>
+            </div>
             <div class="form-group row mt-4">
                 <label class="col-md-2" >Menggunakan Ventilator</label>
                 <div class="col-md-6">
@@ -404,6 +466,13 @@
 </div>
                 </div>
               </div>
+
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="reg_hasillablainnya">Hasil lab lainnya :</label>
+                <div class="col-md-10">
+  <textarea class="form-control" rows="5" name="reg_hasillablainnya"></textarea>
+                </div>
+            </div>
         </div>
         <div id="sw-default-step-5">
             <div class="form-group row mt-4">
@@ -486,6 +555,10 @@
   <input class="form-check-input" type="radio" name="reg_komorbidhipertensi" value="Tidak">
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidhipertensi" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -498,6 +571,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbiddm" value="Tidak">
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbiddm" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -512,6 +589,10 @@
   <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Tidak">
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -524,6 +605,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbidneurologi" value="Tidak">
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidneurologi" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -538,6 +623,10 @@
   <input class="form-check-input" type="radio" name="reg_komorbidhiv" value="Tidak">
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidparu" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -551,6 +640,10 @@
   <input class="form-check-input" type="radio" name="reg_komorbidparu" value="Tidak">
   <label class="form-check-label">Tidak</label>
 </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidparu" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
+</div>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -563,6 +656,10 @@
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbidginjal" value="Tidak">
   <label class="form-check-label">Tidak</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="reg_komorbidginjal" value="Tidak Diisi">
+  <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
