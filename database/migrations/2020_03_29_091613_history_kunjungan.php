@@ -29,6 +29,6 @@ class HistoryKunjungan extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('historyperawatan');
     }
 }

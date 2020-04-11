@@ -85,6 +85,6 @@ class RegisterPasien extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('register');
     }
 }

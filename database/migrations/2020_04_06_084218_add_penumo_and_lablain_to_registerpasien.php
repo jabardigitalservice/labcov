@@ -26,8 +26,9 @@ class AddPenumoAndLablainToRegisterpasien extends Migration
      */
     public function down()
     {
-        Schema::table('registerpasien', function (Blueprint $table) {
-            //
-        });
+        Schema::table('register', function($table) {
+            $table->dropColumn('reg_gejpenumonia');
+            $table->dropColumn('reg_hasillablainnya');
+         });
     }
 }

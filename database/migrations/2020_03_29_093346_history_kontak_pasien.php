@@ -31,6 +31,6 @@ class HistoryKontakPasien extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('historykontakpasien');
     }
 }

@@ -4,17 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStatusToRegister extends Migration
+class AddNomorEkstraksiToPengambilansampel extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() //membuat status register 
+    public function up()
     {
-        Schema::table('register', function (Blueprint $table) {
-                $table->integer('reg_statusreg')->nullable();
+        Schema::table('pengambilansampel', function (Blueprint $table) {
+            $table->string('pen_nomor_ekstraksi')->nullable();
         });
     }
 
@@ -25,8 +25,9 @@ class AddStatusToRegister extends Migration
      */
     public function down()
     {
-        Schema::table('register', function($table) {
-            $table->dropColumn('reg_statusreg');
+        Schema::table('pengambilansampel', function($table) {
+            $table->string('pen_nomor_ekstraksi');
          });
     }
+    
 }

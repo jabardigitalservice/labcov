@@ -46,6 +46,6 @@ class Sample extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('sampel');
     }
 }

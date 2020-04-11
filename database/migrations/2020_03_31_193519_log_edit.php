@@ -28,6 +28,6 @@ class LogEdit extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('logs');
     }
 }
