@@ -96,8 +96,7 @@
 </div>
 </div>
 <hr>
-<h3 class="header-title mt-2 mb-2">Riwayat Perawatan Pasien Dalam Pengawasan COVID-19</h3>
-@if(!empty($historyperawatan))
+<h3 class="header-title mt-2 mb-2">Riwayat Perawatan Pasien</h3>
        <table class="table">
         <thead>
             <tr>
@@ -106,21 +105,59 @@
             </tr>
         </thead>
           <tbody>
-              @foreach($historyperawatan as $hp)
             <tr>
-              <td width="30%">{{$hp->his_tanggalrawat}}</td>
-              <td width="60%">{{$hp->his_rsfasyankes}}</td>
+              <td width="30%">{{$reg->reg_tanggalkunjungan1}}</td>
+              <td width="60%">{{$reg->reg_rsfasyankes1}}</td>
             </tr>
-           @endforeach
+            <tr>
+              <td width="30%">{{$reg->reg_tanggalkunjungan2}}</td>
+              <td width="60%">{{$reg->reg_rsfasyankes2}}</td>
+            </tr>
+            <tr>
+              <td width="30%">{{$reg->reg_tanggalkunjungan3}}</td>
+              <td width="60%">{{$reg->reg_rsfasyankes3}}</td>
+            </tr>
+            <tr>
+              <td width="30%">{{$reg->reg_tanggalkunjungan4}}</td>
+              <td width="60%">{{$reg->reg_rsfasyankes4}}</td>
+            </tr>
+            <tr>
+              <td width="30%">{{$reg->reg_tanggalkunjungan5}}</td>
+              <td width="60%">{{$reg->reg_rsfasyankes5}}</td>
+            </tr>
+            <tr>
+              <td width="30%">{{$reg->reg_tanggalkunjungan6}}</td>
+              <td width="60%">{{$reg->reg_rsfasyankes6}}</td>
+            </tr>
+            <tr>
+              <td width="30%">{{$reg->reg_tanggalkunjungan7}}</td>
+              <td width="60%">{{$reg->reg_rsfasyankes7}}</td>
+            </tr>
           </tbody>
         </table>
-@else
-<p>Pasien tidak memiliki riwayat perawatan</p>
-@endif
 <hr>
 <h3 class="header-title mt-2 mb-2">Tanda dan Gejala</h3>
 <table class="table">
     <tbody>
+      @if(!is_null($reg_rdt))
+      <tr>
+    <td width="40%"><b>Pernah RDT?</b></td>
+    <td width="60%">{{$reg_rdt->rar_pernah_rdt}}</td>
+    </tr>
+    <tr>
+    <td width="40%"><b>Hasil RDT</b></td>
+    <td width="60%">{{$reg_rdt->rar_hasil_rdt}}</td>
+    </tr>
+    <tr>
+    <td width="40%"><b>Tanggal RDT</b></td>
+    <td width="60%">{{$reg_rdt->rar_tanggal_rdt}}</td>
+    </tr>
+    <tr>
+    <td width="40%"><b>Keterangan RDT</b></td>
+    <td width="60%">{{$reg_rdt->rar_keterangan}}</td>
+    </tr>
+      @else
+      @endif
     <tr>
     <td width="40%"><b>Tanggal onset gejala (panas)</b></td>
     <td width="60%">{{$reg->reg_onset_panas}}</td>
@@ -220,7 +257,7 @@
     </table>                
 
     <hr>
-    <h3 class="header-title mt-2 mb-2">Riwayat Kontak / Paparan</h3>
+    <h3 class="header-title mt-2 mb-2">Riwayat Kunjungan Luar Negri</h3>
     <table class="table">
         <tbody>
         <tr>
@@ -230,7 +267,6 @@
         
         </tbody>
         </table>     
-        @if(!empty($historykunjungan))
         <table class="table">
          <thead>
              <tr>
@@ -240,18 +276,43 @@
              </tr>
          </thead>
            <tbody>
-               @foreach($historykunjungan as $hk)
              <tr>
-               <td>{{$hk->kun_tanggalkunjungan}}</td>
-               <td>{{$hk->kun_kotakunjungan}}</td>
-               <td>{{$hk->kun_negarakunjungan}}</td>
+               <td>{{$reg->reg_tanggalkunjungan_pasien1}}</td>
+               <td>{{$reg->reg_kotakunjungan_pasien1}}</td>
+               <td>{{$reg->reg_negarakunjungan_pasien1}}</td>
              </tr>
-            @endforeach
+             <tr>
+               <td>{{$reg->reg_tanggalkunjungan_pasien2}}</td>
+               <td>{{$reg->reg_kotakunjungan_pasien2}}</td>
+               <td>{{$reg->reg_negarakunjungan_pasien2}}</td>
+             </tr>
+             <tr>
+               <td>{{$reg->reg_tanggalkunjungan_pasien3}}</td>
+               <td>{{$reg->reg_kotakunjungan_pasien3}}</td>
+               <td>{{$reg->reg_negarakunjungan_pasien3}}</td>
+             </tr>
+             <tr>
+               <td>{{$reg->reg_tanggalkunjungan_pasien4}}</td>
+               <td>{{$reg->reg_kotakunjungan_pasien4}}</td>
+               <td>{{$reg->reg_negarakunjungan_pasien4}}</td>
+             </tr>
+             <tr>
+               <td>{{$reg->reg_tanggalkunjungan_pasien5}}</td>
+               <td>{{$reg->reg_kotakunjungan_pasien5}}</td>
+               <td>{{$reg->reg_negarakunjungan_pasien5}}</td>
+             </tr>
+             <tr>
+               <td>{{$reg->reg_tanggalkunjungan_pasien6}}</td>
+               <td>{{$reg->reg_kotakunjungan_pasien6}}</td>
+               <td>{{$reg->reg_negarakunjungan_pasien6}}</td>
+             </tr>
+             <tr>
+               <td>{{$reg->reg_tanggalkunjungan_pasien7}}</td>
+               <td>{{$reg->reg_kotakunjungan_pasien7}}</td>
+               <td>{{$reg->reg_negarakunjungan_pasien7}}</td>
+             </tr>
            </tbody>
-         </table>
- @else
- <p>Pasien tidak memiliki riwayat Kunjungan Luar Negri</p>
- @endif         
+         </table>     
  <br>
  <table class="table">
     <tbody>
@@ -262,30 +323,69 @@
     </tbody>
     </table>         
     <br>
-    @if(!empty($historykontak))
         <table class="table">
          <thead>
              <tr>
                  <th>Nama</th>
                  <th>Alamat</th>
                  <th>Hubungan</th>
-                 <th>Tanggal Kontak</th>
+                 <th>Kontak Pertama</th>
+                 <th>Kontak Terakhir</th>
              </tr>
          </thead>
            <tbody>
-               @foreach($historykontak as $hk)
              <tr>
-               <td>{{$hk->kon_namakon}}</td>
-               <td>{{$hk->kon_alamatkon}}</td>
-               <td>{{$hk->kon_hubungankon}}</td>
-               <td>{{$hk->kon_tanggalkon}}</td>
+               <td>{{$reg->reg_namakon1}}</td>
+               <td>{{$reg->reg_alamatkon1}}</td>
+               <td>{{$reg->reg_hubungankon1}}</td>
+               <td>{{$reg->reg_tanggalkonawal1}}</td>
+               <td>{{$reg->reg_tanggalkonakhir1}}</td>
              </tr>
-            @endforeach
+             <tr>
+               <td>{{$reg->reg_namakon2}}</td>
+               <td>{{$reg->reg_alamatkon2}}</td>
+               <td>{{$reg->reg_hubungankon2}}</td>
+               <td>{{$reg->reg_tanggalkonawal2}}</td>
+               <td>{{$reg->reg_tanggalkonakhir2}}</td>
+             </tr>
+             <tr>
+               <td>{{$reg->reg_namakon3}}</td>
+               <td>{{$reg->reg_alamatkon3}}</td>
+               <td>{{$reg->reg_hubungankon3}}</td>
+               <td>{{$reg->reg_tanggalkonawal3}}</td>
+               <td>{{$reg->reg_tanggalkonakhir3}}</td>
+             </tr>
+             <tr>
+               <td>{{$reg->reg_namakon4}}</td>
+               <td>{{$reg->reg_alamatkon4}}</td>
+               <td>{{$reg->reg_hubungankon4}}</td>
+               <td>{{$reg->reg_tanggalkonawal4}}</td>
+               <td>{{$reg->reg_tanggalkonakhir4}}</td>
+             </tr>
+             <tr>
+               <td>{{$reg->reg_namakon5}}</td>
+               <td>{{$reg->reg_alamatkon5}}</td>
+               <td>{{$reg->reg_hubungankon5}}</td>
+               <td>{{$reg->reg_tanggalkonawal5}}</td>
+               <td>{{$reg->reg_tanggalkonakhir5}}</td>
+             </tr>
+             <tr>
+               <td>{{$reg->reg_namakon6}}</td>
+               <td>{{$reg->reg_alamatkon6}}</td>
+               <td>{{$reg->reg_hubungankon6}}</td>
+               <td>{{$reg->reg_tanggalkonawal6}}</td>
+               <td>{{$reg->reg_tanggalkonakhir6}}</td>
+             </tr>
+             <tr>
+               <td>{{$reg->reg_namakon7}}</td>
+               <td>{{$reg->reg_alamatkon7}}</td>
+               <td>{{$reg->reg_hubungankon7}}</td>
+               <td>{{$reg->reg_tanggalkonawal7}}</td>
+               <td>{{$reg->reg_tanggalkonakhir7}}</td>
+             </tr>
+
            </tbody>
          </table>
- @else
- <p>Pasien tidak memiliki riwayat kontak dengan yang lain</p>
- @endif      
  <br>
  <table class="table">
     <tbody>

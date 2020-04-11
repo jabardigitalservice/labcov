@@ -80,7 +80,7 @@
   </div>
         
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Fasyankes Pengirim</label>
+      <label class="col-md-2">Fasyankes Pengirim</label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="reg_fasyankes_pengirim" id="fasyanrs" value="Rumah Sakit" @if($edit->reg_fasyankes_pengirim == "Rumah Sakit") checked @endif>
@@ -94,28 +94,28 @@
     </div>
         
     <div class="form-group row mt-4">
-      <label class="col-md-2">Nama Rumah Sakit</label>
+      <label class="col-md-2">Nama Rumah Sakit / Fasyankes</label>
       <div class="col-md-6">
      <input class="multisteps-form__input form-control" type="text" name="reg_nama_rs" value="{{$edit->reg_nama_rs}}"/>
       </div>
     </div>
         
     <div class="form-group row mt-4">
-      <label class="col-md-2" >No Rekam Medis</label>
+      <label class="col-md-2">No Rekam Medis</label>
       <div class="col-md-6">
      <input class="multisteps-form__input form-control" type="text" name="reg_no_rekammedis" value="{{$edit->reg_no_rekammedis}}"/>
       </div>
     </div>
         
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Dokter Penanggung Jawab</label>
+      <label class="col-md-2">Dokter Penanggung Jawab</label>
       <div class="col-md-6">
      <input class="multisteps-form__input form-control" type="text" name="reg_nama_dokter" value="{{$edit->reg_nama_dokter}}"/>
       </div>
     </div>
         
     <div class="form-group row mt-4">
-      <label class="col-md-2">No Telepon Fasyankes Pengirim</label>
+      <label class="col-md-2">No Telepon Fasyankes Pengirim (Dokter)</label>
       <div class="col-md-6">
      <input class="multisteps-form__input form-control" type="text" name="reg_telp_fas_pengirim" value="{{$edit->reg_telp_fas_pengirim}}"/>
       </div>
@@ -131,107 +131,242 @@
               </div>
 
               <div class="form-group row mt-4">
-                <label class="col-md-2" >NIK (Nomor Induk Kependudukan)</label>
+                <label class="col-md-2">NIK (Nomor Induk Kependudukan)</label>
                 <div class="col-md-6">
                <input class="multisteps-form__input form-control" type="text" name="reg_nik"value="{{$edit->reg_nik}}"/>
                 </div>
               </div>
 
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Tanggal Lahir</label>
+                <label class="col-md-2">Tanggal Lahir</label>
                 <div class="col-md-6">
                <input class="multisteps-form__input form-control" id="tanggallahir" type="text" name="reg_tanggallahir" value="{{$edit->reg_tanggallahir}}"/>
                 </div>
               </div>
+             
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Usia</label>
-                <div class="input-group col-md-3">
-               <input class="multisteps-form__input form-control" type="number" name="usiatahun"/>
-               <div class="input-group-append"> 
-                <span class="input-group-text">Tahun</span>
-              </div>
-                </div>
-                <div class="input-group col-md-3">
-                 <input class="multisteps-form__input form-control" type="number" name="usiabulan"/>
-                 <div class="input-group-append">
-  <span class="input-group-text">Bulan</span>
-</div>
-                 </div>
-              </div>
-              <div class="form-group row mt-4">
-                <label class="col-md-2" >Jenis Kelamin</label>
+                <label class="col-md-2">Jenis Kelamin</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_kelamin" value="Laki Laki" onclick="show1();" @if($edit->reg_kelamin == "Laki Laki") checked @endif >
+  <input class="form-check-input" type="radio" name="reg_kelamin" value="Laki Laki" onclick="show1();" @if($edit->reg_kelamin == "Laki Laki") checked @endif>
   <label class="form-check-label">Laki Laki</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_kelamin" value="Perempuan" onclick="show2();" @if($edit->reg_kelamin == "Perempuan") checked @endif >
+  <input class="form-check-input" type="radio" name="reg_kelamin" value="Perempuan" onclick="show2();" @if($edit->reg_kelamin == "Perempuan") checked @endif>
   <label class="form-check-label">Perempuan</label>
 </div>
                 </div>
               </div>
 
               <div class="form-group row mt-4" id="ifcewe" style="display: none;">
-                <label class="col-md-2" >Bila perempuan, apakah hamil atau pasca melahirkan?</label>
+                <label class="col-md-2">Bila perempuan, apakah hamil atau pasca melahirkan?</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_hamil_pasca" value="Ya" @if($edit->reg_hamil_pasca == "Ya") checked @endif >
-  <label class="form-check-label" >Ya</label>
+  <input class="form-check-input" type="radio" name="reg_hamil_pasca" value="Ya" @if($edit->reg_hamil_pasca == "Ya") checked @endif>
+  <label class="form-check-label">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_hamil_pasca" value="Tidak" @if($edit->reg_hamil_pasca == "Tidak") checked @endif >
+  <input class="form-check-input" type="radio" name="reg_hamil_pasca" value="Tidak" @if($edit->reg_hamil_pasca == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
 </div>
                 </div>
               </div>
 
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Alamat</label>
+                <label class="col-md-2">Alamat</label>
                 <div class="col-md-6">
                <input class="multisteps-form__input form-control" type="text" name="reg_alamat" value="{{$edit->reg_alamat}}"/>
                 </div>
               </div>
               
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Nomor Telp/HP</label>
+                <label class="col-md-2">Nomor Telp/HP</label>
                 <div class="col-md-6">
                <input class="multisteps-form__input form-control" type="text" name="reg_notelp_pasien" value="{{$edit->reg_notelp_pasien}}"/>
                 </div>
               </div>
               <hr>
-              <h4 class="mb-1 mt-0">Riwayat Perawatan</h4>
-              <button class="btn btn-sm btn-primary" id="tambah">Tambah Riwayat</button>
-              <div class="field_wrapper"> 
-              <table class="table">
-        <thead>
-            <tr>
-                <th>Tanggal Dirawat</th>
-                <th>Rumah Sakit / Fasyankes</th>
-                <th>Centang untuk Hapus</th>
-            </tr>
-        </thead>
-          <tbody>
-              @foreach($historyperawatan as $hp)
-            <tr>
-              <td>{{$hp->his_tanggalrawat}}</td>
-              <td>{{$hp->his_rsfasyankes}}</td>
-              <td><input type="checkbox" id="{{$hp->his_id}}" name="hapushis[]" value="{{$hp->hisid}}"></td>
-            </tr>
-           @endforeach
-          </tbody>
-        </table>
-            </div> <!-- wrapper field-->
+              <h4 class="mb-1 mt-0">Riwayat Kunjungan</h4>
+              <div class="form-group row mt-4">
+                <div class="col-md-4">
+                  <label>Tanggal Kunjungan</label>
+                <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan1" value="{{$edit->reg_tanggalkunjungan1}}" name="reg_tanggalkunjungan1"/>
+                
+                </div>
+                <div class="col-md-8">
+                <label>Rumah Sakit / Fasyankes</label>
+                <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes1" value="{{$edit->reg_rsfasyankes1}}"/>
+                </div>
+              </div>
+
+              <div class="form-group row mt-4">
+                <div class="col-md-4">
+                  <label>Tanggal Kunjungan</label>
+                <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan2" value="{{$edit->reg_tanggalkunjungan2}}" name="reg_tanggalkunjungan2"/>
+                
+                </div>
+                <div class="col-md-8">
+                <label>Rumah Sakit / Fasyankes</label>
+                <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes2" value="{{$edit->reg_rsfasyankes2}}"/>
+                </div>
+              </div>
+
+              <div class="form-group row mt-4">
+                <div class="col-md-4">
+                  <label>Tanggal Kunjungan</label>
+                <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan3" value="{{$edit->reg_tanggalkunjungan3}}" name="reg_tanggalkunjungan3"/>
+                
+                </div>
+                <div class="col-md-8">
+                <label>Rumah Sakit / Fasyankes</label>
+                <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes3" value="{{$edit->reg_rsfasyankes3}}"/>
+                </div>
+              </div>
+
+              <div class="form-group row mt-4">
+                <div class="col-md-4">
+                  <label>Tanggal Kunjungan</label>
+                <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan4" value="{{$edit->reg_tanggalkunjungan4}}" name="reg_tanggalkunjungan4"/>
+                
+                </div>
+                <div class="col-md-8">
+                <label>Rumah Sakit / Fasyankes</label>
+                <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes4" value="{{$edit->reg_rsfasyankes4}}"/>
+                </div>
+              </div>
+
+              <div class="form-group row mt-4">
+                <div class="col-md-4">
+                  <label>Tanggal Kunjungan</label>
+                <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan5" value="{{$edit->reg_tanggalkunjungan5}}" name="reg_tanggalkunjungan5"/>
+                
+                </div>
+                <div class="col-md-8">
+                <label>Rumah Sakit / Fasyankes</label>
+                <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes5" value="{{$edit->reg_rsfasyankes5}}"/>
+                </div>
+              </div>
+
+              <div class="form-group row mt-4">
+                <div class="col-md-4">
+                  <label>Tanggal Kunjungan</label>
+                <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan6" value="{{$edit->reg_tanggalkunjungan6}}" name="reg_tanggalkunjungan6"/>
+                
+                </div>
+                <div class="col-md-8">
+                <label>Rumah Sakit / Fasyankes</label>
+                <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes6" value="{{$edit->reg_rsfasyankes6}}"/>
+                </div>
+              </div>
+
+              <div class="form-group row mt-4">
+                <div class="col-md-4">
+                  <label>Tanggal Kunjungan</label>
+                <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan7" value="{{$edit->reg_tanggalkunjungan7}}" name="reg_tanggalkunjungan7"/>
+                
+                </div>
+                <div class="col-md-8">
+                <label>Rumah Sakit / Fasyankes</label>
+                <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes7" value="{{$edit->reg_rsfasyankes7}}"/>
+                </div>
+              </div>
+
+
+           
+             
         </div>
         <div id="sw-default-step-3">
+       
+          @if(!is_null($reg_rdt))
+          <div class="form-group row mt-4">
+            <label class="col-md-2">Pernah tes RDT sebelumnya / Pasien dengan sampel RDT ?</label>
+            <div class="col-md-6">
+            <div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="rar_pernah_rdt" value="Ya" onclick="showRDT2();"  @if($reg_rdt->rar_pernah_rdt && $reg_rdt->rar_pernah_rdt == "Ya") checked @endif>
+<label class="form-check-label">Ya</label>
+</div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="rar_pernah_rdt" value="Tidak" onclick="showRDT();" @if($reg_rdt->rar_pernah_rdt == "Tidak") checked @endif>
+<label class="form-check-label">Tidak</label>
+</div>
+          <div class="form-group mt-4" id="ifrdt" style="display: none;">
+            <div class="form-group row">
+            <label class="col-md-2">Hasil RDT Terakhir</label>
+            <div class="col-md-10">
+            <div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="rar_hasil_rdt" value="Reaktif" @if($reg_rdt->rar_pernah_rdt == "Reaktif") checked @endif>
+<label class="form-check-label">Reaktif</label>
+</div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="rar_hasil_rdt" value="Non Reaktif" @if($reg_rdt->rar_pernah_rdt == "Non Reaktif") checked @endif>
+<label class="form-check-label">Non Reaktif</label>
+</div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2">Tanggal Pemeriksaan RDT</label>
+            <div class="col-md-10">
+              <input class="multisteps-form__input form-control" type="text" id="tanggalrdt" name="rar_tanggal_rdt" value="{{$reg_rdt->rar_tanggal_rdt}}"/>
+            </div>
+          </div>
+          <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="gejlain">Keterangan RDT</label>
+          <div class="col-md-10">
+<textarea class="form-control" rows="3" name="rar_keterangan">{{$reg_rdt->rar_keterangan}}</textarea>
+          </div>
+        </div>
+    </div>
+    @else
+    <div class="form-group row mt-4">
+      <label class="col-md-2">Pernah tes RDT sebelumnya / Pasien dengan sampel RDT ?</label>
+      <div class="col-md-6">
+      <div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="rar_pernah_rdt" value="Ya" onclick="showRDT2();">
+<label class="form-check-label">Ya</label>
+</div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="rar_pernah_rdt" value="Tidak" onclick="showRDT();">
+<label class="form-check-label">Tidak</label>
+</div>
+
+            </div>
+          </div>
+          <div class="form-group mt-4" id="ifrdt" style="display: none;">
+            <div class="form-group row">
+            <label class="col-md-2">Hasil RDT Terakhir</label>
+            <div class="col-md-10">
+            <div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="rar_hasil_rdt" value="Ya">
+<label class="form-check-label">Reaktif</label>
+</div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="rar_hasil_rdt" value="Tidak">
+<label class="form-check-label">Non Reaktif</label>
+</div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2">Tanggal Pemeriksaan RDT</label>
+            <div class="col-md-10">
+              <input class="multisteps-form__input form-control" type="text" id="tanggalrdt" name="rar_tanggal_rdt" placeholder="Tanggal Pemeriksaan RDT"/>
+            </div>
+          </div>
+          <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="gejlain">Keterangan RDT</label>
+          <div class="col-md-10">
+<textarea class="form-control" rows="3" name="rar_keterangan" id="gejlain">isikan Jenis sampel dan keterangan penting lainnya</textarea>
+          </div>
+        </div>
+    </div>
+    @endif
             <div class="form-group row mt-4">
-                <label class="col-md-2" >Tanggal onset gejala (panas)</label>
+                <label class="col-md-2">Tanggal onset gejala (panas)</label>
                 <div class="col-md-6">
                <input class="multisteps-form__input form-control" type="text" id="onsetpanas" name="reg_onset_panas" value="{{$edit->reg_onset_panas}}"/>
                 </div>
               </div>
             <div class="form-group row mt-4">
-                <label class="col-md-2" >Panas</label>
+                <label class="col-md-2">Panas</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejpanas" value="Ya" @if($edit->reg_gejpanas == "Ya") checked @endif>
@@ -249,25 +384,25 @@
               </div>
 
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Tanda Pneumonia</label>
+                <label class="col-md-2">Tanda Pneumonia</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpanas" value="Ya" @if($edit->reg_gejpneumonia == "Ya") checked @endif>
+  <input class="form-check-input" type="radio" name="reg_gejpenumonia" value="Ya" @if($edit->reg_gejpenumonia == "Ya") checked @endif>
   <label class="form-check-label">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpneumonia" value="Tidak" @if($edit->reg_gejpneumonia == "Tidak") checked @endif>
+  <input class="form-check-input" type="radio" name="reg_gejpenumonia" value="Tidak" @if($edit->reg_gejpenumonia == "Tidak") checked @endif>
   <label class="form-check-label">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpneumonia" value="Tidak Diisi" @if($edit->reg_gejpneumonia == "Tidak Diisi") checked @endif>
+  <input class="form-check-input" type="radio" name="reg_gejpenumonia" value="Tidak Diisi" @if($edit->reg_gejpenumonia == "Tidak Diisi") checked @endif>
   <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
               </div>
 
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Batuk</label>
+                <label class="col-md-2">Batuk</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejbatuk" value="Ya" @if($edit->reg_gejbatuk == "Ya") checked @endif>
@@ -284,7 +419,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Nyeri Tenggorokan</label>
+                <label class="col-md-2">Nyeri Tenggorokan</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejnyeritenggorokan" value="Ya" @if($edit->reg_gejnyeritenggorokan == "Ya") checked @endif>
@@ -301,7 +436,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Sesak Nafas</label>
+                <label class="col-md-2">Sesak Nafas</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejsesaknafas" value="Ya" @if($edit->reg_gejsesaknafas == "Ya") checked @endif>
@@ -319,7 +454,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Pilek</label>
+                <label class="col-md-2">Pilek</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejpilek" value="Ya" @if($edit->reg_gejpilek == "Ya") checked @endif>
@@ -336,7 +471,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Lesu</label>
+                <label class="col-md-2">Lesu</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejlesu" value="Ya" @if($edit->reg_gejlesu == "Ya") checked @endif>
@@ -353,7 +488,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Sakit Kepala</label>
+                <label class="col-md-2">Sakit Kepala</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejsakitkepala" value="Ya" @if($edit->reg_gejsakitkepala == "Ya") checked @endif>
@@ -370,7 +505,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Diare</label>
+                <label class="col-md-2">Diare</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejdiare" value="Ya" @if($edit->reg_gejdiare == "Ya") checked @endif>
@@ -387,7 +522,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Mual/Muntah</label>
+                <label class="col-md-2">Mual/Muntah</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_gejmualmuntah" value="Ya" @if($edit->reg_gejmualmuntah == "Ya") checked @endif>
@@ -413,7 +548,7 @@
         </div>
         <div id="sw-default-step-4">
             <div class="form-group row mt-4">
-                <label class="col-md-2" >X-Ray Paru</label>
+                <label class="col-md-2">X-Ray Paru</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_xrayparu" value="Ya" @if($edit->reg_xrayparu == "Ya") checked @endif>
@@ -432,7 +567,7 @@
                 </div>
             </div>
             <div class="form-group row mt-4">
-                <label class="col-md-2" >Leukosit</label>
+                <label class="col-md-2">Leukosit</label>
                 <div class="input-group col-md-3">
                <input class="multisteps-form__input form-control" type="number" min="0" name="reg_leukosit" value="{{$edit->reg_leukosit}}"/>
                <div class="input-group-append"> 
@@ -441,7 +576,7 @@
               </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Limfosit</label>
+                <label class="col-md-2">Limfosit</label>
                 <div class="input-group col-md-3">
                <input class="multisteps-form__input form-control" type="number" min="0" name="reg_limfosit" value="{{$edit->reg_limfosit}}"/>
                <div class="input-group-append"> 
@@ -450,7 +585,7 @@
               </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Trombosit</label>
+                <label class="col-md-2">Trombosit</label>
                 <div class="input-group col-md-3">
                <input class="multisteps-form__input form-control" type="number" min="0" name="reg_trombosit"  value="{{$edit->reg_trombosit}}"/>
                <div class="input-group-append"> 
@@ -460,7 +595,7 @@
               </div>
 
             <div class="form-group row mt-4">
-                <label class="col-md-2" >Menggunakan Ventilator</label>
+                <label class="col-md-2">Menggunakan Ventilator</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_ventilator" value="Ya" @if($edit->reg_ventilator == "Ya") checked @endif>
@@ -473,7 +608,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Status Kesehatan Pasien</label>
+                <label class="col-md-2">Status Kesehatan Pasien</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_statuskes" value="Pulang" @if($edit->reg_statuskes == "Pulang") checked @endif>
@@ -499,7 +634,7 @@
         </div>
         <div id="sw-default-step-5">
             <div class="form-group row mt-4">
-                <label class="col-md-4" >Dalam 14 hari sebelum sakit, apakah pasien melakukan perjalanan ke luar negeri?</label>
+                <label class="col-md-4">Dalam 14 hari sebelum sakit, apakah pasien melakukan perjalanan ke luar negeri?</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline"> 
   <input class="form-check-input" type="radio" name="reg_luarnegri" value="Ya"  @if($edit->reg_luarnegri == "Ya") checked @endif>
@@ -512,32 +647,155 @@
                 </div>
               </div>
               <p><b>Jika Ya, urutkan berdasarkan tanggal kunjungan</b></p>
-              <button class="btn btn-sm btn-primary" id="tambah2">Tambah Riwayat Perjalanan</button>
-              <div class="field_wrapper2"> <!-- TANDAI AKAN DI EDIT -->
-              <table class="table">
-        <thead>
-            <tr>
-                <th>Tanggal Kunjungan</th>
-                <th>Kota Kunjungan</th>
-                <th>Negara Kunjungan</th>
-                <th>Centang untuk Hapus</th>
-            </tr>
-        </thead>
-          <tbody>
-              @foreach($historykunjungan as $hk)
-            <tr>
-              <td>{{$hk->kun_tanggalkunjungan}}</td>
-              <td>{{$hk->kun_kotakunjungan}}</td>
-              <td>{{$hk->kun_negarakunjungan}}</td>
-              <td><input type="checkbox" id="{{$hk->kun_id}}" name="hapuskun[]" value="{{$hk->kunid}}"></td>
-            </tr>
-           @endforeach
-          </tbody>
-        </table>
-            </div>  <!-- wrapper -->
-         
+              <div class="form-group row mt-4">
+                <div class="input-group col-md-4">
+                  <div class="input-group-preppend">
+                    <span class="input-group-text">Tanggal Kunjungan / Lawatan ke 1</span>
+                  </div>
+                  <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan_pasien1" value="{{$edit->reg_tanggalkunjungan_pasien1}}" name="reg_tanggalkunjungan_pasien1"/>
+                </div>
+                    <div class="input-group col-md-4">
+                      <div class="input-group-preppend">
+                      <span class="input-group-text">Nama Kota</span>
+                    </div
+                  ><input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_kotakunjungan_pasien1}}" name="reg_kotakunjungan_pasien1"/>
+                  </div>
+                  <div class="input-group col-md-4">
+                    <div class="input-group-preppend">
+                      <span class="input-group-text">Nama Negara</span>
+                    </div>
+                    <input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_negarakunjungan_pasien1}}" name="reg_negarakunjungan_pasien1"/>
+                  </div>
+                </div>
+                
+                <div class="form-group row mt-4">
+                  <div class="input-group col-md-4">
+                    <div class="input-group-preppend">
+                      <span class="input-group-text">Tanggal Kunjungan / Lawatan ke 2</span>
+                    </div>
+                    <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan_pasien2" value="{{$edit->reg_tanggalkunjungan_pasien2}}" name="reg_tanggalkunjungan_pasien2"/>
+                  </div>
+                      <div class="input-group col-md-4">
+                        <div class="input-group-preppend">
+                        <span class="input-group-text">Nama Kota</span>
+                      </div
+                    ><input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_kotakunjungan_pasien2}}" name="reg_kotakunjungan_pasien2"/>
+                    </div>
+                    <div class="input-group col-md-4">
+                      <div class="input-group-preppend">
+                        <span class="input-group-text">Nama Negara</span>
+                      </div>
+                      <input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_negarakunjungan_pasien2}}" name="reg_negarakunjungan_pasien2"/>
+                    </div>
+                  </div>
+
+                  <div class="form-group row mt-4">
+                    <div class="input-group col-md-4">
+                      <div class="input-group-preppend">
+                        <span class="input-group-text">Tanggal Kunjungan / Lawatan ke 3</span>
+                      </div>
+                      <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan_pasien3" value="{{$edit->reg_tanggalkunjungan_pasien3}}" name="reg_tanggalkunjungan_pasien3"/>
+                    </div>
+                        <div class="input-group col-md-4">
+                          <div class="input-group-preppend">
+                          <span class="input-group-text">Nama Kota</span>
+                        </div
+                      ><input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_kotakunjungan_pasien3}}" name="reg_kotakunjungan_pasien3"/>
+                      </div>
+                      <div class="input-group col-md-4">
+                        <div class="input-group-preppend">
+                          <span class="input-group-text">Nama Negara</span>
+                        </div>
+                        <input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_negarakunjungan_pasien3}}" name="reg_negarakunjungan_pasien3"/>
+                      </div>
+                    </div>
+
+                    <div class="form-group row mt-4">
+                      <div class="input-group col-md-4">
+                        <div class="input-group-preppend">
+                          <span class="input-group-text">Tanggal Kunjungan / Lawatan ke 4</span>
+                        </div>
+                        <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan_pasien4" value="{{$edit->reg_tanggalkunjungan_pasien4}}" name="reg_tanggalkunjungan_pasien4"/>
+                      </div>
+                          <div class="input-group col-md-4">
+                            <div class="input-group-preppend">
+                            <span class="input-group-text">Nama Kota</span>
+                          </div
+                        ><input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_kotakunjungan_pasien4}}" name="reg_kotakunjungan_pasien4"/>
+                        </div>
+                        <div class="input-group col-md-4">
+                          <div class="input-group-preppend">
+                            <span class="input-group-text">Nama Negara</span>
+                          </div>
+                          <input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_negarakunjungan_pasien4}}" name="reg_negarakunjungan_pasien4"/>
+                        </div>
+                      </div>
+
+                      <div class="form-group row mt-4">
+                        <div class="input-group col-md-4">
+                          <div class="input-group-preppend">
+                            <span class="input-group-text">Tanggal Kunjungan / Lawatan ke 5</span>
+                          </div>
+                          <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan_pasien5" value="{{$edit->reg_tanggalkunjungan_pasien5}}" name="reg_tanggalkunjungan_pasien5"/>
+                        </div>
+                            <div class="input-group col-md-4">
+                              <div class="input-group-preppend">
+                              <span class="input-group-text">Nama Kota</span>
+                            </div
+                          ><input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_kotakunjungan_pasien5}}" name="reg_kotakunjungan_pasien5"/>
+                          </div>
+                          <div class="input-group col-md-4">
+                            <div class="input-group-preppend">
+                              <span class="input-group-text">Nama Negara</span>
+                            </div>
+                            <input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_negarakunjungan_pasien5}}" name="reg_negarakunjungan_pasien5"/>
+                          </div>
+                        </div>
+
+                        <div class="form-group row mt-4">
+                          <div class="input-group col-md-4">
+                            <div class="input-group-preppend">
+                              <span class="input-group-text">Tanggal Kunjungan / Lawatan ke 6</span>
+                            </div>
+                            <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan_pasien6" value="{{$edit->reg_tanggalkunjungan_pasien6}}" name="reg_tanggalkunjungan_pasien6"/>
+                          </div>
+                              <div class="input-group col-md-4">
+                                <div class="input-group-preppend">
+                                <span class="input-group-text">Nama Kota</span>
+                              </div
+                            ><input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_kotakunjungan_pasien6}}" name="reg_kotakunjungan_pasien6"/>
+                            </div>
+                            <div class="input-group col-md-4">
+                              <div class="input-group-preppend">
+                                <span class="input-group-text">Nama Negara</span>
+                              </div>
+                              <input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_negarakunjungan_pasien6}}" name="reg_negarakunjungan_pasien6"/>
+                            </div>
+                          </div>
+
+                          <div class="form-group row mt-4">
+                            <div class="input-group col-md-4">
+                              <div class="input-group-preppend">
+                                <span class="input-group-text">Tanggal Kunjungan / Lawatan ke 7</span>
+                              </div>
+                              <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan_pasien7" value="{{$edit->reg_tanggalkunjungan_pasien7}}" name="reg_tanggalkunjungan_pasien7"/>
+                            </div>
+                                <div class="input-group col-md-4">
+                                  <div class="input-group-preppend">
+                                  <span class="input-group-text">Nama Kota</span>
+                                </div
+                              ><input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_kotakunjungan_pasien7}}" name="reg_kotakunjungan_pasien7"/>
+                              </div>
+                              <div class="input-group col-md-4">
+                                <div class="input-group-preppend">
+                                  <span class="input-group-text">Nama Negara</span>
+                                </div>
+                                <input class="multisteps-form__input form-control" type="text"  value="{{$edit->reg_negarakunjungan_pasien7}}" name="reg_negarakunjungan_pasien7"/>
+                              </div>
+                            </div>
+
             <div class="form-group row mt-4">
-                <label class="col-md-4" >Dalam 14 hari sebelum sakit, apakah pasien kontak dengan orang yang sakit?</label>
+                <label class="col-md-4">Dalam 14 hari sebelum sakit, apakah pasien kontak dengan orang yang sakit?</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_kontakdgnsakit" value="Ya"  @if($edit->reg_kontakdgnsakit == "Ya") checked @endif>
@@ -550,34 +808,248 @@
                 </div>
               </div>
               <p><b>Jika Ya, Tambahkan beberapa kontak terakhir dengan orang sakit</b></p>
-              <button class="btn btn-sm btn-primary" id="tambah3">Tambah Kontak Sakit</button>
-              <div class="field_wrapper3">
-              <table class="table">
-        <thead>
-            <tr>
-                <th>Nama Kontak</th>
-                <th>Alamat</th>
-                <th>Hubungan</th>
-                <th>Tanggal Kontak</th>
-                <th>Centang untuk Hapus</th>
-            </tr>
-        </thead>
-          <tbody>
-              @foreach($historykontak as $hko)
-            <tr>
-              <td>{{$hko->kon_namakon}}</td>
-              <td>{{$hko->kon_alamatkon}}</td>
-              <td>{{$hko->kon_hubungankon}}</td>
-              <td>{{$hko->kon_tanggalkon}}</td>
-              <td><input type="checkbox" id="{{$hko->kon_id}}" name="hapuskon[]" value="{{$hko->konid}}"></td>
-            </tr>
-           @endforeach
-          </tbody>
-        </table>
-            </div>  <!-- Wrapper -->
+
+                
+<div class="form-group row mt-4">
+  <div class="input-group col-md-3">
+  <div class="input-group-preppend">
+    <span class="input-group-text">Nama</span>
+  </div><input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_namakon1}}" name="reg_namakon1"/>
+</div>
+<div class="input-group col-md-3"
+><div class="input-group-preppend">
+  <span class="input-group-text">Alamat</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_alamatkon1}}"  name="reg_alamatkon1"/>
+</div>
+<div class="input-group col-md-2"
+><div class="input-group-preppend">
+<span class="input-group-text">Hubungan</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_hubungankon1}}" name="reg_hubungankon1"/>
+</div>
+<div class="input-group col-md-2">
+<div class="input-group-preppend">
+<span class="input-group-text">Tanggal Pertama</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" id="tanggalkonawal1" value="{{$edit->reg_tanggalkonawal1}}" name="reg_tanggalkonawal1"/>
+</div>
+<div class="input-group col-md-2">
+  <div class="input-group-preppend">
+  <span class="input-group-text">Tanggal Terakhir</span>
+  </div>
+  <input class="multisteps-form__input form-control" type="text" id="tanggalkonakhir1" value="{{$edit->reg_tanggalkonakhir1}}" name="reg_tanggalkonakhir1"/>
+  </div>
+</div>
+             
+
+                
+<div class="form-group row mt-4">
+  <div class="input-group col-md-3">
+  <div class="input-group-preppend">
+    <span class="input-group-text">Nama</span>
+  </div><input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_namakon2}}" name="reg_namakon2"/>
+</div>
+<div class="input-group col-md-3"
+><div class="input-group-preppend">
+  <span class="input-group-text">Alamat</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_alamatkon2}}"  name="reg_alamatkon2"/>
+</div>
+<div class="input-group col-md-2"
+><div class="input-group-preppend">
+<span class="input-group-text">Hubungan</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_hubungankon2}}" name="reg_hubungankon2"/>
+</div>
+<div class="input-group col-md-2">
+  <div class="input-group-preppend">
+  <span class="input-group-text">Tanggal Pertama</span>
+  </div>
+  <input class="multisteps-form__input form-control" type="text" id="tanggalkonawal2" value="{{$edit->reg_tanggalkonawal2}}" name="reg_tanggalkonawal2"/>
+  </div>
+  <div class="input-group col-md-2">
+    <div class="input-group-preppend">
+    <span class="input-group-text">Tanggal Terakhir</span>
+    </div>
+    <input class="multisteps-form__input form-control" type="text" id="tanggalkonakhir2" value="{{$edit->reg_tanggalkonakhir2}}" name="reg_tanggalkonakhir2"/>
+    </div>
+</div>
+
+
+                
+<div class="form-group row mt-4">
+  <div class="input-group col-md-3">
+  <div class="input-group-preppend">
+    <span class="input-group-text">Nama</span>
+  </div><input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_namakon3}}" name="reg_namakon3"/>
+</div>
+<div class="input-group col-md-3"
+><div class="input-group-preppend">
+  <span class="input-group-text">Alamat</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_alamatkon3}}"  name="reg_alamatkon3"/>
+</div>
+<div class="input-group col-md-2"
+><div class="input-group-preppend">
+<span class="input-group-text">Hubungan</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_hubungankon3}}" name="reg_hubungankon3"/>
+</div>
+<div class="input-group col-md-2">
+  <div class="input-group-preppend">
+  <span class="input-group-text">Tanggal Pertama</span>
+  </div>
+  <input class="multisteps-form__input form-control" type="text" id="tanggalkonawal3" value="{{$edit->reg_tanggalkonawal3}}" name="reg_tanggalkonawal3"/>
+  </div>
+  <div class="input-group col-md-2">
+    <div class="input-group-preppend">
+    <span class="input-group-text">Tanggal Terakhir</span>
+    </div>
+    <input class="multisteps-form__input form-control" type="text" id="tanggalkonakhir3" value="{{$edit->reg_tanggalkonakhir3}}" name="reg_tanggalkonakhir3"/>
+    </div>
+</div>
+
+
+                
+<div class="form-group row mt-4">
+  <div class="input-group col-md-3">
+  <div class="input-group-preppend">
+    <span class="input-group-text">Nama</span>
+  </div><input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_namakon4}}" name="reg_namakon4"/>
+</div>
+<div class="input-group col-md-3"
+><div class="input-group-preppend">
+  <span class="input-group-text">Alamat</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_alamatkon4}}"  name="reg_alamatkon4"/>
+</div>
+<div class="input-group col-md-2"
+><div class="input-group-preppend">
+<span class="input-group-text">Hubungan</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_hubungankon4}}" name="reg_hubungankon4"/>
+</div>
+<div class="input-group col-md-2">
+  <div class="input-group-preppend">
+  <span class="input-group-text">Tanggal Pertama</span>
+  </div>
+  <input class="multisteps-form__input form-control" type="text" id="tanggalkonawal4" value="{{$edit->reg_tanggalkonawal4}}" name="reg_tanggalkonawal4"/>
+  </div>
+  <div class="input-group col-md-2">
+    <div class="input-group-preppend">
+    <span class="input-group-text">Tanggal Terakhir</span>
+    </div>
+    <input class="multisteps-form__input form-control" type="text" id="tanggalkonakhir4" value="{{$edit->reg_tanggalkonakhir4}}" name="reg_tanggalkonakhir4"/>
+    </div>
+</div>
+
+
+                
+<div class="form-group row mt-4">
+  <div class="input-group col-md-3">
+  <div class="input-group-preppend">
+    <span class="input-group-text">Nama</span>
+  </div><input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_namakon5}}" name="reg_namakon5"/>
+</div>
+<div class="input-group col-md-3"
+><div class="input-group-preppend">
+  <span class="input-group-text">Alamat</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_alamatkon5}}"  name="reg_alamatkon5"/>
+</div>
+<div class="input-group col-md-2"
+><div class="input-group-preppend">
+<span class="input-group-text">Hubungan</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_hubungankon5}}" name="reg_hubungankon5"/>
+</div>
+<div class="input-group col-md-2">
+  <div class="input-group-preppend">
+  <span class="input-group-text">Tanggal Pertama</span>
+  </div>
+  <input class="multisteps-form__input form-control" type="text" id="tanggalkonawal5" value="{{$edit->reg_tanggalkonawal5}}" name="reg_tanggalkonawal5"/>
+  </div>
+  <div class="input-group col-md-2">
+    <div class="input-group-preppend">
+    <span class="input-group-text">Tanggal Terakhir</span>
+    </div>
+    <input class="multisteps-form__input form-control" type="text" id="tanggalkonakhir5" value="{{$edit->reg_tanggalkonakhir5}}" name="reg_tanggalkonakhir5"/>
+    </div>
+</div>
+
+
+                
+<div class="form-group row mt-4">
+  <div class="input-group col-md-3">
+  <div class="input-group-preppend">
+    <span class="input-group-text">Nama</span>
+  </div><input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_namakon6}}" name="reg_namakon6"/>
+</div>
+<div class="input-group col-md-3"
+><div class="input-group-preppend">
+  <span class="input-group-text">Alamat</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_alamatkon6}}"  name="reg_alamatkon6"/>
+</div>
+<div class="input-group col-md-2"
+><div class="input-group-preppend">
+<span class="input-group-text">Hubungan</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_hubungankon6}}" name="reg_hubungankon6"/>
+</div>
+<div class="input-group col-md-2">
+  <div class="input-group-preppend">
+  <span class="input-group-text">Tanggal Pertama</span>
+  </div>
+  <input class="multisteps-form__input form-control" type="text" id="tanggalkonawal6" value="{{$edit->reg_tanggalkonawal6}}" name="reg_tanggalkonawal6"/>
+  </div>
+  <div class="input-group col-md-2">
+    <div class="input-group-preppend">
+    <span class="input-group-text">Tanggal Terakhir</span>
+    </div>
+    <input class="multisteps-form__input form-control" type="text" id="tanggalkonakhir6" value="{{$edit->reg_tanggalkonakhir6}}" name="reg_tanggalkonakhir6"/>
+    </div>
+</div>
+
+
+                
+<div class="form-group row mt-4">
+  <div class="input-group col-md-3">
+  <div class="input-group-preppend">
+    <span class="input-group-text">Nama</span>
+  </div><input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_namakon7}}" name="reg_namakon7"/>
+</div>
+<div class="input-group col-md-3"
+><div class="input-group-preppend">
+  <span class="input-group-text">Alamat</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_alamatkon7}}"  name="reg_alamatkon7"/>
+</div>
+<div class="input-group col-md-2"
+><div class="input-group-preppend">
+<span class="input-group-text">Hubungan</span>
+</div>
+<input class="multisteps-form__input form-control" type="text" value="{{$edit->reg_hubungankon7}}" name="reg_hubungankon7"/>
+</div>
+<div class="input-group col-md-2">
+  <div class="input-group-preppend">
+  <span class="input-group-text">Tanggal Pertama</span>
+  </div>
+  <input class="multisteps-form__input form-control" type="text" id="tanggalkonawal7" value="{{$edit->reg_tanggalkonawal7}}" name="reg_tanggalkonawal7"/>
+  </div>
+  <div class="input-group col-md-2">
+    <div class="input-group-preppend">
+    <span class="input-group-text">Tanggal Terakhir</span>
+    </div>
+    <input class="multisteps-form__input form-control" type="text" id="tanggalkonakhir7" value="{{$edit->reg_tanggalkonakhir7}}" name="reg_tanggalkonakhir7"/>
+    </div>
+</div>
+
+
            
             <div class="form-group row mt-4">
-                <label class="col-md-4" >Apakah orang tersebut tersangka/terinfeksi Covid-19?</label>
+                <label class="col-md-4">Apakah orang tersebut tersangka/terinfeksi Covid-19?</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_kontakterinfeksi" value="Ya"  @if($edit->reg_kontakterinfeksi == "Ya") checked @endif>
@@ -590,7 +1062,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-4" >Apakah ada anggota keluarga pasien yang sakitnya sama?</label>
+                <label class="col-md-4">Apakah ada anggota keluarga pasien yang sakitnya sama?</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_keluargapasiensakitsama" value="Ya"  @if($edit->reg_keluargapasiensakitsama == "Ya") checked @endif>
@@ -607,7 +1079,7 @@
         <div id="sw-default-step-6">
             
             <div class="form-group row mt-4">
-                <label class="col-md-2" >Penyakit Kardiovaskuler/Hipertensi</label>
+                <label class="col-md-2">Penyakit Kardiovaskuler/Hipertensi</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbidhipertensi" value="Ya" @if($edit->reg_komorbidhipertensi == "Ya") checked @endif>
@@ -624,7 +1096,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Diabetes Mellitus</label>
+                <label class="col-md-2">Diabetes Mellitus</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbiddm" value="Ya" @if($edit->reg_komorbiddm == "Ya") checked @endif>
@@ -641,7 +1113,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Liver</label>
+                <label class="col-md-2">Liver</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Ya" @if($edit->reg_komorbidliver == "Ya") checked @endif>
@@ -658,7 +1130,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Kronik neurologi / neuromuskula</label>
+                <label class="col-md-2">Kronik neurologi / neuromuskula</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbidneurologi" value="Ya" @if($edit->reg_komorbidneurologi == "Ya") checked @endif>
@@ -675,7 +1147,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Imunodefisiensi / HIV</label>
+                <label class="col-md-2">Imunodefisiensi / HIV</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbidhiv" value="Ya" @if($edit->reg_komorbidhiv == "Ya") checked @endif>
@@ -692,7 +1164,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Penyakit paru kronik</label>
+                <label class="col-md-2">Penyakit paru kronik</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbidparu" value="Ya" @if($edit->reg_komorbidparu == "Ya") checked @endif>
@@ -709,7 +1181,7 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Penyakit ginjal</label>
+                <label class="col-md-2">Penyakit ginjal</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="reg_komorbidginjal" value="Ya" @if($edit->reg_komorbidginjal == "Ya") checked @endif>
@@ -761,11 +1233,18 @@
 
 <script src="{{asset('assets/libs/smartwizard/jquery.smartWizard.min.js')}}"></script>
 <script>
-    function show1(){
+     function show1(){
   document.getElementById('ifcewe').style.display ='none';
 };
 function show2(){
   document.getElementById('ifcewe').style.display = 'block';
+};
+
+function showRDT(){
+  document.getElementById('ifrdt').style.display ='none';
+};
+function showRDT2(){
+  document.getElementById('ifrdt').style.display = 'block';
 };
     $(document).ready(function(){
     $("#smartwizard-default").smartWizard(
@@ -777,53 +1256,41 @@ function show2(){
             }
         }
         );
-var max_fields = 10; //maximum input boxes allowed
-var wrapper = $(".field_wrapper"); //Fields wrapper
-var add_button = $("#tambah"); //Add button ID
-var x = 1; //initlal text box count
-$(add_button).click(function(e){ //on add input button click
-e.preventDefault();
-if(x < max_fields){ //max input box allowed
-x++; //text box increment
-$(wrapper).append('<div class="tambahan"><div class="form-group row mt-4"><label class="col-md-2" >Tanggal Dirawat</label><div class="input-group col-md-3"><input class="multisteps-form__input form-control" type="number" min="1" max="31" name="tanggalrawat[]"/><div class="input-group-append"><span class="input-group-text">Tanggal</span></div></div><div class="input-group col-md-3"><input class="multisteps-form__input form-control" type="number" min="1" max="12" name="bulanrawat[]"/><div class="input-group-append"><span class="input-group-text">Bulan</span></div></div><div class="input-group col-md-3"><input class="multisteps-form__input form-control" type="number" min="1900" max="2020" name="tahunrawat[]"/><div class="input-group-append"><span class="input-group-text">Tahun</span></div></div></div><div class="form-group row mt-4"><label class="col-md-2" >Rumah Sakit / Fasyankes</label><div class="col-md-6"><input class="multisteps-form__input form-control" type="text" name="tempatrawat[]" placeholder="Nama RS/Fasyankes"/></div></div><div style="cursor:pointer;" class="remove_field btn btn-danger btn-sm">Remove</div></div>');
-}
-});
-$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-e.preventDefault(); $(this).parent('div').remove(); x--;
-})
-//////////////////////////////
-var wrapper2 = $(".field_wrapper2"); //Fields wrapper
-var add_button2 = $("#tambah2"); //Add button ID
-var x2 = 1; //initlal text box count
-$(add_button2).click(function(e){ //on add input button click
-e.preventDefault();
-if(x2 < max_fields){ //max input box allowed
-x2++; //text box increment
-$(wrapper2).append('<div class="tambahan2"><div class="form-group row mt-4"><label class="col-md-2">Tanggal Kunjungan</label><div class="input-group col-md-1"><input class="multisteps-form__input form-control" type="text" name="tanggalkeluarnegri[]"/><div class="input-group-append"><span class="input-group-text">Tanggal</span></div></div><div class="input-group col-md-1"><input class="multisteps-form__input form-control" type="text" name="bulankeluarnegri[]"/><div class="input-group-append"><span class="input-group-text">Bulan</span></div></div><div class="input-group col-md-1"><input class="multisteps-form__input form-control" type="text" name="tahunkeluarnegri[]"/><div class="input-group-append"><span class="input-group-text">Tahun</span></div></div></div><div class="form-group row mt-4"><label class="col-md-2" >Lokasi Kunjungan</label><div class="input-group col-md-3"><div class="input-group-preppend"><span class="input-group-text">Kota</span></div><input class="multisteps-form__input form-control" type="text" name="kota[]"/></div><div class="input-group col-md-3"><div class="input-group-preppend"><span class="input-group-text">Negara</span></div><input class="multisteps-form__input form-control" type="text" name="negara[]"/></div></div><div style="cursor:pointer;" class="remove_field2 btn btn-danger btn-sm">Remove</div></div></div>'); //add input box
-}
-});
-$(wrapper2).on("click",".remove_field2", function(e){ //user click on remove text
-e.preventDefault(); $(this).parent('div').remove(); x2--;
-})
-/////////////////////////
-var wrapper3 = $(".field_wrapper3"); //Fields wrapper
-var add_button3 = $("#tambah3"); //Add button ID
-var x3 = 1; //initlal text box count
-$(add_button3).click(function(e){ //on add input button click
-e.preventDefault();
-if(x3 < max_fields){ //max input box allowed
-x3++; //text box increment
-$(wrapper3).append('<div class="tambahan3"><div class="form-group row mt-4"><div class="input-group col-md-3"><div class="input-group-preppend"><span class="input-group-text">Nama</span></div><input class="multisteps-form__input form-control" type="text"  name="namakontak[]"/></div><div class="input-group col-md-3"><div class="input-group-preppend"><span class="input-group-text">Alamat</span></div><input class="multisteps-form__input form-control" type="text"  name="alamatkontak[]"/></div><div class="input-group col-md-3"><div class="input-group-preppend"><span class="input-group-text">Hubungan</span></div><input class="multisteps-form__input form-control" type="text" name="hubungankontak[]"/></div><div class="input-group col-md-3"><div class="input-group-preppend"><span class="input-group-text">Tanggal</span></div><input class="multisteps-form__input form-control" type="text"  name="tanggalkontak[]" placeholder="DD/MM/YYYY"/></div></div><div style="cursor:pointer;" class="remove_field3 btn btn-danger btn-sm">Remove</div></div>'); //add input box
-}
-});
-$(wrapper3).on("click",".remove_field3", function(e){ //user click on remove text
-e.preventDefault(); $(this).parent('div').remove(); x3--;
-})
  });
 </script>
 <script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 <script>
+
+$("#tanggalkunjungan1").flatpickr();
+$("#tanggalkunjungan2").flatpickr();
+$("#tanggalkunjungan3").flatpickr();
+$("#tanggalkunjungan4").flatpickr();
+$("#tanggalkunjungan5").flatpickr();
+$("#tanggalkunjungan6").flatpickr();
+$("#tanggalkunjungan7").flatpickr();
+$("#tanggalkunjungan_pasien1").flatpickr();
+$("#tanggalkunjungan_pasien2").flatpickr();
+$("#tanggalkunjungan_pasien3").flatpickr();
+$("#tanggalkunjungan_pasien4").flatpickr();
+$("#tanggalkunjungan_pasien5").flatpickr();
+$("#tanggalkunjungan_pasien6").flatpickr();
+$("#tanggalkunjungan_pasien7").flatpickr();
+$("#tanggalkonawal1").flatpickr();
+$("#tanggalkonawal2").flatpickr();
+$("#tanggalkonawal3").flatpickr();
+$("#tanggalkonawal4").flatpickr();
+$("#tanggalkonawal5").flatpickr();
+$("#tanggalkonawal6").flatpickr();
+$("#tanggalkonawal7").flatpickr();
+$("#tanggalkonakhir1").flatpickr();
+$("#tanggalkonakhir2").flatpickr();
+$("#tanggalkonakhir3").flatpickr();
+$("#tanggalkonakhir4").flatpickr();
+$("#tanggalkonakhir5").flatpickr();
+$("#tanggalkonakhir6").flatpickr();
+$("#tanggalkonakhir7").flatpickr();
 $("#tanggallahir").flatpickr();
+$("#tanggalrdt").flatpickr();
 $("#onsetpanas").flatpickr();
     function yesnoCheck(that) {
     if (that.value == "Other") {

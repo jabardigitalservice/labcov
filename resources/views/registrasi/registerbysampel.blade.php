@@ -1,5 +1,5 @@
 @extends('layouts.web')
-@section('title','- Registrasi Baru')
+@section('title','- Tambahkan Informasi Pasien dari Sampel')
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/libs/smartwizard/smart_wizard.min.css')}}" type="text/css" />
 @endsection
@@ -9,10 +9,10 @@
                 <div class="container-fluid">
                     <div class="row page-title align-items-center">
                         <div class="col-sm-4 col-xl-6">
-                            <h4 class="mb-1 mt-0">Registrasi Baru</h4>
+                            <h4 class="mb-1 mt-0">Tambahkan Informasi Pasien dari Sampel</h4>
                         </div>
                         <div class="col-sm-8 col-xl-6">
-                           <a href="{{url('registrasi')}}" class="btn btn-md btn-primary float-right"><i class="uil-arrow-left"></i> Kembali</a>
+                           <a href="{{url('rujukan')}}" class="btn btn-md btn-primary float-right"><i class="uil-arrow-left"></i> Kembali</a>
                         </div>
                     </div>
 
@@ -21,8 +21,14 @@
       <div class="col-12">
           <div class="card">
               <div class="card-body">  
-<form method="POST" action="{{url('registrasi')}}">
+<h5 class="mb-1 mt-0">Sampel yang ada di grup ini :
+@foreach($selected_sampel as $s)
+<span class="badge badge-primary">#{{$s->sam_barcodenomor_sampel}}</span>
+@endforeach
+</h5>
+<form method="POST" action="{{url('rujukan/registersampel')}}" class="mt-4">
     @csrf
+<input type="hidden" name="pen_id" value="{{$selected_pengambilan->pen_id}}">
 <div id="smartwizard-default">
     <ul>
         <li><a href="#sw-default-step-1">Identitas Pengirim<small class="d-block">Identitas Pengirim Spesimen</small></a></li>
@@ -335,15 +341,15 @@
                 <label class="col-md-2" >Tanda Pneumonia</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpenumonia" value="Ya">
+  <input class="form-check-input" type="radio" name="reg_gejpneumonia" value="Ya">
   <label class="form-check-label">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpenumonia" value="Tidak">
+  <input class="form-check-input" type="radio" name="reg_gejpneumonia" value="Tidak">
   <label class="form-check-label">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpenumonia" value="Tidak Diisi">
+  <input class="form-check-input" type="radio" name="reg_gejpneumonia" value="Tidak Diisi">
   <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
@@ -675,7 +681,6 @@
   <input class="multisteps-form__input form-control" type="text" name="reg_negarakunjungan_pasien4"/>
 </div>
           </div>
-
           <div class="form-group row mt-4">
 <div class="input-group col-md-4">
   <div class="input-group-preppend">

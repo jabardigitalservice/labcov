@@ -7,6 +7,10 @@ use App\RegisterPasien;
 use App\HistoryPerawatan;
 use App\KontakPasien;
 use App\KunjunganPergi;
+use App\RDT;
+use App\PengambilanSampel;
+use App\GroupSampel;
+use App\Sampel;
 use Carbon\Carbon;
 use App\Logs;
 use Auth;
@@ -30,6 +34,55 @@ class RegisterPasienController extends Controller
         return view('registrasi.index')->with(compact('reg'));
     }
 
+    public function rujukan()
+    {
+        $belum_reg = GroupSampel::join('pengambilansampel','pengambilansampel.pen_id','=','groupsampel.group_sampel_id')
+        ->join('sampel','sampel.sam_penid','=','pengambilansampel.pen_id')
+        ->select('sampel.sam_barcodenomor_sampel','pengambilansampel.pen_id','groupsampel.*')
+        ->whereNull('pengambilansampel.pen_noreg')->get();
+        $group = $belum_reg->groupby('group_sampel_id' );
+       return view('registrasi.rujukan')->with(compact('group'));
+       // return $group;
+    }
+
+    public function registerbysampel($id)
+    {
+        $selected_pengambilan = PengambilanSampel::where('pen_id',$id)->first();
+        $selected_sampel = Sampel::where('sam_penid',$selected_pengambilan->pen_id)->get();
+       return view('registrasi.registerbysampel')->with(compact('selected_pengambilan','selected_sampel'));
+       // return $group;
+    }
+
+    public function storeregisterbysampel(Request $request)
+    {
+        $addpasientopen = PengambilanSampel::where('pen_id',$request->pen_id)->first();
+        $addpasientopen->pen_nik = $request->reg_nik;
+        $addpasientopen->pen_noreg = $request->reg_no;
+        $regis = collect($request->all());
+   if($request->reg_dinkes_pengirim == "Other"){
+       $regis->put('reg_dinkes_pengirim', $request->daerahlain);
+   }
+    $years = Carbon::parse($request->reg_tanggallahir)->diff(Carbon::now())->format('%y tahun %m bulan');
+    $regis->put('reg_usia', $years);
+    $regis->put('reg_userid', Auth::user()->id);
+    if($request->rar_pernah_rdt == "Ya"){
+        $rdt = new RDT;
+        $rdt->rar_pernah_rdt = $request->rar_pernah_rdt;
+        $rdt->rar_hasil_rdt = $request->rar_hasil_rdt;
+        $rdt->rar_tanggal_rdt = $request->rar_tanggal_rdt;
+        $rdt->rar_keterangan = $request->rar_keterangan;
+        $rdt->create();
+    }
+    
+    try{
+    $addpasientopen->update();
+    RegisterPasien::create($regis->all());
+    }catch(QE $e){  return $e; } //show db error message
+        notify()->success('Register telah sukses ditambahkan !');
+        return redirect('rujukan');
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -48,72 +101,28 @@ class RegisterPasienController extends Controller
      */
     public function store(Request $request)
     {
-        // INSERT REGISTRASI PER DAERAH //
-        $regis = collect($request->all());
-        if($request->reg_dinkes_pengirim == "Other"){
-            $regis->put('reg_dinkes_pengirim', $request->daerahlain);
-        }
-        $regis->put('reg_usia', $request->usiatahun." Tahun ".$request->usiabulan." Bulan");
-
-        // INSERT RAWAT //
-        $hisvisit = array();
-        if(!empty($request->tanggalrawat) || !is_null($request->tanggalrawat)){
-            for($i = 0; $i<count($request->tanggalrawat); $i++){
-                $hp = new HistoryPerawatan;
-                $hp->his_regid = $request->reg_no;
-                $hp->his_tanggalrawat = $request->tahunrawat[$i]."-".$request->bulanrawat[$i]."-".$request->tanggalrawat[$i];
-                $hp->his_rsfasyankes = $request->tempatrawat[$i];
-                try{
-                    $hp->save();
-                   array_push($hisvisit,$hp->hisid);
-                 }catch(QE $e){  return $e; } //show db error message
-            }
-        }
-            // INSERT PERJALANAN //
-            $kunvisit = array();
-            if(!empty($request->tanggalkeluarnegri) || !is_null($request->tanggalkeluarnegri)){
-                for($i = 0; $i<count($request->tanggalkeluarnegri); $i++){
-                    $kp = new KunjunganPergi();
-                    $kp->kun_regid = $request->reg_no;
-                    $kp->kun_tanggalkunjungan = $request->tahunkeluarnegri[$i]."-".$request->bulankeluarnegri[$i]."-".$request->tanggalkeluarnegri[$i];
-                    $kp->kun_kotakunjungan = $request->kota[$i];
-                    $kp->kun_negarakunjungan = $request->negara[$i];
-                    try{
-                    $kp->save();
-                    array_push($kunvisit,$kp->kunid);
-                     }catch(QE $e){  return $e; } //show db error message
-                }
-            }
-
-              // INSERT PERJALANAN//
-              $konvisit = array();
-              if(!empty($request->namakontak) || !is_null($request->namakontak)){
-
-                for($i = 0; $i<count($request->namakontak); $i++){
-                    $q = new KontakPasien();
-                    $q->kon_regid = $request->reg_no;
-                    $q->kon_tanggalkon= $request->tanggalkontak[$i];
-                    $q->kon_namakon = $request->namakontak[$i];
-                    $q->kon_alamatkon = $request->alamatkontak[$i];
-                    $q->kon_hubungankon = $request->hubungankontak[$i];
-                    try{
-                    $q->save();
-                    array_push($konvisit,$q->konid);
-                     }catch(QE $e){  return $e; } //show db error message
-                }
-
-            }
-$regis->put('reg_history_visit', implode(",",$hisvisit));
-$regis->put('reg_kunjunganluarnegri', implode(",",$kunvisit));
-$regis->put('reg_kontakterakhir', implode(",",$konvisit));
-$regis->put('reg_userid', Auth::user()->id);
-try{
+   $regis = collect($request->all());
+   if($request->reg_dinkes_pengirim == "Other"){
+       $regis->put('reg_dinkes_pengirim', $request->daerahlain);
+   }
+    $years = Carbon::parse($request->reg_tanggallahir)->diff(Carbon::now())->format('%y tahun %m bulan');
+    $regis->put('reg_usia', $years);
+    $regis->put('reg_userid', Auth::user()->id);
+    if($request->rar_pernah_rdt == "Ya"){
+        $rdt = new RDT;
+        $rdt->rar_pernah_rdt = $request->rar_pernah_rdt;
+        $rdt->rar_hasil_rdt = $request->rar_hasil_rdt;
+        $rdt->rar_tanggal_rdt = $request->rar_tanggal_rdt;
+        $rdt->rar_keterangan = $request->rar_keterangan;
+        $rdt->create();
+    }
+    
+    try{
     RegisterPasien::create($regis->all());
-     }catch(QE $e){  return $e; } //show db error message
+    }catch(QE $e){  return $e; } //show db error message
 
-
-     notify()->success('Register telah sukses ditambahkan !');
-        return redirect('registrasi');
+        notify()->success('Register telah sukses ditambahkan !');
+        return redirect('register');
     }
 
     /**
@@ -125,11 +134,8 @@ try{
     public function show($id)
     {
         $reg = RegisterPasien::find($id);
-        $historyperawatan = HistoryPerawatan::whereIn('hisid',explode(',',$reg->reg_history_visit))->get();
-        $historykunjungan = KunjunganPergi::whereIn('kunid',explode(',',$reg->reg_kunjunganluarnegri))->get();
-        $historykontak = KontakPasien::whereIn('konid',explode(',',$reg->reg_kontakterakhir))->get();
-
-    return view('registrasi.show')->with(compact('reg','historyperawatan','historykunjungan','historykontak'));
+        $reg_rdt = RDT::where('rar_noreg',$reg->reg_no)->first();
+    return view('registrasi.show')->with(compact('reg','reg_rdt'));
     }
 
     /**
@@ -141,10 +147,8 @@ try{
     public function edit($id)
     {
         $edit = RegisterPasien::find($id);
-        $historyperawatan = HistoryPerawatan::whereIn('hisid',explode(',',$edit->reg_history_visit))->get();
-        $historykunjungan = KunjunganPergi::whereIn('kunid',explode(',',$edit->reg_kunjunganluarnegri))->get();
-        $historykontak = KontakPasien::whereIn('konid',explode(',',$edit->reg_kontakterakhir))->get();
-    return view('registrasi.edit')->with(compact('edit','historyperawatan','historykunjungan','historykontak'));
+        $reg_rdt = RDT::where('rar_noreg',$edit->reg_no)->first();
+    return view('registrasi.edit')->with(compact('edit','reg_rdt'));
     }
 
     /**
@@ -161,82 +165,29 @@ try{
         if($request->reg_dinkes_pengirim == "Other"){
             $update->put('reg_dinkes_pengirim', $request->daerahlain);
         }
-        $update->put('reg_usia', $request->usiatahun." Tahun ".$request->usiabulan." Bulan");
-
-        // INSERT RAWAT //
-        $hisvisit = array();
-        $new_rawat = explode(",", $olddata->reg_history_visit);
-        if(!empty($request->tanggalrawat) || !is_null($request->tanggalrawat)){
-            for($i = 0; $i<count($request->tanggalrawat); $i++){
-                $history_perawatan = new HistoryPerawatan;
-                $history_perawatan->his_regid = $request->reg_no;
-                $history_perawatan->his_tanggalrawat = $request->tahunrawat[$i]."-".$request->bulanrawat[$i]."-".$request->tanggalrawat[$i];
-                $history_perawatan->his_rsfasyankes = $request->tempatrawat[$i];
-                try{
-                    $history_perawatan->save();
-                   array_push($hisvisit,$history_perawatan->hisid);
-                 }catch(QE $e){  return $e; } //show db error message
-            }
+        
+    $years = Carbon::parse($request->reg_tanggallahir)->diff(Carbon::now())->format('%y tahun %m bulan');
+    $update->put('reg_usia', $years);
+    $update->put('reg_userid', Auth::user()->id);
+    if($request->rar_pernah_rdt == "Ya"){
+        $rdt_exist = RDT::where('rar_noreg', $olddata->reg_no)->first();
+        if(is_null($rdt_exist)){
+            $rdt = new RDT;
+        }else {
+            $rdt = $rdt_exist;
         }
-        if(!is_null($request->hapushis) || !empty($request->hapushis)){
-       $new_rawat = array_diff($new_rawat,$request->hapushis);
-          }
-        foreach($hisvisit as $historybaru){
-            array_push($new_rawat, $historybaru);
+        $rdt->rar_pernah_rdt = $request->rar_pernah_rdt;
+        $rdt->rar_hasil_rdt = $request->rar_hasil_rdt;
+        $rdt->rar_tanggal_rdt = $request->rar_tanggal_rdt;
+        $rdt->rar_keterangan = $request->rar_keterangan;
+        if(is_null($rdt_exist)){
+       
+            $rdt->create();
+        }else {
+            $rdt->update();
         }
-
-            // INSERT PERJALANAN//
-            $kunvisit = array();
-        $new_kunjungan = explode(",",$olddata->reg_kunjunganluarnegri);
-           if(!empty($request->tanggalkeluarnegri) || !is_null($request->tanggalkeluarnegri)){
-                for($i = 0; $i<count($request->tanggalkeluarnegri); $i++){
-                    $kunjungan_pergi = new KunjunganPergi();
-                    $kunjungan_pergi->kun_regid = $request->reg_no;
-                    $kunjungan_pergi->kun_tanggalkunjungan = $request->tahunkeluarnegri[$i]."-".$request->bulankeluarnegri[$i]."-".$request->tanggalkeluarnegri[$i];
-                    $kunjungan_pergi->kun_kotakunjungan = $request->kota[$i];
-                    $kunjungan_pergi->kun_negarakunjungan = $request->negara[$i];
-                    try{
-                    $kunjungan_pergi->save();
-                    array_push($kunvisit,$kunjungan_pergi->kunid);
-                     }catch(QE $e){  return $e; } //show db error message
-                }
-              }
-              if(!is_null($request->hapuskun) || !empty($request->hapuskun)){
-           $new_kunjungan =  array_diff($new_kunjungan, $request->hapuskun);
-               }
-            foreach($kunvisit as $kunjunganbaru){
-                array_push($new_kunjungan, $kunjunganbaru);
-            }
-
-              // INSERT PERJALANAN//
-              $konvisit = array();
-              $new_kontak = explode(",",$olddata->reg_kontakterakhir);
-              if(!empty($request->namakontak) || !is_null($request->namakontak)){
-
-                for($i = 0; $i<count($request->namakontak); $i++){
-                    $kontak_pasien = new KontakPasien();
-                    $kontak_pasien->kon_regid = $request->reg_no;
-                    $kontak_pasien->kon_tanggalkon= $request->tanggalkontak[$i];
-                    $kontak_pasien->kon_namakon = $request->namakontak[$i];
-                    $kontak_pasien->kon_alamatkon = $request->alamatkontak[$i];
-                    $kontak_pasien->kon_hubungankon = $request->hubungankontak[$i];
-                    try{
-                    $kontak_pasien->save();
-                    array_push($konvisit,$kontak_pasien->konid);
-                     }catch(QE $e){  return $e; } //show db error message
-                }
-         }
-         if(!is_null($request->hapuskon) || !empty($request->hapuskon)){
-           $new_kontak =  array_diff($new_kontak, $request->hapuskon);
-         }
-            foreach($konvisit as $kontakbaru){
-                array_push($new_kontak, $kontakbaru);
-            }
-
-
-$update->put('reg_history_visit', implode(",",$new_rawat));
-$update->put('reg_kunjunganluarnegri', implode(",",$new_kunjungan));
-$update->put('reg_kontakterakhir', implode(",",$new_kontak));
+    }
+    
     try{
     $olddata->update($update->all());
      }catch(QE $e){  return $e; } //show db error message
