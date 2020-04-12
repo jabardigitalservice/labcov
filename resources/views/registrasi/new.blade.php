@@ -1089,7 +1089,7 @@
   <label class="form-check-label">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidparu" value="Tidak Diisi">
+  <input class="form-check-input" type="radio" name="reg_komorbidhiv" value="Tidak Diisi">
   <label class="form-check-label">Tidak Diisi</label>
 </div>
                 </div>
