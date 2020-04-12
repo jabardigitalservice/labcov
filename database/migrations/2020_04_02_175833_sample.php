@@ -25,7 +25,7 @@ class Sample extends Migration
         Schema::create('sampel', function (Blueprint $table) {
             $table->increments('sam_id');
             $table->string('sam_penid');
-            $table->string('sam_noreg');
+            $table->string('sam_noreg')->nullable();
 
         $table->integer('sam_jenis_sampel')->nullable();
         $table->string('sam_petugas_pengambil_sampel')->nullable();

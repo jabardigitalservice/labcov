@@ -16,7 +16,7 @@ class PengambilanSample extends Migration
         Schema::create('pengambilansampel', function (Blueprint $table) {
             $table->increments('pen_id');
             $table->string('pen_nik')->nullable();
-            $table->string('pen_noreg');
+            $table->string('pen_noreg')->nullable();
             $table->tinyInteger('pen_sampel_diambil')->nullable();
             $table->tinyInteger('pen_sampel_diterima')->nullable();
             $table->tinyInteger('pen_sampel_diterima_dari_fas_rujukan')->nullable();

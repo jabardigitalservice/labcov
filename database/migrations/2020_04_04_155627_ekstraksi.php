@@ -16,7 +16,7 @@ class Ekstraksi extends Migration
         Schema::create('ekstraksisampel', function (Blueprint $table) {
             $table->increments('eks_id');
             $table->string('eks_nik')->nullable();
-            $table->string('eks_noreg');
+            $table->string('eks_noreg')->nullable();
             $table->string('eks_penid');
             $table->string('eks_samid');
             $table->date('eks_tanggal_penerimaan_sampel')->nullable();

@@ -16,7 +16,7 @@ class Pemeriksaansampel extends Migration
         Schema::create('pemeriksaansampel', function (Blueprint $table) {
         $table->increments('pem_id');
         $table->integer('pem_penid');
-        $table->string('pem_noreg');
+        $table->string('pem_noreg')->nullable();
         $table->integer('pem_samid');
         $table->date('pem_tanggal_penerimaan_sampel')->nullable();
         $table->string('pem_jam_penerimaan_sampel')->nullable();

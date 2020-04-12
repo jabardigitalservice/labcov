@@ -20,7 +20,6 @@ class PengambilanSampel extends Model
     * @var string
     */
    protected $primaryKey = 'pen_id';
-
    /**
     * Attributes that should be mass-assignable.
     * @var array
@@ -36,6 +35,8 @@ class PengambilanSampel extends Model
    'pen_id_sampel',
    'pen_catatan',
    'pen_userid',
+   'pen_statuspen',
+   'pen_nomor_ekstraksi',
    'created_at',
    'updated_at'];
 }
