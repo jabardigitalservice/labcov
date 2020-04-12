@@ -37,18 +37,6 @@
                       <input type="file" name="xlsregister">
                       </div>
                       <div class="form-group">
-                      <label class="control-label">File XLSX Riwayat Perawatan:</label>
-                      <input type="file" name="xlsriwayatperawatan">
-                      </div>
-                      <div class="form-group">
-                      <label class="control-label">File XLSX Riwayat Kunjungan Luar Negri:</label>
-                      <input type="file" name="xlsriwayatkunjungan">
-                      </div>
-                      <div class="form-group">
-                      <label class="control-label">File XLSX Riwayat Kontak Pasien:</label>
-                      <input type="file" name="xlsriwayatkontak">
-                      </div>
-                      <div class="form-group">
                         <button ype="submit" class="btn btn-primary">Upload</button>
                     </div>
          </form>
