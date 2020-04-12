@@ -109,54 +109,72 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{url('registrasi')}}">
+                                <a href="javascript: void(0);">     
                                 <i class="uil-user-square"></i>
-                                <span> Registrasi </span>
-                            </a>
+                                    <span> Registrasi </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+
+                                <ul class="nav-second-level mm-collapse">
+                                    <li>
+                                        <a href="{{url('registrasi')}}">Registrasi Mandiri (L)</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('rujukan')}}">Registrasi Rujukan (R)</a>
+                                    </li>
+                                    
+                                </ul>
                         </li>
+                      
                         <li>
                             <a  href="{{url('pengambilansampel')}}">
                                 <i class="uil-flask-potion "></i>
                                 <span>Pengambilan Sample </span>
-                               
                             </a>
 
                         </li>
+
                         <li>
-                            <a href="javascript: void(0);">
-                                <i class="uil-flask"></i>
-                                <span>Ekstraksi Sample</span>
-                                <span class="menu-arrow"></span>
+                        <a href="javascript: void(0);">     
+                        <i class="uil-user-square"></i>
+                       <span>Ekstraksi Sampel </span>
+                       <span class="menu-arrow"></span>
                             </a>
 
-                            <ul class="nav-second-level" aria-expanded="false">
-                                <li>
-                                    <a href="project-list.html">List</a>
-                                </li>
-                                <li>
-                                    <a href="project-detail.html">Detail</a>
-                                </li>
-                            </ul>
-                        </li>
+                            <ul class="nav-second-level mm-collapse">
+                       <li>
+                           <a href="{{url('ekstraksi')}}">Ekstrasi Sampel</a>
+                       </li>
+                       <li>
+                           <a href="{{url('penyimpanan')}}">Penyimpanan Sampel</a>
+                       </li>
+                       <li>
+                           <a href="{{url('pemusnahan')}}">Pemusnahan Sampel</a>
+                       </li>
+                                    
+                                </ul>
+                      
                         <li>
-                            <a href="javascript: void(0);">
+                            <a href="{{url('pemeriksaansampel')}}">
                                 <i class="uil-atom"></i>
-                                <span>Penelitian Sample </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-
-                            <ul class="nav-second-level" aria-expanded="false">
-                                <li>
-                                    <a href="task-list.html">List</a>
-                                </li>
-                                <li>
-                                    <a href="task-board.html">Kanban Board</a>
-                                </li>
-                            </ul>
+                                <span>Pemeriksaan rRT-PCR</span>
+                            </a> <!-- ini ada sub menunya -->
                         </li>
-        
+
                         <li>
-                            <a href="charts-apex.html" aria-expanded="false">
+                            <a href="{{url('pemeriksaanrdt')}}">
+                                <i class="uil-atom"></i>
+                                <span>Pemeriksaan RDT</span>
+                            </a> <!-- ini ada sub menunya -->
+                        </li>
+                        <li>
+                            <a href="{{url('validasi')}}" aria-expanded="false">
+                                <i class="uil-eye"></i>
+                                <span> Validasi Sample </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('pelacakan')}}" aria-expanded="false">
                                 <i class="uil-search-alt "></i>
                                 <span> Pelacakan Sample </span>
                             </a>
