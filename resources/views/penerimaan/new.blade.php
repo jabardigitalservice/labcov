@@ -21,8 +21,8 @@
       <div class="col-12">
           <div class="card">
               <div class="card-body">  
-                <h4 class="header-title mt-0 mb-1">NOMOR REGISTRASI : #{{$selected_reg->reg_no}}</h4>
-                <h4 class="header-title mt-0 mb-1">NOMOR INDUK KEPENDUDUKAN PASIEN : {{$selected_reg->reg_no}}</h4>
+                <h4 class="header-title mt-0 mb-1">No. Registrasi : #{{$selected_reg->reg_no}}</h4>
+                <h4 class="header-title mt-0 mb-1">No. Induk Kependudukan : {{$selected_reg->reg_no}}</h4>
 <form method="POST" action="{{url('pengambilansampel/ambil')}}">
     @csrf
  <input type="hidden" name="pen_noreg" value="{{$selected_reg->reg_no}}">

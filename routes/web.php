@@ -74,7 +74,7 @@ Route::post('ekstraksi/apidel/','EkstraksiController@apidelete')->middleware('au
 | Ekstraksi Sampel dan Importnya Routes
 |--------------------------------------------------------------------------
 |
-*/
+*/ 
 
 Route::get('pemeriksaansampel','PemeriksaanSampelController@index')->middleware('auth');
 Route::get('pemeriksaansampel/detail/{eksid}','PemeriksaanSampelController@show')->middleware('auth');

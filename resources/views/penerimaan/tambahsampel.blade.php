@@ -12,7 +12,7 @@
                             <h4 class="mb-1 mt-0">Pengambilan / Penerimaan Sampel Baru</h4>
                         </div>
                         <div class="col-sm-8 col-xl-6">
-                           <a href="{{url('registrasi')}}" class="btn btn-md btn-primary float-right"><i class="uil-arrow-left"></i> Kembali</a>
+                           <a href="{{url('pengambilansampel')}}" class="btn btn-md btn-primary float-right"><i class="uil-arrow-left"></i> Kembali</a>
                         </div>
                     </div>
 
@@ -67,6 +67,12 @@
       </div>
   </div>
   
+  <div class="form-group row">
+      <label class="col-md-2 col-form-label" >Nomor Ekstraksi</label>
+      <div class="col-md-10">
+      <input class="form-control" type="text" name="pen_nomor_sampel" placeholder="Nomor Ekstraksi"/>
+      </div>
+  </div>
     <hr>
     <h4 class="mb-1 mt-0">Sampel</h4>
     <p>Dibawah ini adalah sampel yang diambil atau diterima, klik tambahkan sesuai dengan banyaknya sampel</p>
