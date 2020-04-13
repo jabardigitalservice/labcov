@@ -36,8 +36,16 @@
               <td width="60%">{{$reg->reg_nama_pasien}}</td>
             </tr>
             <tr>
-                <td width="40%"><b>Nomor Induk Kependudukan</b></td>
-                <td width="60%">{{$reg->reg_nik}}</td>
+                <td width="40%"><b>>@if($reg->reg_jenisidentitas == "KTP")
+                Nomor Induk Kependudukan
+                @elseif($reg->reg_jenisidentitas == "SIM")
+                Nomor Surat Izin Mengemudi
+              @endif</b></td>
+                <td width="60%">@if($reg->reg_jenisidentitas == "KTP")
+                {{$reg->reg_nik}}
+                @elseif($reg->reg_jenisidentitas == "SIM")
+                {{$reg->reg_nosim}}
+              @endif</td>
               </tr>
               <tr>
                 <td width="40%"><b>Tanggal Lahir & Usia</b></td>
@@ -52,7 +60,7 @@
               </tr>
               <tr>
                 <td width="40%"><b>Alamat Pasien</b></td>
-                <td width="60%">{{$reg->reg_alamat}}</td>
+                <td width="60%">{{$reg->reg_alamat}}, {{$reg->reg_domisilikotakab}}, {{$reg->reg_domisilikecamatan}}, {{$reg->reg_domisilikelurahan}}</td>
               </tr>
               <tr>
                 <td width="40%"><b>No Telp Pasien</b></td>
@@ -77,7 +85,11 @@
 </tr>
 <tr>
 <td width="40%"><b>Nama Rumah Sakit / Fasyankes</b></td>
-<td width="60%">{{$reg->reg_nama_rs}}</td>
+<td width="60%">@if($reg->reg_nama_rs == "Other")
+{{$reg->reg_nama_rs_lainnya}}
+@else 
+{{$reg->reg_nama_rs}}
+@endif</td>
 </tr>
 <tr>
 <td width="40%"><b>Nomor Rekam Medis</b></td>
@@ -100,39 +112,18 @@
        <table class="table">
         <thead>
             <tr>
+                <th>Kunjungan Ke</th>
                 <th>Tanggal Dirawat</th>
                 <th>Rumah Sakit / Fasyankes</th>
             </tr>
         </thead>
           <tbody>
             <tr>
-              <td width="30%">{{$reg->reg_tanggalkunjungan1}}</td>
-              <td width="60%">{{$reg->reg_rsfasyankes1}}</td>
+              <td width="10%">{{$reg->reg_kunke}}</td>
+              <td width="30%">{{$reg->reg_tanggalkunjungan}}</td>
+              <td width="60%">{{$reg->reg_rsfasyankes}}</td>
             </tr>
-            <tr>
-              <td width="30%">{{$reg->reg_tanggalkunjungan2}}</td>
-              <td width="60%">{{$reg->reg_rsfasyankes2}}</td>
-            </tr>
-            <tr>
-              <td width="30%">{{$reg->reg_tanggalkunjungan3}}</td>
-              <td width="60%">{{$reg->reg_rsfasyankes3}}</td>
-            </tr>
-            <tr>
-              <td width="30%">{{$reg->reg_tanggalkunjungan4}}</td>
-              <td width="60%">{{$reg->reg_rsfasyankes4}}</td>
-            </tr>
-            <tr>
-              <td width="30%">{{$reg->reg_tanggalkunjungan5}}</td>
-              <td width="60%">{{$reg->reg_rsfasyankes5}}</td>
-            </tr>
-            <tr>
-              <td width="30%">{{$reg->reg_tanggalkunjungan6}}</td>
-              <td width="60%">{{$reg->reg_rsfasyankes6}}</td>
-            </tr>
-            <tr>
-              <td width="30%">{{$reg->reg_tanggalkunjungan7}}</td>
-              <td width="60%">{{$reg->reg_rsfasyankes7}}</td>
-            </tr>
+            
           </tbody>
         </table>
 <hr>
@@ -172,7 +163,7 @@
     <tr>
     <tr>
     <td width="40%"><b>Tanda Pneumonia</b></td>
-    <td width="60%">{{$reg->reg_gejpneumonia}}</td>
+    <td width="60%">{{$reg->reg_gejpenumonia}}</td>
     </tr>
     <tr>
     <td width="40%"><b>Batuk</b></td>

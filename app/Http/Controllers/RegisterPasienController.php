@@ -62,6 +62,8 @@ class RegisterPasienController extends Controller
    if($request->reg_dinkes_pengirim == "Other"){
        $regis->put('reg_dinkes_pengirim', $request->daerahlain);
    }
+   
+    $regis->put('reg_dateinput',Carbon::now()->isoFormat('yyyy-mm-dd'));
     $years = Carbon::parse($request->reg_tanggallahir)->diff(Carbon::now())->format('%y tahun %m bulan');
     $regis->put('reg_usia', $years);
     $regis->put('reg_userid', Auth::user()->id);
@@ -105,6 +107,18 @@ class RegisterPasienController extends Controller
    if($request->reg_dinkes_pengirim == "Other"){
        $regis->put('reg_dinkes_pengirim', $request->daerahlain);
    }
+   if($request->reg_nama_rs == "Other"){
+    $regis->put('reg_nama_rs_lainnya', $request->reg_nama_rs_lainnya);
+}
+if($request->reg_jenisidentitas == "KTP"){
+    $regis->put('reg_nik', $request->reg_nik);
+    $regis->put('reg_jenisidentitas', "KTP");
+}elseif($request->reg_jenisidentitas == "SIM"){
+    $regis->put('reg_nosim', $request->reg_nosim);
+    $regis->put('reg_jenisidentitas', "SIM");
+}
+
+    $regis->put('reg_dateinput',Carbon::now());
     $years = Carbon::parse($request->reg_tanggallahir)->diff(Carbon::now())->format('%y tahun %m bulan');
     $regis->put('reg_usia', $years);
     $regis->put('reg_userid', Auth::user()->id);
@@ -166,6 +180,16 @@ class RegisterPasienController extends Controller
             $update->put('reg_dinkes_pengirim', $request->daerahlain);
         }
         
+   if($request->reg_nama_rs == "Other"){
+    $update->put('reg_nama_rs_lainnya', $request->reg_nama_rs_lainnya);
+}
+if($request->reg_jenisidentitas == "KTP"){
+    $update->put('reg_nik', $request->reg_nik);
+    $update->put('reg_jenisidentitas', "KTP");
+}elseif($request->reg_jenisidentitas == "SIM"){
+    $update->put('reg_nosim', $request->reg_nosim);
+    $update->put('reg_jenisidentitas', "SIM");
+}
     $years = Carbon::parse($request->reg_tanggallahir)->diff(Carbon::now())->format('%y tahun %m bulan');
     $update->put('reg_usia', $years);
     $update->put('reg_userid', Auth::user()->id);
@@ -222,4 +246,10 @@ class RegisterPasienController extends Controller
             return redirect('registrasi');
     }
 
+    public function scanbarcoderujukan(Request $request){
+        $sampel = Sampel::where('sam_barcodenomor_sampel',$request->sam_barcodenomor_sampel)->first();
+    
+        return redirect('rujukan/registersampel/'.$sampel->sam_penid);
+
+    }
 }

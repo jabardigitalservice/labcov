@@ -21,6 +21,7 @@ Route::get('/', 'HomeController@index')->middleware('auth');
 Route::resource('registrasi', 'RegisterPasienController')->middleware('auth');
 Route::get('rujukan', 'RegisterPasienController@rujukan')->middleware('auth');
 Route::get('rujukan/registersampel/{id}', 'RegisterPasienController@registerbysampel')->middleware('auth');
+Route::post('scanbarcoderujukan','RegisterPasienController@scanbarcoderujukan')->middleware('auth');
 Route::post('rujukan/registersampel/', 'RegisterPasienController@storeregisterbysampel')->middleware('auth');
 Route::post('registrasi/{id}','RegisterPasienController@updatex')->middleware('auth');
 Route::get('registrasi/delete/{id}','RegisterPasienController@delete')->middleware('auth');

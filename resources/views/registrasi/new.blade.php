@@ -24,7 +24,7 @@
 <form method="POST" action="{{url('registrasi')}}">
     @csrf
 <div id="smartwizard-default">
-    <ul>
+    <ul> 
         <li><a href="#sw-default-step-1">Identitas Pengirim<small class="d-block">Identitas Pengirim Spesimen</small></a></li>
         <li><a href="#sw-default-step-2">Identitas Pasien<small class="d-block">Informasi Pasien</small></a></li>
         <li><a href="#sw-default-step-3">Tanda dan Gejala<small class="d-block">Gejala Pasien</small></a></li>
@@ -42,7 +42,7 @@
     </div>
       <div class="form-group row mt-4">
       <label class="col-md-2" for="dinkespengirim">Dinkes Pengirim</label>
-      <select class="multisteps-form__input form-control col-md-6" id="dinkespengirim" name="reg_dinkes_pengirim" onchange="yesnoCheck(this);">
+      <select class="multisteps-form__input form-control col-md-6" id="dinkespengirim" name="reg_dinkes_pengirim" onchange="dinkesotheroptionselect(this);">
           <option value="Kota Bandung">Kota Bandung</option>
           <option value="Kabupaten Bandung">Kabupaten Bandung</option>
           <option value="Kabupaten Bandung Barat">Kabupaten Bandung Barat</option>
@@ -72,10 +72,14 @@
           <option value="Kabupaten Tasikmalaya">Kabupaten Tasikmalaya</option>
           <option value="Other">Luar Provinsi Jawa Barat, Sebutkan</option>
         </select>
-      
-        <div id="ifYes" class="mt-3 col-md-6" style="display: none;">
-          <input class="multisteps-form__input form-control" type="text" id="daerahlain" name="daerahlain" placeholder="Masukan Dinkes Terkait"/>
+  </div>
+   <div class="mt-4" id="inputdaerahlain" style="display: none;">
+    <div class="form-group row">
+      <label class="col-md-2"></label>
+      <div class="col-md-6">
+        <input class="multisteps-form__input form-control" type="text" id="daerahlain" name="daerahlain" placeholder="Masukan Dinkes Terkait"/>
       </div>
+    </div>
   </div>
         
     <div class="form-group row mt-4">
@@ -83,11 +87,11 @@
       <div class="col-md-6">
       <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="reg_fasyankes_pengirim" id="fasyanrs" value="Rumah Sakit">
-          <label class="form-check-label">Rumah Sakit</label>
+          <label class="form-check-label" for="fasyanrs">Rumah Sakit</label>
         </div>
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="reg_fasyankes_pengirim" id="fasyandinkes" value="Dinkes">
-          <label class="form-check-label">Dinkes</label>
+          <label class="form-check-label" for="fasyandinkes">Dinkes</label>
         </div>
       </div>
     </div>
@@ -95,7 +99,52 @@
     <div class="form-group row mt-4">
       <label class="col-md-2">Nama Rumah Sakit / Fasyankes </label>
       <div class="col-md-6">
-     <input class="multisteps-form__input form-control" type="text" name="reg_nama_rs" placeholder="Nama Rumah Sakit / Fasyankes"/>
+        <select class="multisteps-form__input form-control col-md-6" id="rsfasyankes" name="reg_nama_rs" onchange="rsotheroptionselect(this);">
+          <option value="RSUP Dr. Hasan Sadikin">RSUP Dr. Hasan Sadikin</option>
+          <option value="RSP Dr. H.A. Rotinsulu">RSP Dr. H.A. Rotinsulu</option>
+          <option value="RSP Dr. Goenawan P"> RSP Dr. Goenawan P</option>
+          <option value="RSUD Dr. Slamet">RSUD Dr. Slamet</option>
+          <option value="RSUD R. Syamsudin, SH">RSUD R. Syamsudin, SH</option>
+          <option value="RSUD Indramayu">RSUD Indramayu</option>
+          <option value="RSUD Gunungjati">RSUD Gunungjati</option>
+          <option value="Rumkit Tk. ll Dustira">Rumkit Tk. ll Dustira</option>
+          <option value="RSUD Cibinong">RSUD Cibinong</option>
+          <option value="RSUD Ciawi">RSUD Ciawi</option>
+          <option value="RSUD Cibabat">RSUD Cibabat</option>
+          <option value="RSUD Kota Bogor">RSUD Kota Bogor</option>
+          <option value="RSUD Al Ihsan">RSUD Al Ihsan</option>
+          <option value="RS Bhayangkara Sartika Asih">RS Bhayangkara Sartika Asih</option>
+          <option value="RSUD dr. Soekardjo">RSUD dr. Soekardjo</option>
+          <option value="RSUD SMC Kab. Tasik">RSUD SMC Kab. Tasik</option>
+          <option value="RS Paru Prov. Jabar Sidawangi">RS Paru Prov. Jabar Sidawangi</option>
+          <option value="RSUD Bayu Asih">RSUD Bayu Asih</option>
+          <option value="RSUD Karawang">RSUD Karawang</option>
+          <option value="RSUD Sekarwangi">RSUD Sekarwangi</option>
+          <option value="RSUD Subang">RSUD Subang</option>
+          <option value="RSUD Waled">RSUD Waled</option>
+          <option value="RSUD Arjawinangun">RSUD Arjawinangun</option>
+          <option value="RSUD 45 Kuningan">RSUD 45 Kuningan</option>
+          <option value="RSUD Kab Bekasi">RSUD Kab Bekasi</option>
+          <option value="RSUD Sumedang">RSUD Sumedang</option>
+          <option value="RSUD Banjar">RSUD Banjar</option>
+          <option value="RSUD Ciamis">RSUD Ciamis</option>
+          <option value="RSUD Cideres">RSUD Cideres</option>
+          <option value="RSUD Majalaya">RSUD Majalaya</option>
+          <option value="RS Lanud dr. M. Salamun">RS Lanud dr. M. Salamun</option>
+          <option value="RSUD Kota Depok">RSUD Kota Depok</option>
+          <option value="RSUD Sayang">RSUD Sayang</option>
+          <option value="RSUD dr. Chasbullah A">RSUD dr. Chasbullah A</option>
+          <option value="Other">RS Lainnya, Sebutkan</option>
+        </select>
+      </div>
+    </div> 
+
+     <div class="mt-4" id="inputrslain" style="display: none;">
+      <div class="form-group row">
+        <label class="col-md-2"></label>
+        <div class="col-md-6">
+          <input class="multisteps-form__input form-control" type="text" name="reg_nama_rs_lainnya" placeholder="Nama Rumah Sakit / Fasyankes"/>
+        </div>
       </div>
     </div>
         
@@ -128,53 +177,128 @@
                <input class="multisteps-form__input form-control" type="text" name="reg_nama_pasien" placeholder="Nama Lengkap Pasien"/>
                 </div>
               </div>
-
               <div class="form-group row mt-4">
-                <label class="col-md-2" >NIK (Nomor Induk Kependudukan)</label>
-                <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" name="reg_nik" placeholder="NIK Pasien"/>
-                </div>
-              </div>
-
-              <div class="form-group row mt-4">
-                <label class="col-md-2" >Tanggal Lahir</label>
-                <div class="col-md-6">
-               <input class="multisteps-form__input form-control" id="tanggallahir" type="text" name="reg_tanggallahir" placeholder="Tanggal Lahir"/>
-                </div>
-              </div>
-          
-              <div class="form-group row mt-4">
-                <label class="col-md-2" >Jenis Kelamin</label>
+                <label class="col-md-2" >Nomor Identitas <span style="color:red;">*</span></label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_kelamin" value="Laki Laki" onclick="show1();" >
-  <label class="form-check-label">Laki Laki</label>
+  <input class="form-check-input" id="selectktpid" type="radio" name="reg_jenisidentitas" value="KTP" onclick="ktpselect();" required>
+  <label class="form-check-label" for="selectktpid">Nomor Induk Kependudukan</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_kelamin" value="Perempuan" onclick="show2();" >
-  <label class="form-check-label">Perempuan</label>
+  <input class="form-check-input" id="selectsimid" type="radio" name="reg_jenisidentitas" value="SIM" onclick="simselect();" >
+  <label class="form-check-label" for="selectsimid">Nomor Sim</label>
 </div>
                 </div>
               </div>
-
-              <div class="form-group row mt-4" id="ifcewe" style="display: none;">
+   <div class="mt-4" id="sim" style="display: none;">
+   <div class="form-group row">
+     <label class="col-md-2" >Nomor SIM (Surat Izin Mengemudi)</label>
+     <div class="col-md-6">
+    <input class="multisteps-form__input form-control" type="text" id="idsim" name="reg_nosim" maxlength="12" placeholder="Nomor SIM Pasien"/>
+     </div>
+   </div>
+ </div>
+ <div class="mt-4" id="ktp" style="display: none;">
+   <div class="form-group row">
+     <label class="col-md-2" >NIK KTP (Nomor Induk Kependudukan)</label>
+     <div class="col-md-6">
+    <input class="multisteps-form__input form-control" type="text" id="idktp" name="reg_nik" maxlength="16" placeholder="NIK Pasien"/>
+     </div>
+   </div>
+ </div>
+   <div class="form-group row mt-4">
+     <label class="col-md-2" >Tanggal Lahir <span style="color:red;">*</span><br>
+      <small>Format : yyyy/mm/dd (contoh : 2020/12/01)</small></label>
+     <div class="col-md-6">
+    <input class="multisteps-form__input form-control" id="tanggallahir" type="text" name="reg_tanggallahir" placeholder="Tanggal Lahir" required/>
+     </div>
+   </div>
+          
+   <div class="form-group row mt-4">
+     <label class="col-md-2" >Jenis Kelamin <span style="color:red;">*</span></label>
+     <div class="col-md-6">
+     <div class="form-check form-check-inline">
+  <input class="form-check-input" id="kellaki" type="radio" name="reg_kelamin" value="Laki Laki" onclick="show1();" required>
+  <label class="form-check-label" for="kellaki">Laki Laki</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" id="kelperempuan" type="radio" name="reg_kelamin" value="Perempuan" onclick="show2();" >
+  <label class="form-check-label" for="kelperempuan">Perempuan</label>
+</div>
+                </div>
+              </div>
+<div class="mt-4" id="ifcewe" style="display: none;">
+              <div class="form-group row">
                 <label class="col-md-2" >Bila perempuan, apakah hamil atau pasca melahirkan?</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_hamil_pasca" value="Ya">
-  <label class="form-check-label" >Ya</label>
+  <input class="form-check-input" type="radio" id="pascaya" name="reg_hamil_pasca" value="Ya">
+  <label class="form-check-label" for="pascaya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_hamil_pasca" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="pascano" name="reg_hamil_pasca" value="Tidak">
+  <label class="form-check-label" for="pascano">Tidak</label>
 </div>
                 </div>
-              </div>
-
+              </div> <!-- -->
+            </div>
               <div class="form-group row mt-4">
                 <label class="col-md-2" >Alamat</label>
-                <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" name="reg_alamat" placeholder="Alamat Pasien"/>
+                <div class="col-md-8">
+                  <div class="row">
+                  <select class="multisteps-form__input col-md-3 form-control" id="domisilikotakab" name="reg_domisilikotakab">
+                    <option value="Kota Bandung">Kota Bandung</option>
+                    <option value="Kabupaten Bandung">Kabupaten Bandung</option>
+                    <option value="Kabupaten Bandung Barat">Kabupaten Bandung Barat</option>
+                    <option value="Kota Banjar">Kota Banjar</option>
+                    <option value="Kota Cimahi">Kota Cimahi</option>
+                    <option value="Kabupaten Bekasi">Kabupaten Bekasi</option>
+                    <option value="Kota Bekasi">Kota Bekasi</option>
+                    <option value="Kabupaten Bogor">Kabupaten Bogor</option>
+                    <option value="Kota Bogor">Kota Bogor</option>
+                    <option value="Kabupaten Ciamis">Kabupaten Ciamis</option>
+                    <option value="Kabupaten Cianjur">Kabupaten Cianjur</option>
+                    <option value="Kabupaten Cirebon">Kabupaten Cirebon</option>
+                    <option value="Kota Cirebon">Kota Cirebon</option>
+                    <option value="Kota Depok">Kota Depok</option>
+                    <option value="Kabupaten Garut">Kabupaten Garut</option>
+                    <option value="Kabupaten Indramayu">Kabupaten Indramayu</option>
+                    <option value="Kabupaten Karawang">Kabupaten Karawang</option>
+                    <option value="Kabupaten Kuningan">Kabupaten Kuningan</option>
+                    <option value="Kabupaten Majalengka">Kabupaten Majalengka</option>
+                    <option value="Kabupaten Pangandaran">Kabupaten Pangandaran</option>
+                    <option value="Kabupaten Purwakarta">Kabupaten Purwakarta</option>
+                    <option value="Kabupaten Subang">Kabupaten Subang</option>
+                    <option value="Kabupaten Sukabumi">Kabupaten Sukabumi</option>
+                    <option value="Kota Sukabumi">Kota Sukabumi</option>
+                    <option value="Kabupaten Sumedang">Kabupaten Sumedang</option>
+                    <option value="Kota Tasikmalaya">Kota Tasikmalaya</option>
+                    <option value="Kabupaten Tasikmalaya">Kabupaten Tasikmalaya</option>
+                  </select>
+                  <div class="col-md-9">  
+                    <div class="input-group">
+                    <div class="input-group-preppend">
+                      <span class="input-group-text">Alamat</span>
+                    </div>
+                    <input class="multisteps-form__input form-control" type="text" name="reg_alamat" placeholder="Alamat Pasien"/>
+                  </div>
+              
+              </div>
+              </div>
+               <div class="row mt-2">
+               <div class="input-group col-md-6">
+                <div class="input-group-preppend">
+                  <span class="input-group-text">Kecamatan</span>
+                </div>
+                <input class="multisteps-form__input form-control" type="text" name="reg_domisilikecamatan"/>
+              </div>
+              <div class="input-group col-md-6">
+                <div class="input-group-preppend">
+                  <span class="input-group-text">Kelurahan</span>
+                </div>
+                <input class="multisteps-form__input form-control" type="text" name="reg_domisilikelurahan"/>
+              </div>
+            </div>
                 </div>
               </div>
               
@@ -188,110 +312,78 @@
               <h4 class="mb-1 mt-0">Riwayat Kunjungan</h4>
               <p>Isi pada baris yang merupakan kali kunjungan saat ini.</p>
               <div class="form-group row mt-4">
+                <label class="col-md-2" >Kunjungan Ke</label>
+                <div class="col-md-6">
+                <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="kunke1" name="reg_kunke" value="1" required>
+  <label class="form-check-label" for="kunke1">Ke-1</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="kunke2" name="reg_kunke" value="2">
+  <label class="form-check-label" for="kunke2">Ke-2</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="kunke3" name="reg_kunke" value="3">
+  <label class="form-check-label" for="kunke3">Ke-3</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="kunke4" name="reg_kunke" value="4">
+  <label class="form-check-label" for="kunke4">Ke-4</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="kunke5" name="reg_kunke" value="5">
+  <label class="form-check-label" for="kunke5">Ke-5</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="kunke6" name="reg_kunke" value="6">
+  <label class="form-check-label" for="kunke6">Ke-6</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="kunke7" name="reg_kunke" value="7">
+  <label class="form-check-label" for="kunke7">Ke-7</label>
+</div>
+                </div>
+              </div>
+
+              <div class="form-group row mt-4">
               <div class="col-md-4">
                 <label>Tanggal Kunjungan</label>
-              <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan1" name="reg_tanggalkunjungan1" placeholder="Tanggal Kunjungan ke 1"/>
+              <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan" name="reg_tanggalkunjungan" placeholder="Tanggal Kunjungan"/>
               
               </div>
-              <div class="col-md-8">
+              <div class="col-md-6">
               <label>Rumah Sakit / Fasyankes</label>
-              <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes1" placeholder="Nama RS/Fasyankes ke 1"/>
+              <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes" placeholder="Nama RS/Fasyankes"/>
               </div>
             </div>
-            <div class="form-group row mt-4">
-              <div class="col-md-4">
-                <label>Tanggal Kunjungan</label>
-              <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan2" name="reg_tanggalkunjungan2" placeholder="Tanggal Kunjungan ke 2"/>
-              
-              </div>
-              <div class="col-md-8">
-              <label>Rumah Sakit / Fasyankes</label>
-              <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes2" placeholder="Nama RS/Fasyankes ke 2" />
-              </div>
-            </div>
-            <div class="form-group row mt-4">
-              <div class="col-md-4">
-                <label>Tanggal Kunjungan</label>
-              <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan3" name="reg_tanggalkunjungan3" placeholder="Tanggal Kunjungan ke 3"/>
-              
-              </div>
-              <div class="col-md-8">
-              <label>Rumah Sakit / Fasyankes</label>
-              <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes3" placeholder="Nama RS/Fasyankes ke 3"/>
-              </div>
-            </div>
-            <div class="form-group row mt-4">
-              <div class="col-md-4">
-                <label>Tanggal Kunjungan</label>
-              <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan4" name="reg_tanggalkunjungan4" placeholder="Tanggal Kunjungan ke 4"/>
-              
-              </div>
-              <div class="col-md-8">
-              <label>Rumah Sakit / Fasyankes</label>
-              <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes4" placeholder="Nama RS/Fasyankes ke 4"/>
-              </div>
-            </div>
-            <div class="form-group row mt-4">
-              <div class="col-md-4">
-                <label>Tanggal Kunjungan</label>
-              <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan5" name="reg_tanggalkunjungan5" placeholder="Tanggal Kunjungan ke 5"/>
-              
-              </div>
-              <div class="col-md-8">
-              <label>Rumah Sakit / Fasyankes</label>
-              <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes5" placeholder="Nama RS/Fasyankes ke 5"/>
-              </div>
-            </div>
-            <div class="form-group row mt-4">
-              <div class="col-md-4">
-                <label>Tanggal Kunjungan</label>
-              <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan6" name="reg_tanggalkunjungan6" placeholder="Tanggal Kunjungan ke 6"/>
-              
-              </div>
-              <div class="col-md-8">
-              <label>Rumah Sakit / Fasyankes</label>
-              <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes6" placeholder="Nama RS/Fasyankes ke 6"/>
-              </div>
-            </div>
-            <div class="form-group row mt-4">
-              <div class="col-md-4">
-                <label>Tanggal Kunjungan</label>
-              <input class="multisteps-form__input form-control" type="text" id="tanggalkunjungan7" name="reg_tanggalkunjungan7" placeholder="Tanggal Kunjungan ke 7"/>
-              
-              </div>
-              <div class="col-md-8">
-              <label>Rumah Sakit / Fasyankes</label>
-              <input class="multisteps-form__input form-control" type="text" name="reg_rsfasyankes7" placeholder="Nama RS/Fasyankes ke 7"/>
-              </div>
-            </div>
-            
+
               </div>
         <div id="sw-default-step-3">
           <div class="form-group row mt-4">
             <label class="col-md-2" >Pernah tes RDT sebelumnya / Pasien dengan sampel RDT ?</label>
             <div class="col-md-6">
             <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="rar_pernah_rdt" value="Ya" onclick="showRDT2();" >
-<label class="form-check-label">Ya</label>
+<input class="form-check-input" type="radio" id="pernahrdt" name="rar_pernah_rdt" value="Ya" onclick="showRDT2();" >
+<label class="form-check-label" for="pernahrdt">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="rar_pernah_rdt" value="Tidak" onclick="showRDT();" >
-<label class="form-check-label">Tidak</label>
+<input class="form-check-input" type="radio" id="tidakpernahrdt" name="rar_pernah_rdt" value="Tidak" onclick="showRDT();" >
+<label class="form-check-label" for="tidakpernahrdt">Tidak</label>
 </div>
             </div>
           </div>
 
-          <div class="form-group mt-4" id="ifrdt" style="display: none;">
-            <div class="form-group row" id="ifrdt" style="display: none;">
+          <div class="mt-4" id="ifrdt" style="display: none;">
+            <div class="form-group row">
             <label class="col-md-2" >Hasil RDT Terakhir</label>
             <div class="col-md-10">
             <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="rar_hasil_rdt" value="Ya">
-<label class="form-check-label" >Reaktif</label>
+<input class="form-check-input" type="radio" id="reaktif" name="rar_hasil_rdt" value="Ya">
+<label class="form-check-label" for="reaktif">Reaktif</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="rar_hasil_rdt" value="Tidak">
-<label class="form-check-label">Non Reaktif</label>
+<input class="form-check-input" type="radio" id="nonreaktif" name="rar_hasil_rdt" value="Tidak">
+<label class="form-check-label" for="nonreaktif">Non Reaktif</label>
 </div>
             </div>
           </div>
@@ -302,32 +394,32 @@
             </div>
           </div>
           <div class="form-group row">
-          <label class="col-md-2 col-form-label" for="gejlain">Keterangan RDT</label>
+          <label class="col-md-2 col-form-label">Keterangan RDT</label>
           <div class="col-md-10">
-<textarea class="form-control" rows="3" name="rar_keterangan" id="gejlain">isikan Jenis sampel dan keterangan penting lainnya</textarea>
+<textarea class="form-control" rows="3" name="rar_keterangan">isikan Jenis sampel dan keterangan penting lainnya</textarea>
           </div>
         </div>
     </div>
             <div class="form-group row mt-4">
                 <label class="col-md-2" >Tanggal onset gejala (panas)</label>
                 <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" id="onsetpanas" name="reg_onsetpanas" placeholder="Tanggal Onset Panas"/>
+               <input class="multisteps-form__input form-control" type="text" id="onsetpanas" name="reg_onset_panas" placeholder="Tanggal Onset Panas"/>
                 </div>
               </div>
             <div class="form-group row mt-4">
                 <label class="col-md-2" >Panas</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpanas" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="gejpanasya" name="reg_gejpanas" value="Ya">
+  <label class="form-check-label" for="gejpanasya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpanas" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="gejpanasno" name="reg_gejpanas" value="Tidak">
+  <label class="form-check-label" for="gejpanasno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpanas" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="gejpanasnull" name="reg_gejpanas" value="Tidak Diisi">
+  <label class="form-check-label" for="gejpanasnull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -335,16 +427,16 @@
                 <label class="col-md-2" >Tanda Pneumonia</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpenumonia" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="gejpneumoniaya" name="reg_gejpenumonia" value="Ya">
+  <label class="form-check-label" for="gejpneumoniaya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpenumonia" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="gejpneumoniano" name="reg_gejpenumonia" value="Tidak">
+  <label class="form-check-label" for="gejpneumoniano">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpenumonia" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="gejpneumonianull" name="reg_gejpenumonia" value="Tidak Diisi">
+  <label class="form-check-label" for="gejpneumonianull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -352,16 +444,16 @@
                 <label class="col-md-2" >Batuk</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejbatuk" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="gejbatukya" name="reg_gejbatuk" value="Ya">
+  <label class="form-check-label" for="gejbatukya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejbatuk" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="gejbatukno" name="reg_gejbatuk" value="Tidak">
+  <label class="form-check-label" for="gejbatukno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejbatuk" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="gejbatuknull" name="reg_gejbatuk" value="Tidak Diisi">
+  <label class="form-check-label" for="gejbatuknull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -369,16 +461,16 @@
                 <label class="col-md-2" >Nyeri Tenggorokan</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejnyeritenggorokan" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="gejnyeritenggorokanya" name="reg_gejnyeritenggorokan" value="Ya">
+  <label class="form-check-label" for="gejnyeritenggorokanya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejnyeritenggorokan" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="gejnyeritenggorokanno" name="reg_gejnyeritenggorokan" value="Tidak">
+  <label class="form-check-label" for="gejnyeritenggorokanno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejnyeritenggorokan" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="gejnyeritenggorokannull" name="reg_gejnyeritenggorokan" value="Tidak Diisi">
+  <label class="form-check-label" for="gejnyeritenggorokannull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -386,16 +478,16 @@
                 <label class="col-md-2" >Sesak Nafas</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejsesaknafas" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="gejsesaknafasya" name="reg_gejsesaknafas" value="Ya">
+  <label class="form-check-label" for="gejsesaknafasya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejsesaknafas" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="gejsesaknafasno" name="reg_gejsesaknafas" value="Tidak">
+  <label class="form-check-label" for="gejsesaknafasno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejsesaknafas" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="gejsesaknafasnull" name="reg_gejsesaknafas" value="Tidak Diisi">
+  <label class="form-check-label" for="gejsesaknafasnull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -403,16 +495,16 @@
                 <label class="col-md-2" >Pilek</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpilek" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="gejpilekya" name="reg_gejpilek" value="Ya">
+  <label class="form-check-label" for="gejpilekya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpilek" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="gejpilekno" name="reg_gejpilek" value="Tidak">
+  <label class="form-check-label" for="gejpilekno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejpilek" value="Tidak Disii">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="gejpileknull" name="reg_gejpilek" value="Tidak Disii">
+  <label class="form-check-label" for="gejpileknull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -420,16 +512,16 @@
                 <label class="col-md-2" >Lesu</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejlesu" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="gejlesuya" name="reg_gejlesu" value="Ya">
+  <label class="form-check-label" for="gejlesuya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejlesu" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="gejlesuno" name="reg_gejlesu" value="Tidak">
+  <label class="form-check-label" for="gejlesuno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejlesu" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="gejlesunull" name="reg_gejlesu" value="Tidak Diisi">
+  <label class="form-check-label" for="gejlesunull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -437,16 +529,16 @@
                 <label class="col-md-2" >Sakit Kepala</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejsakitkepala" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="gejsakitkepalaya" name="reg_gejsakitkepala" value="Ya">
+  <label class="form-check-label" for="gejsakitkepalaya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejsakitkepala" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="gejsakitkepalano" name="reg_gejsakitkepala" value="Tidak">
+  <label class="form-check-label" for="gejsakitkepalano">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejsakitkepala" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="gejsakitkepalanull" name="reg_gejsakitkepala" value="Tidak Diisi">
+  <label class="form-check-label" for="gejsakitkepalanull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -454,16 +546,16 @@
                 <label class="col-md-2" >Diare</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejdiare" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="gejdiareya" name="reg_gejdiare" value="Ya">
+  <label class="form-check-label" for="gejdiareya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejdiare" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="gejdiareno" name="reg_gejdiare" value="Tidak">
+  <label class="form-check-label" for="gejdiareno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejdiare" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="gejdiarenull" name="reg_gejdiare" value="Tidak Diisi">
+  <label class="form-check-label" for="gejdiarenull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -471,16 +563,16 @@
                 <label class="col-md-2" >Mual/Muntah</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejmualmuntah" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="gejmualmuntahya" name="reg_gejmualmuntah" value="Ya">
+  <label class="form-check-label" for="gejmualmuntahya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejmualmuntah" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="gejmualmuntahno"  name="reg_gejmualmuntah" value="Tidak">
+  <label class="form-check-label" for="gejmualmuntahno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_gejmualmuntah" value="Tidak">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="gejmualmuntahnull" name="reg_gejmualmuntah" value="Tidak">
+  <label class="form-check-label" for="gejmualmuntahnull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -497,12 +589,12 @@
                 <label class="col-md-2" >X-Ray Paru</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_xrayparu" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="xrayya" name="reg_xrayparu" value="Ya">
+  <label class="form-check-label" for="xrayya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_xrayparu" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="xrayno" name="reg_xrayparu" value="Tidak">
+  <label class="form-check-label" for="xrayno">Tidak</label>
 </div>
                 </div>
               </div>
@@ -543,12 +635,12 @@
                 <label class="col-md-2" >Menggunakan Ventilator</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_ventilator" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="ventilatorya" name="reg_ventilator" value="Ya">
+  <label class="form-check-label" for="ventilatorya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_ventilator" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="ventilatorno" name="reg_ventilator" value="Tidak">
+  <label class="form-check-label" for="ventilatorno">Tidak</label>
 </div>
                 </div>
               </div>
@@ -556,22 +648,22 @@
                 <label class="col-md-2" >Status Kesehatan Pasien</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_statuskes" value="Pulang">
-  <label class="form-check-label">Pulang</label>
+  <input class="form-check-input" type="radio" id="pulang" name="reg_statuskes" value="Pulang">
+  <label class="form-check-label" for="pulang">Pulang</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_statuskes" value="Dirawat">
-  <label class="form-check-label">Dirawat</label>
+  <input class="form-check-input" type="radio" id="dirawat" name="reg_statuskes" value="Dirawat">
+  <label class="form-check-label" for="dirawat">Dirawat</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_statuskes" value="Meninggal">
-  <label class="form-check-label">Meninggal</label>
+  <input class="form-check-input" type="radio" id="meninggal" name="reg_statuskes" value="Meninggal">
+  <label class="form-check-label" for="meninggal">Meninggal</label>
 </div>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-md-2 col-form-label" for="reg_hasillablainnya">Hasil lab lainnya :</label>
+                <label class="col-md-2 col-form-label">Hasil lab lainnya :</label>
                 <div class="col-md-10">
   <textarea class="form-control" rows="5" name="reg_hasillablainnya"></textarea>
                 </div>
@@ -582,12 +674,12 @@
                 <label class="col-md-4" >Dalam 14 hari sebelum sakit, apakah pasien melakukan perjalanan ke luar negeri?</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_luarnegri" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="luarnegriya" name="reg_luarnegri" value="Ya">
+  <label class="form-check-label" for="luarnegriya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_luarnegri" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="luarnegrino" name="reg_luarnegri" value="Tidak">
+  <label class="form-check-label" for="luarnegrino">Tidak</label>
 </div>
                 </div>
               </div>
@@ -744,12 +836,12 @@
                 <label class="col-md-4" >Dalam 14 hari sebelum sakit, apakah pasien kontak dengan orang yang sakit?</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_kontakdgnsakit" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="kontakdgnsakitya" name="reg_kontakdgnsakit" value="Ya">
+  <label class="form-check-label" for="kontakdgnsakitya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_kontakdgnsakit" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="kontakdgnsakitno" name="reg_kontakdgnsakit" value="Tidak">
+  <label class="form-check-label" for="kontakdgnsakitno">Tidak</label>
 </div>
 </div>
       </div>
@@ -983,12 +1075,12 @@
                 <label class="col-md-4" >Apakah orang tersebut tersangka/terinfeksi Covid-19?</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_kontakterinfeksi " value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="kontakterinfeksiya" name="reg_kontakterinfeksi" value="Ya">
+  <label class="form-check-label" for="kontakterinfeksiya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_kontakterinfeksi " value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="kontakterinfeksino" name="reg_kontakterinfeksi" value="Tidak">
+  <label class="form-check-label" for="kontakterinfeksino">Tidak</label>
 </div>
                 </div>
               </div>
@@ -996,12 +1088,12 @@
                 <label class="col-md-4" >Apakah ada anggota keluarga pasien yang sakitnya sama?</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_keluargapasiensakitsama" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="keluargapasienya" name="reg_keluargapasiensakitsama" value="Ya">
+  <label class="form-check-label" for="keluargapasienya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_keluargapasiensakitsama" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="keluargapasienno" name="reg_keluargapasiensakitsama" value="Tidak">
+  <label class="form-check-label" for="keluargapasienno">Tidak</label>
 </div>
                 </div>
               </div>
@@ -1013,16 +1105,16 @@
                 <label class="col-md-2" >Penyakit Kardiovaskuler/Hipertensi</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidhipertensi" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="komorbidhipertensiya" name="reg_komorbidhipertensi" value="Ya">
+  <label class="form-check-label" for="komorbidhipertensiya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidhipertensi" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="komorbidhipertensino" name="reg_komorbidhipertensi" value="Tidak">
+  <label class="form-check-label" for="komorbidhipertensino">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidhipertensi" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="komorbidhipertensinull" name="reg_komorbidhipertensi" value="Tidak Diisi">
+  <label class="form-check-label" for="komorbidhipertensinull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -1030,16 +1122,16 @@
                 <label class="col-md-2" >Diabetes Mellitus</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbiddm" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="komorbiddmya" name="reg_komorbiddm" value="Ya">
+  <label class="form-check-label" for="komorbiddmya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbiddm" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="komorbiddmno" name="reg_komorbiddm" value="Tidak">
+  <label class="form-check-label" for="komorbiddmno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbiddm" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="komorbiddmnull" name="reg_komorbiddm" value="Tidak Diisi">
+  <label class="form-check-label" for="komorbiddmnull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -1047,16 +1139,16 @@
                 <label class="col-md-2" >Liver</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="komorbidliverya" name="reg_komorbidliver" value="Ya">
+  <label class="form-check-label" for="komorbidliverya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="komorbidliverno" name="reg_komorbidliver" value="Tidak">
+  <label class="form-check-label" for="komorbidliverno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidliver" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="komorbidlivernull" name="reg_komorbidliver" value="Tidak Diisi">
+  <label class="form-check-label" for="komorbidlivernull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -1064,16 +1156,16 @@
                 <label class="col-md-2" >Kronik neurologi / neuromuskula</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidneurologi" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="komorbidneurologiya" name="reg_komorbidneurologi" value="Ya">
+  <label class="form-check-label" for="komorbidneurologiya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidneurologi" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="komorbidneurologino" name="reg_komorbidneurologi" value="Tidak">
+  <label class="form-check-label" for="komorbidneurologino">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidneurologi" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="komorbidneurologinull" name="reg_komorbidneurologi" value="Tidak Diisi">
+  <label class="form-check-label" for="komorbidneurologinull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -1081,16 +1173,16 @@
                 <label class="col-md-2" >Imunodefisiensi / HIV</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidhiv" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="komorbidhivya" name="reg_komorbidhiv" value="Ya">
+  <label class="form-check-label" for="komorbidhivya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidhiv" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="komorbidhivno" name="reg_komorbidhiv" value="Tidak">
+  <label class="form-check-label" for="komorbidhivno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidhiv" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="komorbidhivnull" name="reg_komorbidhiv" value="Tidak Diisi">
+  <label class="form-check-label" for="komorbidhivnull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -1098,16 +1190,16 @@
                 <label class="col-md-2" >Penyakit paru kronik</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidparu" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="komorbidparuya" name="reg_komorbidparu" value="Ya">
+  <label class="form-check-label" for="komorbidparuya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidparu" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="komorbidparuno" name="reg_komorbidparu" value="Tidak">
+  <label class="form-check-label" for="komorbidparuno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidparu" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="komorbidparunull" name="reg_komorbidparu" value="Tidak Diisi">
+  <label class="form-check-label" for="komorbidparunull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -1115,16 +1207,16 @@
                 <label class="col-md-2" >Penyakit ginjal</label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidginjal" value="Ya">
-  <label class="form-check-label">Ya</label>
+  <input class="form-check-input" type="radio" id="komorbidginjalya" name="reg_komorbidginjal" value="Ya">
+  <label class="form-check-label" for="komorbidginjalya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidginjal" value="Tidak">
-  <label class="form-check-label">Tidak</label>
+  <input class="form-check-input" type="radio" id="komorbidginjalno" name="reg_komorbidginjal" value="Tidak">
+  <label class="form-check-label" for="komorbidginjalno">Tidak</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="reg_komorbidginjal" value="Tidak Diisi">
-  <label class="form-check-label">Tidak Diisi</label>
+  <input class="form-check-input" type="radio" id="komorbidginjalnull" name="reg_komorbidginjal" value="Tidak Diisi">
+  <label class="form-check-label" for="komorbidginjalnull">Tidak Diisi</label>
 </div>
                 </div>
               </div>
@@ -1161,7 +1253,7 @@
             </div> <!-- content -->
 
 @section('js')
-
+<script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 <script src="{{asset('assets/libs/smartwizard/jquery.smartWizard.min.js')}}"></script>
 <script>
     function show1(){
@@ -1171,65 +1263,100 @@ function show2(){
   document.getElementById('ifcewe').style.display = 'block';
 };
 
+function simselect(){
+  document.getElementById('sim').style.display ='block';
+  document.getElementById('ktp').style.display ='none';
+  $('#idktp').val('');
+};
+function ktpselect(){
+  document.getElementById('sim').style.display ='none';
+  document.getElementById('ktp').style.display ='block';
+  $('#idsim').val('');
+};
+
 function showRDT(){
   document.getElementById('ifrdt').style.display ='none';
 };
 function showRDT2(){
   document.getElementById('ifrdt').style.display = 'block';
 };
-    $(document).ready(function(){
-    $("#smartwizard-default").smartWizard(
-        {useURLhash:!1,
-            showStepURLhash:!1,
-            lang: {  // Language variables
-                next: 'Selanjutnya', 
-                previous: 'Sebelumnya'
-            }
-        }
-        );
+   
+$(document).ready(function(){
+if(document.getElementById('selectktpid').checked) {
+  document.getElementById('sim').style.display ='none';
+  document.getElementById('ktp').style.display ='block';
+  }
+if(document.getElementById('selectsimid').checked) {
+  document.getElementById('sim').style.display ='block';
+  document.getElementById('ktp').style.display ='none';
+}
+if(document.getElementById('pernahrdt').checked) {
+  document.getElementById('ifrdt').style.display = 'block';
+}
+if(document.getElementById('kelperempuan').checked) {
+  document.getElementById('ifcewe').style.display = 'block';
+}
+if(document.getElementById("dinkespengirim").value == "Other"){
+  document.getElementById("inputdaerahlain").style.display = "block";
+}
+
+if(document.getElementById("rsfasyankes").value == "Other"){
+  document.getElementById("inputrslain").style.display = "block";
+}
+
+$("#smartwizard-default").smartWizard({
+useURLhash:!1,
+showStepURLhash:!1, 
+keyNavigation:false, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
+lang: {  // Language variables
+next: 'Selanjutnya', 
+previous: 'Sebelumnya'
+}
+});
  });
 </script>
-<script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 <script>
-$("#tanggalkunjungan1").flatpickr();
-$("#tanggalkunjungan2").flatpickr();
-$("#tanggalkunjungan3").flatpickr();
-$("#tanggalkunjungan4").flatpickr();
-$("#tanggalkunjungan5").flatpickr();
-$("#tanggalkunjungan6").flatpickr();
-$("#tanggalkunjungan7").flatpickr();
-$("#tanggalkunjungan_pasien1").flatpickr();
-$("#tanggalkunjungan_pasien2").flatpickr();
-$("#tanggalkunjungan_pasien3").flatpickr();
-$("#tanggalkunjungan_pasien4").flatpickr();
-$("#tanggalkunjungan_pasien5").flatpickr();
-$("#tanggalkunjungan_pasien6").flatpickr();
-$("#tanggalkunjungan_pasien7").flatpickr();
-$("#tanggalkonawal1").flatpickr();
-$("#tanggalkonawal2").flatpickr();
-$("#tanggalkonawal3").flatpickr();
-$("#tanggalkonawal4").flatpickr();
-$("#tanggalkonawal5").flatpickr();
-$("#tanggalkonawal6").flatpickr();
-$("#tanggalkonawal7").flatpickr();
-$("#tanggalkonakhir1").flatpickr();
-$("#tanggalkonakhir2").flatpickr();
-$("#tanggalkonakhir3").flatpickr();
-$("#tanggalkonakhir4").flatpickr();
-$("#tanggalkonakhir5").flatpickr();
-$("#tanggalkonakhir6").flatpickr();
-$("#tanggalkonakhir7").flatpickr();
-$("#tanggallahir").flatpickr();
-$("#tanggalrdt").flatpickr();
-$("#onsetpanas").flatpickr();
+$("#tanggalkunjungan").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkunjungan_pasien1").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkunjungan_pasien2").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkunjungan_pasien3").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkunjungan_pasien4").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkunjungan_pasien5").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkunjungan_pasien6").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkunjungan_pasien7").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonawal1").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonawal2").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonawal3").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonawal4").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonawal5").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonawal6").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonawal7").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonakhir1").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonakhir2").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonakhir3").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonakhir4").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonakhir5").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonakhir6").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalkonakhir7").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggallahir").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tanggalrdt").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#onsetpanas").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
 
-    function yesnoCheck(that) {
+  function dinkesotheroptionselect(that) {
     if (that.value == "Other") {
-        document.getElementById("ifYes").style.display = "block";
+        document.getElementById("inputdaerahlain").style.display = "block";
     } else {
-        document.getElementById("ifYes").style.display = "none";
+        document.getElementById("inputdaerahlain").style.display = "none";
     }
-}
+  }
+
+  function rsotheroptionselect(that) {
+    if (that.value == "Other") {
+        document.getElementById("inputrslain").style.display = "block";
+    } else {
+        document.getElementById("inputrslain").style.display = "none";
+    }
+  }
 </script>
 @endsection
 

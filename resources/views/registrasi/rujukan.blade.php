@@ -27,7 +27,7 @@
                             <div class="card">
                                 <div class="card-body">  
                                     <h4 class="header-title mt-0 mb-1">Register Pasien Rujukan</h4>
-                                    <p class="sub-header">
+                                   <!--  <p class="sub-header">
                                        Berikut adalah grup sampel yang belum memiliki nomor registrasi, harap cocokan lalu beri nomor registrasi
                                     </p>
                                         <table id="basic-datatable"  class="table table-striped dt-responsive table-bordered" style="width:100%">
@@ -55,7 +55,19 @@
                                                
                                             </tbody>
                                         </table>
-
+-->
+<p class="sub-header">Scan / masukan nomor barcode salah satu sampel untuk register pasien rujukan </p>
+<form id="scanbarcode row" action="{{url('scanbarcoderujukan')}}" method="post">
+    @csrf
+    <center>
+    <div class="form-group">
+    <input id="barcodesampel" class="form-control col-md-3" name="sam_barcodenomor_sampel" maxlength="13" placeholder="Scan..." type="text" tabindex="1" name="" required autofocus>
+  <br>
+  <button type="submit" class="mt-2 btn btn-md btn-primary">Tambahkan Informasi Register</button>
+    </div>
+ 
+</center>
+</form>
                                        
                                 </div>
                             </div>
@@ -84,36 +96,14 @@
         <script src="{{asset('assets/libs/datatables/dataTables.keyTable.min.js')}}"></script>
         <script src="{{asset('assets/libs/datatables/dataTables.select.min.js')}}"></script>
 <script>
-$(document).ready(function(){
     
+    
+  $("#barcodesampel").keyup(function() {
+    if ($(this).val().length >= 13)
+      $('#scanbarcode').submit();
+  })
 
-    $(document).on('click', '.deletebtn', function(e) {
-       var href = $(this).attr('href');
-       Swal.fire({
-   title: 'Yakin untuk menghapus data ini ? ',
-   text: 'Data yang sudah dihapus tidak dapat dikembalikan!',
-   icon: 'warning',
-   showCancelButton: true,
-   confirmButtonColor: '#95000c',
-   confirmButtonText: 'Ya, Hapus!',
-   cancelButtonText: 'Tidak, batalkan'
- }).then((result) => {
-   if (result.value) {
-      window.location.href = href;
-  
-   // For more information about handling dismissals please visit
-   // https://sweetalert2.github.io/#handling-dismissals
-   } else if (result.dismiss === Swal.DismissReason.cancel) {
-     Swal.fire(
-       'Dibatalkan',
-       'Data tidak jadi dihapus',
-       'error'
-     )
-   }
- });
- 
-      });
- 
+$(document).ready(function(){
   
     $("#basic-datatable").DataTable({
         language:{
