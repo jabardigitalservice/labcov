@@ -36,7 +36,7 @@
               <td width="60%">{{$reg->reg_nama_pasien}}</td>
             </tr>
             <tr>
-                <td width="40%"><b>>@if($reg->reg_jenisidentitas == "KTP")
+                <td width="40%"><b>@if($reg->reg_jenisidentitas == "KTP")
                 Nomor Induk Kependudukan
                 @elseif($reg->reg_jenisidentitas == "SIM")
                 Nomor Surat Izin Mengemudi
