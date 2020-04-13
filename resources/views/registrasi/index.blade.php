@@ -52,7 +52,7 @@
                                                     <td><p><b>Dinkes Pengirim : </b>{{$r->reg_dinkes_pengirim}}</p>
                                                         <p><b>Fasyankes : </b> {{$r->reg_fasyankes_pengirim}} ({{$r->reg_nama_rs}})</p>
                                                         <p><b>Dokter Penanggung Jawab : </b>{{$r->reg_nama_dokter}}</p></td>
-                                                        <td>{{ Carbon\Carbon::parse($r->reg_dateinput)->isoformat('d MMMM Y')}}</p>  </td>
+                                                        <td>{{ Carbon\Carbon::parse($r->created_at)}}</p>  </td>
                                                     <td>
                                                         <a href="{{url('registrasi/'.$r->regid)}}" class="btn btn-sm btn-primary"><i class="uil-info-circle"></i></a>
                                                         <a href="{{url('registrasi/'.$r->regid.'/edit')}}" class="btn btn-sm btn-warning"><i class="uil-edit"></i></a>
