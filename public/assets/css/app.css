@@ -1,37 +1,9 @@
 /*
 Template Name: Shreyu - Responsive Bootstrap 4 Admin Dashboard
-Author: CoderThemes
-Version: 1.0.0
-Website: https://coderthemes.com/
-Contact: support@coderthemes.com
-File: Main Css File
-*/
-/* =======================
-    TABLE OF CSS
-    1. Fonts 
-    2. General 
-    3. Left Menu 
-    4. Topbar 
-    5. Page Head 
-    6. Footer 
-    7. Horizontal Nav 
-    8. Right Sidebar 
-    9. Layouts 
-    10. Helper 
-    11. Social 
-    12. Widgets 
-    13. Custom Checkbox 
-    14. Custom Radio 
-    15. Print 
-    16. Preloader 
-    17. Plugins 
-    18. Components Demo 
-    19. Tasks 
-    20. Email 
-    21. Timeline 
-    22. Extra Pages 
-    23. Authentication 
-   ======================= */
+Author: CoderThemes edited by Hade Gawe 
+Version: 1.0.0 
+Website : https://hadegawe.com
+Custom Web Apps made for PEMPROV JABAR
 /* 1. Fonts */
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,900&display=swap");
 /* 2. General */
@@ -2834,3 +2806,4 @@ body.authentication-bg {
     bottom: 3rem;
     left: 0;
     right: 0; }
+/* Hade Gawe */

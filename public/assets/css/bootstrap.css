@@ -1,9 +1,4 @@
 /*
-Template Name: Shreyu - Responsive Bootstrap 4 Admin Dashboard
-Author: CoderThemes
-Version: 1.0.0
-Website: https://coderthemes.com/
-Contact: support@coderthemes.com
 File: Custom Bootstrap Css File
 */
 /*!
@@ -1529,7 +1524,7 @@ pre {
     background-color: #e9e9eb; }
 
 .table .thead-dark th {
-  color: #fff;
+  color: #eee;
   background-color: #343a40;
   border-color: #454d55; }
 
@@ -1539,7 +1534,7 @@ pre {
   border-color: #f6f6f7; }
 
 .table-dark {
-  color: #fff;
+  color: #eee;
   background-color: #343a40; }
   .table-dark th,
   .table-dark td,
