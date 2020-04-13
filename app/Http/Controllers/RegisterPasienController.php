@@ -146,7 +146,7 @@ if($request->reg_jenisidentitas == "KTP"){
     }catch(QE $e){  return $e; } //show db error message
 
         notify()->success('Register telah sukses ditambahkan !');
-        return redirect('register');
+        return redirect('registrasi');
     }
 
     /**
