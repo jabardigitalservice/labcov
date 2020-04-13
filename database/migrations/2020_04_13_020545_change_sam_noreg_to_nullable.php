@@ -14,7 +14,7 @@ class ChangeSamNoregToNullable extends Migration
     public function up()
     {
         Schema::table('sampel', function (Blueprint $table) {
-            $table->integer('sam_noreg')->unsigned()->nullable()->change();
+            $table->string('sam_noreg')->unsigned()->nullable()->change();
         });
     }
 
