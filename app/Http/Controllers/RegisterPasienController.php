@@ -63,7 +63,17 @@ class RegisterPasienController extends Controller
        $regis->put('reg_dinkes_pengirim', $request->daerahlain);
    }
    
-    $regis->put('reg_dateinput',Carbon::now()->isoFormat('yyyy-mm-dd'));
+   if($request->reg_nama_rs == "Other"){
+    $regis->put('reg_nama_rs_lainnya', $request->reg_nama_rs_lainnya);
+}
+if($request->reg_jenisidentitas == "KTP"){
+    $regis->put('reg_nik', $request->reg_nik);
+    $regis->put('reg_jenisidentitas', "KTP");
+}elseif($request->reg_jenisidentitas == "SIM"){
+    $regis->put('reg_nosim', $request->reg_nosim);
+    $regis->put('reg_jenisidentitas', "SIM");
+}
+    $regis->put('reg_dateinput',Carbon::now());
     $years = Carbon::parse($request->reg_tanggallahir)->diff(Carbon::now())->format('%y tahun %m bulan');
     $regis->put('reg_usia', $years);
     $regis->put('reg_userid', Auth::user()->id);
