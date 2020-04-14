@@ -10,5 +10,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-database/migrations/2020_04_13_195030_simplify_kunjungan.php
-database/migrations/2020_04_13_195202_add_new_field_revisi.php
