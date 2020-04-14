@@ -172,9 +172,9 @@
         </div>
         <div id="sw-default-step-2">
             <div class="form-group row mt-4">
-                <label class="col-md-2">Nama Pasien</label>
+                <label class="col-md-2">Nama Pasien <span style="color:red;">*</span></label>
                 <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" name="reg_nama_pasien" placeholder="Nama Lengkap Pasien"/>
+               <input class="multisteps-form__input form-control" type="text" name="reg_nama_pasien" placeholder="Nama Lengkap Pasien" required/>
                 </div>
               </div>
               <div class="form-group row mt-4">
@@ -243,7 +243,7 @@
               </div> <!-- -->
             </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Alamat</label>
+                <label class="col-md-2" >Alamat <span style="color:red;">*</span></label>
                 <div class="col-md-8">
                   <div class="row">
                   <select class="multisteps-form__input col-md-3 form-control" id="domisilikotakab" name="reg_domisilikotakab">
@@ -303,13 +303,13 @@
               </div>
               
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Nomor Telp/HP</label>
+                <label class="col-md-2">Nomor Telp/HP <span style="color:red;">*</span></label>
                 <div class="col-md-6">
-               <input class="multisteps-form__input form-control" type="text" name="reg_notelp_pasien" placeholder="Nomor Telp/HP Pasien"/>
+               <input class="multisteps-form__input form-control" type="text" name="reg_notelp_pasien" placeholder="Nomor Telp/HP Pasien / Keluarga" required/>
                 </div>
               </div>
               <hr>
-              <h4 class="mb-1 mt-0">Riwayat Kunjungan</h4>
+              <h4 class="mb-1 mt-0">Riwayat Kunjungan <span style="color:red;">*</span></h4>
               <p>Isi pada baris yang merupakan kali kunjungan saat ini.</p>
               <div class="form-group row mt-4">
                 <label class="col-md-2" >Kunjungan Ke</label>
