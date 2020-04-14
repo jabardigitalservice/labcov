@@ -1,5 +1,5 @@
 @extends('layouts.web')
-@section('title','- Ubah Data Pengambilan Sampel')
+@section('title','- Lengkapi Pengambilan Sampel')
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/libs/smartwizard/smart_wizard.min.css')}}" type="text/css" />
 @endsection
@@ -9,7 +9,7 @@
                 <div class="container-fluid">
                     <div class="row page-title align-items-center">
                          <div class="col-sm-4 col-xl-6">
-                            <h4 class="mb-1 mt-0">Ubah Pengambilan / Penerimaan Sampel</h4>
+                            <h4 class="mb-1 mt-0">Lengkapi Pengambilan / Penerimaan Sampel</h4>
                         </div>
                         <div class="col-sm-8 col-xl-6">
                            <a href="{{url('pengambilansampel')}}" class="btn btn-md btn-primary float-right"><i class="uil-arrow-left"></i> Kembali</a>
@@ -21,23 +21,22 @@
       <div class="col-12">
           <div class="card">
               <div class="card-body">  
-                @if(!is_null($show->pen_noreg))
-                <h4 class="header-title mt-0 mb-1">NOMOR REGISTRASI : #{{$show->pen_noreg}}</h4>
+                @if(!is_null($pen->pen_noreg))
+                <h4 class="header-title mt-0 mb-1">NOMOR REGISTRASI : #{{$pen->pen_noreg}}</h4>
                 @endif
-<form method="POST" action="{{url('pengambilansampel/update')}}">
+<form method="POST" action="{{url('pengambilansampel/savescanbarcode')}}">
     @csrf
-    
-    <input type="hidden" name="pen_id" value="{{$show->pen_id}}">
+    <input type="hidden" name="pen_id" value="{{$pen->pen_id}}">
     <div class="form-group row mt-4">
       <label class="col-md-2" >Sampel Diambil</label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="pen_sampel_diambil" value="1" @if($show->pen_sampel_diambil == 1) checked @endif>
-<label class="form-check-label">Ya</label>
+<input class="form-check-input" type="radio" id="sampeldiambilya" name="pen_sampel_diambil" value="1" @if($pen->pen_sampel_diambil == 1) checked @endif>
+<label class="form-check-label" for="sampeldiambilya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="pen_sampel_diambil" value="0"  @if($show->pen_sampel_diambil == 0) checked @endif>
-<label class="form-check-label">Tidak</label>
+<input class="form-check-input" type="radio" id="sampeldiambilno" name="pen_sampel_diambil" value="0"  @if($pen->pen_sampel_diambil  == 0 && !is_null($pen->pen_sampel_diambil)) checked @endif>
+<label class="form-check-label" for="sampeldiambilno">Tidak</label>
 </div>
       </div>
     </div>
@@ -46,12 +45,12 @@
       <label class="col-md-2" >Sampel Diterima</label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="pen_sampel_diterima" value="1" @if($show->pen_sampel_diterima == 1) checked @endif>
-<label class="form-check-label">Ya</label>
+<input class="form-check-input" type="radio" id="sampel_diterimaya" name="pen_sampel_diterima" value="1" @if($pen->pen_sampel_diterima == 1) checked @endif>
+<label class="form-check-label" for="sampel_diterimaya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="pen_sampel_diterima" value="0" @if($show->pen_sampel_diterima == 0) checked @endif>
-<label class="form-check-label">Tidak</label>
+<input class="form-check-input" type="radio" id="sampel_diterimano" name="pen_sampel_diterima" value="0" @if($pen->pen_sampel_diterima == 0 && !is_null($pen->pen_sampel_diterima)) checked @endif>
+<label class="form-check-label" for="sampel_diterimano">Tidak</label>
 </div>
       </div>
     </div>
@@ -60,33 +59,33 @@
       <label class="col-md-2" >Sampel Diambil dari Fasyankes Rujukan</label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="1" @if($show->pen_sampel_diterima_dari_fas_rujukan == 1) checked @endif>
-<label class="form-check-label">Ya</label>
+<input class="form-check-input" type="radio" id="fas_rujukanya" name="pen_sampel_diterima_dari_fas_rujukan" value="1" @if($pen->pen_sampel_diterima_dari_fas_rujukan == 1) checked @endif>
+<label class="form-check-label" for="fas_rujukanya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="0" @if($show->pen_sampel_diterima_dari_fas_rujukan == 0) checked  @endif>
-<label class="form-check-label">Tidak</label>
+<input class="form-check-input" type="radio" id="fas_rujukanno" name="pen_sampel_diterima_dari_fas_rujukan" value="0" @if($pen->pen_sampel_diterima_dari_fas_rujukan == 0 && !is_null($pen->pen_sampel_diterima_dari_fas_rujukan)) checked  @endif>
+<label class="form-check-label" for="fas_rujukanno">Tidak</label>
 </div>
       </div>
     </div>
     <div class="form-group row mt-4">
       <label class="col-md-2" >Petugas Penerima Sampel <small>Isi bila diterima dari fasyankes rujukan</small></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="pen_penerima_sampel" value="{{$show->pen_penerima_sampel}}"/>
+     <input class="form-control" type="text" name="pen_penerima_sampel" value="{{$pen->pen_penerima_sampel}}"/>
       </div>
     </div>
     
     <div class="form-group row">
       <label class="col-md-2 col-form-label" for="gejlain">Catatan Lain</label>
       <div class="col-md-10">
-<textarea class="form-control" rows="5" name="pen_catatan">{{$show->pen_catatan}}</textarea>
+<textarea class="form-control" rows="5" name="pen_catatan">{{$pen->pen_catatan}}</textarea>
       </div>
   </div>
   
   <div class="form-group row">
       <label class="col-md-2 col-form-label" >Nomor Ekstraksi</label>
       <div class="col-md-10">
-      <input class="form-control" type="text" name="pen_nomor_ekstraksi" value="{{$show->pen_nomor_ekstraksi}}"/>
+      <input class="form-control" type="text" name="pen_nomor_ekstraksi" value="{{$pen->pen_nomor_ekstraksi}}"/>
       </div>
   </div>
     <hr>
@@ -105,7 +104,7 @@
           </tr>
       </thead>
       <tbody class="field_wrapper">
-      @foreach($sampel as $s)
+        @foreach($sampel as $s)
       <tr>
         <td>
         
@@ -156,7 +155,7 @@
         <td><input type="text" class="form-control"  name="eks_tanggal_sampel[]" value="{{$s->sam_tanggal_sampel}}"></td>
         <td><input type="text" class="form-control"  name="eks_pukul_sampel[]" value="{{$s->sam_pukul_sampel}}"></td>
         <td><input type="text" class="form-control"  name="eks_barcodenomor_sampel[]" value="{{$s->sam_barcodenomor_sampel}}"></td>
-        <td><button class="btn btn-sm btn-danger remove_field"><i class="uil-trash"></i></button></td>
+        <td><button class="btn btn-sm btn-danger delete-sampel"><i class="uil-trash"></i></button></td>
       </tr>
       
       @endforeach

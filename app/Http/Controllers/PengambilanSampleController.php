@@ -20,7 +20,7 @@ class PengambilanSampleController extends Controller
      */
     public function index()
     {   
-        $avail_regis = RegisterPasien::where('reg_statusreg','1')->get();
+        $avail_regis = RegisterPasien::where('reg_statusreg','1')->get(); 
         $not_avail_regis = PengambilanSampel::join('sampel','sampel.sam_penid','=','pengambilansampel.pen_id')
         ->select('pengambilansampel.*','sampel.sam_barcodenomor_sampel')
         ->where('pengambilansampel.pen_statuspen',1)->get();
@@ -40,11 +40,11 @@ class PengambilanSampleController extends Controller
         return view('penerimaan.new')->with(compact('selected_reg'));
     }
 
-    /**
+    /*
      * Store a newly created resource in storage.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $insert = collect($request->all());
@@ -82,7 +82,7 @@ class PengambilanSampleController extends Controller
                 return redirect('pengambilansampel');
     
     }
-
+ */
     /**
      * Display the specified resource.
      *
@@ -120,40 +120,45 @@ class PengambilanSampleController extends Controller
      */
     public function update(Request $request)
     {
-        $edit = collect($request->all());
-        $sampelArray = array();
-        $update = PengambilanSampel::where('pen_id', $request->pen_id)->first();
-        $id_pen = $update->pen_id;
-        for($i=0; $i< count($request->sam_jenis_sampel); $i++){
-            if(isset($request->prev_sam[$i]) ){
-            $sampel = Sampel::where('sam_id', $request->prev_sam[$i])->first();
-            }else {
-            $sampel = new Sampel();
-            $sampel->sam_penid = $id_pen;
-            $sampel->sam_noreg = $request->pen_noreg;
-            $sampel->sam_possam = 1;
-            $sampel->sam_userid = Auth::user()->id;
-            }
-            $sampel->sam_jenis_sampel = $request->sam_jenis_sampel[$i];
-            $sampel->sam_petugas_pengambil_sampel = $request->petugas_pengambil[$i];
-            $sampel->sam_tanggal_sampel = $request->tanggalsampel[$i];
-            $sampel->sam_pukul_sampel = $request->pukulsampel[$i];
-            $sampel->sam_barcodenomor_sampel = $request->nomorsampel[$i];
-            if(isset($request->prev_sam[$i]) ){
-           $sampel->update();
-                }else {
-            $sampel->save();
-                }
-            array_push($sampelArray,$sampel->sam_id);
+        $pen = PengambilanSampel::where('pen_id',$request->pen_id)->first();
+        $store = collect($request->all());
+        $sampelArray= array();
+        for($i = 0; $i<count($request->eks_samid); $i++){
+        $sam = Sampel::where('sam_id',$request->eks_samid[$i])->first();
+        $sam->sam_jenis_sampel = $request->eks_jenis_sampel[$i];
+        $sam->sam_namadiluarjenis = $request->eks_namadiluarjenis[$i];
+        $sam->sam_petugas_pengambil_sampel = $request->eks_petugas_pengambil_sampel[$i];
+        $sam->sam_tanggal_sampel = $request->eks_tanggal_sampel[$i];
+        $sam->sam_pukul_sampel = $request->eks_pukul_sampel[$i];
+        $sam->sam_barcodenomor_sampel = $request->eks_barcodenomor_sampel[$i];
+        $sam->update();
+        array_push($sampelArray,$sam->sam_id);
         }
-        $edit->put('pen_id_sampel',implode(",",$sampelArray));
-        try{
-        $update->update($edit->all());
-             }catch(QE $e){  return $e; } //show db error message
 
-             notify()->success('Status pengambilan telah sukses diubah !');
-                return redirect('pengambilansampel');
+        if($request->sam_jenis_sampel){
+            for($i = 0; $i<count($request->sam_jenis_sampel); $i++){
+                $newsam = new Sampel;
+                $newsam->sam_jenis_sampel = $request->jenis_sampel[$i];
+                $newsam->sam_namadiluarjenis = $request->namadiluarjenis[$i];
+                $newsam->sam_petugas_pengambil_sampel = $request->petugas_pengambil[$i];
+                $newsam->sam_tanggal_sampel = $request->tanggalsampel[$i];
+                $newsam->sam_pukul_sampel = $request->pukulsampel[$i];
+                $newsam->sam_barcodenomor_sampel = $request->nomor_sampel[$i];
+                $newsam->save();
+                 array_push($sampelArray,$newsam->sam_id);
+                 }
+        }
        
+       $pasienstatus = RegisterPasien::where('reg_no',$pen->no_reg)->first();
+       $pasienstatus->reg_statusreg = 3;
+
+            $store->put('pen_id_sampel',implode(",",$sampelArray));
+            try{
+            $pen->update($store->all());
+                 }catch(QE $e){  return $e; } //show db error message
+    
+                 notify()->success('Status pengambilan telah sukses diubah !');
+                    return redirect('pengambilansampel');
     }
 
     /**
@@ -229,5 +234,70 @@ class PengambilanSampleController extends Controller
              notify()->success('Status Pengambilan telah sukses ditambahkan !');
                 return redirect('pengambilansampel');
     
+    }
+
+    public function labscanbarcode(Request $request){
+    $sam = Sampel::where('sam_barcodenomor_sampel',$request->sam_barcodenomor_sampel)->first();
+    if($sam){
+        $pen = PengambilanSampel::where('pen_id',$sam->sam_penid)->first();
+        if($pen){
+            $sampel = Sampel::where('sam_penid',$pen->pen_id)->get();
+            return view('penerimaan.baru')->with(compact('sam','pen','sampel'));
+
+        }else {
+            
+        notify()->warning('Kode sampel tidak ditemukan !');
+        return redirect('pengambilansampel');
+
+        }
+
+    }else {
+        notify()->warning('Kode sampel tidak ditemukan !');
+                return redirect('pengambilansampel');
+
+    }
+    }
+
+    public function savebyscan(Request $request){
+        $pen = PengambilanSampel::where('pen_id',$request->pen_id)->first();
+        $store = collect($request->all());
+        $sampelArray= array();
+        for($i = 0; $i<count($request->eks_samid); $i++){
+        $sam = Sampel::where('sam_id',$request->eks_samid[$i])->first();
+        $sam->sam_jenis_sampel = $request->eks_jenis_sampel[$i];
+        $sam->sam_namadiluarjenis = $request->eks_namadiluarjenis[$i];
+        $sam->sam_petugas_pengambil_sampel = $request->eks_petugas_pengambil_sampel[$i];
+        $sam->sam_tanggal_sampel = $request->eks_tanggal_sampel[$i];
+        $sam->sam_pukul_sampel = $request->eks_pukul_sampel[$i];
+        $sam->sam_barcodenomor_sampel = $request->eks_barcodenomor_sampel[$i];
+        $sam->update();
+        array_push($sampelArray,$sam->sam_id);
+        }
+
+        if($request->sam_jenis_sampel){
+            for($i = 0; $i<count($request->sam_jenis_sampel); $i++){
+                $newsam = new Sampel;
+                $newsam->sam_jenis_sampel = $request->jenis_sampel[$i];
+                $newsam->sam_namadiluarjenis = $request->namadiluarjenis[$i];
+                $newsam->sam_petugas_pengambil_sampel = $request->petugas_pengambil[$i];
+                $newsam->sam_tanggal_sampel = $request->tanggalsampel[$i];
+                $newsam->sam_pukul_sampel = $request->pukulsampel[$i];
+                $newsam->sam_barcodenomor_sampel = $request->nomor_sampel[$i];
+                $newsam->save();
+                 array_push($sampelArray,$newsam->sam_id);
+                 }
+        }
+       $pasienstatus = RegisterPasien::where('reg_no',$pen->no_reg)->first();
+       $pasienstatus->reg_statusreg = 3;
+
+            $store->put('pen_id_sampel',implode(",",$sampelArray));
+            try{
+            $pen->update($store->all());
+            $pasienstatus->update();
+                 }catch(QE $e){  return $e; } //show db error message
+    
+                 notify()->success('Status pengambilan telah sukses diubah !');
+                    return redirect('pengambilansampel');
+        
     }
 }

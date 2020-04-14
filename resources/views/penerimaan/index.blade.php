@@ -26,7 +26,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">  
-                                    <h4 class="header-title mt-0 mb-1">Penerimaan atau Pengambilan Sampel Pasien</h4>
+                                  <!--   <h4 class="header-title mt-0 mb-1">Penerimaan atau Pengambilan Sampel Pasien</h4>
                                     <p class="sub-header">
                                       Berikut ini adalah daftar dari registrasi yang belum ada status penerimaan atau pengambilan sampel, Silahkan pilih dan lakukan Ambil atau Terima Sampel Pasien
                                     </p>
@@ -55,6 +55,20 @@
                                                
                                             </tbody>
                                         </table>
+                                        -->
+
+                                        <p class="sub-header">Scan / masukan nomor barcode salah satu sampel untuk register pasien rujukan </p>
+<form id="scanbarcode row" action="{{url('pengambilansampel/labscanbarcode')}}" method="post">
+    @csrf
+    <center>
+    <div class="form-group">
+    <input id="barcodesampel" class="form-control col-md-3" name="sam_barcodenomor_sampel" placeholder="Scan..." type="text" tabindex="1" name="" required autofocus>
+  <br>
+  <button type="submit" class="mt-2 btn btn-md btn-primary">Tambahkan Informasi Sampel</button>
+    </div>
+ 
+</center>
+</form>
 
                                        
                                 </div>

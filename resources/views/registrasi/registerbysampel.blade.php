@@ -177,10 +177,20 @@
 
       </div>
       <div id="sw-default-step-2">
+           <div class="form-group row mt-4">
+            <label class="col-md-2">Kewarganegaraan <span style="color:red;">*</span></label>
+            <div class="col-md-6">
+              <select class="multisteps-form__input form-control col-md-6" name="reg_kewarganegaraan" required>
+                <option value="WNI">WNI</option>
+                <option value="WNA">WNA</option>
+              </select>
+            </div>
+          </div> 
+
           <div class="form-group row mt-4">
-              <label class="col-md-2">Nama Pasien</label>
+              <label class="col-md-2">Nama Pasien <span style="color:red;">*</span></label>
               <div class="col-md-6">
-             <input class="multisteps-form__input form-control" type="text" name="reg_nama_pasien" placeholder="Nama Lengkap Pasien"/>
+             <input class="multisteps-form__input form-control" type="text" name="reg_nama_pasien" placeholder="Nama Lengkap Pasien" required/>
               </div>
             </div>
             <div class="form-group row mt-4">
@@ -212,6 +222,14 @@
    </div>
  </div>
 </div>
+
+<div class="form-group row mt-4">
+  <label class="col-md-2">Nomor Kartu Keluarga </label>
+  <div class="col-md-6">
+ <input class="multisteps-form__input form-control" type="text" name="reg_nkk" placeholder="Nomor Kartu Keluarga"/>
+  </div>
+</div>
+
  <div class="form-group row mt-4">
    <label class="col-md-2" >Tanggal Lahir <span style="color:red;">*</span><br>
     <small>Format : yyyy/mm/dd (contoh : 2020/12/01)</small></label>
@@ -219,6 +237,19 @@
   <input class="multisteps-form__input form-control" id="tanggallahir" type="text" name="reg_tanggallahir" placeholder="Tanggal Lahir" required/>
    </div>
  </div>
+        
+ <div class="form-group row mt-4">
+  <label class="col-md-2">Tempat Lahir <span style="color:red;">*</span></label>
+  <div class="col-md-6">
+ <input class="multisteps-form__input form-control" type="text" name="reg_tempatlahir" placeholder="Tempat Lahir" required/>
+  </div>
+</div>              
+<div class="form-group row mt-4">
+  <label class="col-md-2">Pekerjaan </label>
+  <div class="col-md-6">
+ <input class="multisteps-form__input form-control" type="text" name="reg_pekerjaan" placeholder="Pekerjaan"/>
+  </div>
+     </div>
         
  <div class="form-group row mt-4">
    <label class="col-md-2" >Jenis Kelamin <span style="color:red;">*</span></label>
@@ -248,65 +279,78 @@
               </div>
             </div> <!-- -->
           </div>
-            <div class="form-group row mt-4">
-              <label class="col-md-2" >Alamat</label>
-              <div class="col-md-8">
-                <div class="row">
-                <select class="multisteps-form__input col-md-3 form-control" id="domisilikotakab" name="reg_domisilikotakab">
-                  <option value="Kota Bandung">Kota Bandung</option>
-                  <option value="Kabupaten Bandung">Kabupaten Bandung</option>
-                  <option value="Kabupaten Bandung Barat">Kabupaten Bandung Barat</option>
-                  <option value="Kota Banjar">Kota Banjar</option>
-                  <option value="Kota Cimahi">Kota Cimahi</option>
-                  <option value="Kabupaten Bekasi">Kabupaten Bekasi</option>
-                  <option value="Kota Bekasi">Kota Bekasi</option>
-                  <option value="Kabupaten Bogor">Kabupaten Bogor</option>
-                  <option value="Kota Bogor">Kota Bogor</option>
-                  <option value="Kabupaten Ciamis">Kabupaten Ciamis</option>
-                  <option value="Kabupaten Cianjur">Kabupaten Cianjur</option>
-                  <option value="Kabupaten Cirebon">Kabupaten Cirebon</option>
-                  <option value="Kota Cirebon">Kota Cirebon</option>
-                  <option value="Kota Depok">Kota Depok</option>
-                  <option value="Kabupaten Garut">Kabupaten Garut</option>
-                  <option value="Kabupaten Indramayu">Kabupaten Indramayu</option>
-                  <option value="Kabupaten Karawang">Kabupaten Karawang</option>
-                  <option value="Kabupaten Kuningan">Kabupaten Kuningan</option>
-                  <option value="Kabupaten Majalengka">Kabupaten Majalengka</option>
-                  <option value="Kabupaten Pangandaran">Kabupaten Pangandaran</option>
-                  <option value="Kabupaten Purwakarta">Kabupaten Purwakarta</option>
-                  <option value="Kabupaten Subang">Kabupaten Subang</option>
-                  <option value="Kabupaten Sukabumi">Kabupaten Sukabumi</option>
-                  <option value="Kota Sukabumi">Kota Sukabumi</option>
-                  <option value="Kabupaten Sumedang">Kabupaten Sumedang</option>
-                  <option value="Kota Tasikmalaya">Kota Tasikmalaya</option>
-                  <option value="Kabupaten Tasikmalaya">Kabupaten Tasikmalaya</option>
-                </select>
-                <div class="col-md-9">  
-                  <div class="input-group">
-                  <div class="input-group-preppend">
-                    <span class="input-group-text">Alamat</span>
-                  </div>
-                  <input class="multisteps-form__input form-control" type="text" name="reg_alamat" placeholder="Alamat Pasien"/>
+          <div class="form-group row mt-4">
+            <label class="col-md-2" >Alamat <span style="color:red;">*</span></label>
+            <div class="col-md-10">
+              <div class="row">
+              <select class="multisteps-form__input col-md-3 form-control" id="domisilikotakab" name="reg_domisilikotakab" required>
+                <option value="Kota Bandung">Kota Bandung</option>
+                <option value="Kabupaten Bandung">Kabupaten Bandung</option>
+                <option value="Kabupaten Bandung Barat">Kabupaten Bandung Barat</option>
+                <option value="Kota Banjar">Kota Banjar</option>
+                <option value="Kota Cimahi">Kota Cimahi</option>
+                <option value="Kabupaten Bekasi">Kabupaten Bekasi</option>
+                <option value="Kota Bekasi">Kota Bekasi</option>
+                <option value="Kabupaten Bogor">Kabupaten Bogor</option>
+                <option value="Kota Bogor">Kota Bogor</option>
+                <option value="Kabupaten Ciamis">Kabupaten Ciamis</option>
+                <option value="Kabupaten Cianjur">Kabupaten Cianjur</option>
+                <option value="Kabupaten Cirebon">Kabupaten Cirebon</option>
+                <option value="Kota Cirebon">Kota Cirebon</option>
+                <option value="Kota Depok">Kota Depok</option>
+                <option value="Kabupaten Garut">Kabupaten Garut</option>
+                <option value="Kabupaten Indramayu">Kabupaten Indramayu</option>
+                <option value="Kabupaten Karawang">Kabupaten Karawang</option>
+                <option value="Kabupaten Kuningan">Kabupaten Kuningan</option>
+                <option value="Kabupaten Majalengka">Kabupaten Majalengka</option>
+                <option value="Kabupaten Pangandaran">Kabupaten Pangandaran</option>
+                <option value="Kabupaten Purwakarta">Kabupaten Purwakarta</option>
+                <option value="Kabupaten Subang">Kabupaten Subang</option>
+                <option value="Kabupaten Sukabumi">Kabupaten Sukabumi</option>
+                <option value="Kota Sukabumi">Kota Sukabumi</option>
+                <option value="Kabupaten Sumedang">Kabupaten Sumedang</option>
+                <option value="Kota Tasikmalaya">Kota Tasikmalaya</option>
+                <option value="Kabupaten Tasikmalaya">Kabupaten Tasikmalaya</option>
+              </select>
+              <div class="col-md-9">  
+                <div class="input-group">
+                <div class="input-group-preppend">
+                  <span class="input-group-text">Alamat <span style="color:red;">*</span></span>
                 </div>
-            
-            </div>
-            </div>
-             <div class="row mt-2">
-             <div class="input-group col-md-6">
-              <div class="input-group-preppend">
-                <span class="input-group-text">Kecamatan</span>
+                <input class="multisteps-form__input form-control" type="text" name="reg_alamat" placeholder="Alamat Pasien" required/>
               </div>
-              <input class="multisteps-form__input form-control" type="text" name="reg_domisilikecamatan"/>
+          
+          </div>
+          </div>
+           <div class="row mt-2">
+           <div class="input-group col-md-4">
+            <div class="input-group-preppend">
+              <span class="input-group-text">Kecamatan <span style="color:red;">*</span></span>
             </div>
-            <div class="input-group col-md-6">
-              <div class="input-group-preppend">
-                <span class="input-group-text">Kelurahan</span>
-              </div>
-              <input class="multisteps-form__input form-control" type="text" name="reg_domisilikelurahan"/>
+            <input class="multisteps-form__input form-control" type="text" name="reg_domisilikecamatan" required/>
+          </div>
+          <div class="input-group col-md-4">
+            <div class="input-group-preppend">
+              <span class="input-group-text">Kelurahan <span style="color:red;">*</span></span>
+            </div>
+            <input class="multisteps-form__input form-control" type="text" name="reg_domisilikelurahan" required/>
+          </div>
+          <div class="input-group col-md-2">
+            <div class="input-group-preppend">
+              <span class="input-group-text">RT <span style="color:red;">*</span></span>
+            </div>
+            <input class="multisteps-form__input form-control" type="text" name="reg_domisilirt" required/>
+          </div>
+          <div class="input-group col-md-2">
+            <div class="input-group-preppend">
+              <span class="input-group-text">RW <span style="color:red;">*</span></span>
+            </div>
+            <input class="multisteps-form__input form-control" type="text" name="reg_domisilirw" required/>
+          </div>
+        </div>
             </div>
           </div>
-              </div>
-            </div>
+          
             
             <div class="form-group row mt-4">
               <label class="col-md-2" >Nomor Telp/HP</label>
@@ -314,11 +358,18 @@
              <input class="multisteps-form__input form-control" type="text" name="reg_notelp_pasien" placeholder="Nomor Telp/HP Pasien"/>
               </div>
             </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label">Keterangan lain</label>
+              <div class="col-md-10">
+    <textarea class="form-control" rows="3" name="reg_keteranganpasien">Keterangan lain</textarea>
+              </div>
+            </div>
+        
             <hr>
             <h4 class="mb-1 mt-0">Riwayat Kunjungan</h4>
             <p>Isi pada baris yang merupakan kali kunjungan saat ini.</p>
             <div class="form-group row mt-4">
-              <label class="col-md-2" >Kunjungan Ke</label>
+              <label class="col-md-2" >Kunjungan Ke <span style="color:red;">*</span></label>
               <div class="col-md-6">
               <div class="form-check form-check-inline">
 <input class="form-check-input" type="radio" id="kunke1" name="reg_kunke" value="1" required>
@@ -363,6 +414,7 @@
             </div>
           </div>
 
+           
             </div>
       <div id="sw-default-step-3">
         <div class="form-group row mt-4">
@@ -1259,26 +1311,65 @@
             </div> <!-- content -->
 
 @section('js')
-
+<script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 <script src="{{asset('assets/libs/smartwizard/jquery.smartWizard.min.js')}}"></script>
 <script>
-    function show1(){
-  document.getElementById('ifcewe').style.display ='none';
+  function show1(){
+document.getElementById('ifcewe').style.display ='none';
 };
 function show2(){
-  document.getElementById('ifcewe').style.display = 'block';
+document.getElementById('ifcewe').style.display = 'block';
+};
+
+function simselect(){
+document.getElementById('sim').style.display ='block';
+document.getElementById('ktp').style.display ='none';
+};
+function ktpselect(){
+document.getElementById('sim').style.display ='none';
+document.getElementById('ktp').style.display ='block';
 };
 
 function showRDT(){
-  document.getElementById('ifrdt').style.display ='none';
+document.getElementById('ifrdt').style.display ='none';
 };
 function showRDT2(){
-  document.getElementById('ifrdt').style.display = 'block';
+document.getElementById('ifrdt').style.display = 'block';
 };
+ 
+
     $(document).ready(function(){
+
+if(document.getElementById('selectktpid').checked) {
+  document.getElementById('sim').style.display ='none';
+  document.getElementById('ktp').style.display ='block';
+  }
+if(document.getElementById('selectsimid').checked) {
+  document.getElementById('sim').style.display ='block';
+  document.getElementById('ktp').style.display ='none';
+}
+if(document.getElementById('pernahrdt').checked) {
+  document.getElementById('ifrdt').style.display = 'block';
+}
+if(document.getElementById('kelperempuan').checked) {
+  document.getElementById('ifcewe').style.display = 'block';
+}
+if(document.getElementById("dinkespengirim").value == "Other"){
+  document.getElementById("inputdaerahlain").style.display = "block";
+}
+
+if(document.getElementById("rsfasyankes").value == "Other"){
+  document.getElementById("inputrslain").style.display = "block";
+}
+
     $("#smartwizard-default").smartWizard(
         {useURLhash:!1,
             showStepURLhash:!1,
+anchorSettings: {
+          anchorClickable: true, // Enable/Disable anchor navigation
+          enableAllAnchors: true, // Activates all anchors clickable all times
+      },
+keyNavigation:false, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
             lang: {  // Language variables
                 next: 'Selanjutnya', 
                 previous: 'Sebelumnya'
@@ -1287,39 +1378,33 @@ function showRDT2(){
         );
  });
 </script>
-<script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 <script>
-$("#tanggalkunjungan1").flatpickr();
-$("#tanggalkunjungan2").flatpickr();
-$("#tanggalkunjungan3").flatpickr();
-$("#tanggalkunjungan4").flatpickr();
-$("#tanggalkunjungan5").flatpickr();
-$("#tanggalkunjungan6").flatpickr();
-$("#tanggalkunjungan7").flatpickr();
-$("#tanggalkunjungan_pasien1").flatpickr();
-$("#tanggalkunjungan_pasien2").flatpickr();
-$("#tanggalkunjungan_pasien3").flatpickr();
-$("#tanggalkunjungan_pasien4").flatpickr();
-$("#tanggalkunjungan_pasien5").flatpickr();
-$("#tanggalkunjungan_pasien6").flatpickr();
-$("#tanggalkunjungan_pasien7").flatpickr();
-$("#tanggalkonawal1").flatpickr();
-$("#tanggalkonawal2").flatpickr();
-$("#tanggalkonawal3").flatpickr();
-$("#tanggalkonawal4").flatpickr();
-$("#tanggalkonawal5").flatpickr();
-$("#tanggalkonawal6").flatpickr();
-$("#tanggalkonawal7").flatpickr();
-$("#tanggalkonakhir1").flatpickr();
-$("#tanggalkonakhir2").flatpickr();
-$("#tanggalkonakhir3").flatpickr();
-$("#tanggalkonakhir4").flatpickr();
-$("#tanggalkonakhir5").flatpickr();
-$("#tanggalkonakhir6").flatpickr();
-$("#tanggalkonakhir7").flatpickr();
-$("#tanggallahir").flatpickr();
-$("#tanggalrdt").flatpickr();
-$("#onsetpanas").flatpickr();
+  $("#tanggalkunjungan").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkunjungan_pasien1").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkunjungan_pasien2").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkunjungan_pasien3").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkunjungan_pasien4").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkunjungan_pasien5").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkunjungan_pasien6").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkunjungan_pasien7").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonawal1").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonawal2").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonawal3").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonawal4").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonawal5").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonawal6").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonawal7").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonakhir1").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonakhir2").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonakhir3").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonakhir4").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonakhir5").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonakhir6").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalkonakhir7").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggallahir").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#tanggalrdt").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  $("#onsetpanas").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+  
 
     function yesnoCheck(that) {
     if (that.value == "Other") {

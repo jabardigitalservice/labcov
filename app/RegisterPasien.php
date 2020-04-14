@@ -154,6 +154,7 @@ class RegisterPasien extends Model
    'reg_hubungankon7',
    'reg_tanggalkonawal7',
    'reg_tanggalkonakhir7',
+   'reg_penid',
    'created_at',
    'updated_at'];
 }

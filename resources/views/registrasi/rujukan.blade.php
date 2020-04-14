@@ -61,7 +61,7 @@
     @csrf
     <center>
     <div class="form-group">
-    <input id="barcodesampel" class="form-control col-md-3" name="sam_barcodenomor_sampel" maxlength="13" placeholder="Scan..." type="text" tabindex="1" name="" required autofocus>
+    <input id="barcodesampel" class="form-control col-md-3" name="sam_barcodenomor_sampel" placeholder="Scan..." type="text" tabindex="1" name="" required autofocus>
   <br>
   <button type="submit" class="mt-2 btn btn-md btn-primary">Tambahkan Informasi Register</button>
     </div>
@@ -97,11 +97,6 @@
         <script src="{{asset('assets/libs/datatables/dataTables.select.min.js')}}"></script>
 <script>
     
-    
-  $("#barcodesampel").keyup(function() {
-    if ($(this).val().length >= 13)
-      $('#scanbarcode').submit();
-  })
 
 $(document).ready(function(){
   

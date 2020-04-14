@@ -74,6 +74,8 @@ if($request->reg_jenisidentitas == "KTP"){
     $regis->put('reg_jenisidentitas', "SIM");
 }
     $regis->put('reg_dateinput',Carbon::now());
+    $regis->put('reg_statusreg',2);
+    $regis->put('reg_penid',$request->pen_id);
     $years = Carbon::parse($request->reg_tanggallahir)->diff(Carbon::now())->format('%y tahun %m bulan');
     $regis->put('reg_usia', $years);
     $regis->put('reg_userid', Auth::user()->id);
@@ -113,6 +115,7 @@ if($request->reg_jenisidentitas == "KTP"){
      */
     public function store(Request $request)
     {
+
    $regis = collect($request->all());
    if($request->reg_dinkes_pengirim == "Other"){
        $regis->put('reg_dinkes_pengirim', $request->daerahlain);
@@ -138,15 +141,46 @@ if($request->reg_jenisidentitas == "KTP"){
         $rdt->rar_hasil_rdt = $request->rar_hasil_rdt;
         $rdt->rar_tanggal_rdt = $request->rar_tanggal_rdt;
         $rdt->rar_keterangan = $request->rar_keterangan;
-        $rdt->create();
+        $rdt-save();
     }
     
     try{
-    RegisterPasien::create($regis->all());
+    $regis = RegisterPasien::create($regis->all());
     }catch(QE $e){  return $e; } //show db error message
 
+    $newpengambilansampel = new PengambilanSampel;
+    $newpengambilansampel->pen_noreg = $regis->reg_no;
+    $newpengambilansampel->pen_noreg = $regis->reg_nik;
+    $newpengambilansampel->save();
+    
+    $sampelArray = array();
+    $id_pen = $newpengambilansampel->pen_id;
+    foreach($request->nomorsampel as $sam){
+        $sampel = new Sampel();
+        $sampel->sam_penid = $id_pen;
+        $sampel->sam_noreg = $regis->reg_no;
+        $sampel->sam_barcodenomor_sampel = $sam;
+        $sampel->sam_statussam = 1;
+        $sampel->sam_possam = 1;
+        $sampel->sam_userid = Auth::user()->id;
+        $sampel->save();
+        array_push($sampelArray,$sampel->sam_id);
+    }
+    $inserttopensampel = PengambilanSampel::where('pen_id',$id_pen)->first();
+    $inserttopensampel->pen_id_sampel = implode(",",$sampelArray);
+    $inserttopensampel->pen_userid = Auth::user()->id;
+    $inserttopensampel->pen_statuspen = 1;
+    $changestatus = RegisterPasien::where('reg_no',$regis->reg_no)->first();
+    $changestatus->reg_statusreg = 2;
+    $changestatus->reg_penid = $id_pen;
+    try{
+        $inserttopensampel->update();
+        $changestatus->update();
+             }catch(QE $e){  return $e; } //show db error message
+             
         notify()->success('Register telah sukses ditambahkan !');
         return redirect('registrasi');
+       
     }
 
     /**
@@ -258,8 +292,18 @@ if($request->reg_jenisidentitas == "KTP"){
 
     public function scanbarcoderujukan(Request $request){
         $sampel = Sampel::where('sam_barcodenomor_sampel',$request->sam_barcodenomor_sampel)->first();
-    
-        return redirect('rujukan/registersampel/'.$sampel->sam_penid);
-
+        if($sampel){
+        $pen = PengambilanSampel::where('pen_id',$sampel->sam_penid)->first();
+        $register = RegisterPasien::where('reg_penid',$sampel->sam_penid)->first();
+            if(is_null($pen->pen_noreg) && is_null($register)){
+                return redirect('rujukan/registersampel/'.$sampel->sam_penid);
+            }else {
+            notify()->warning('Sampel tersebut telah memiliki informasi pasien !');
+            return redirect('rujukan');
+            }
+        }else {
+            notify()->warning('Nomor sampel tidak ditemukan !');
+            return redirect('rujukan');
+        }
     }
 }

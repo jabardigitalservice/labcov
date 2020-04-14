@@ -39,6 +39,8 @@ Route::get('import','ImportExportController@indeximport')->middleware('auth');
 
 Route::get('pengambilansampel','PengambilanSampleController@index')->middleware('auth');
 Route::get('pengambilansampel/detail/{penid}','PengambilanSampleController@show')->middleware('auth');
+Route::post('pengambilansampel/labscanbarcode','PengambilanSampleController@labscanbarcode')->middleware('auth');
+Route::post('pengambilansampel/savescanbarcode','PengambilanSampleController@savebyscan')->middleware('auth');
 Route::get('pengambilansampel/ambil/{noreg}','PengambilanSampleController@create')->middleware('auth');
 Route::post('pengambilansampel/ambil','PengambilanSampleController@store')->middleware('auth');
 Route::get('pengambilansampel/tambahsampel','PengambilanSampleController@tambahsampelrujukan')->middleware('auth');

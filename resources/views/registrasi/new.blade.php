@@ -31,6 +31,7 @@
         <li><a href="#sw-default-step-4">Pemeriksaan Penunjang<small class="d-block">Pemeriksaan Pasien</small></a></li>
         <li><a href="#sw-default-step-5">Riwayat Kontak<small class="d-block">Riwayat Kontak Pasien</small></a></li>
         <li><a href="#sw-default-step-6">Penyakit Penyerta<small class="d-block">Komorbid Pasien</small></a></li>
+        <li><a href="#sw-default-step-7">Sampel<small class="d-block">Nomor Sampel</small></a></li>
     </ul>
     <div class="p-3">
         <div id="sw-default-step-1">
@@ -272,12 +273,6 @@
               </div> <!-- -->
             </div>
                 
-            <div class="form-group row mt-4">
-              <label class="col-md-2">Pekerjaan <span style="color:red;">*</span></label>
-              <div class="col-md-6">
-             <input class="multisteps-form__input form-control" type="text" name="reg_notelp_pasien" placeholder="Nomor Telp/HP Pasien / Keluarga" required/>
-              </div>
-            </div>
               <div class="form-group row mt-4">
                 <label class="col-md-2" >Alamat <span style="color:red;">*</span></label>
                 <div class="col-md-8">
@@ -1285,14 +1280,28 @@
   <textarea class="form-control" rows="5" name="reg_penjelasanlain" id="penjelasanlain"></textarea>
                 </div>
             </div>
-            
-            <div class="form-group row mt-4">
-                <div class="col-md-12">
- <button class="btn btn-md btn-primary" type="submit">Tambahkan Register</button>
-                </div>
-            </div>
 
         </div>
+        
+      <div id="sw-default-step-7">
+          
+        <h4 class="mb-1 mt-0">Sampel</h4>
+        <p><b>Arahkan Kursor ke kotak lalu scan barcode sampel</b></p>
+        <center>
+          <input class="form-control col-md-4" type="text" placeholder="Klik disini lalu scan barcode sampel" id="scanInput" autofocus>
+        </center>
+          <div class="field_wrapper mt-3">
+          </div>
+        
+    <div id="resultsList"></div>
+        <div class="form-group row mt-4">
+            <div class="col-md-12">
+<button class="btn btn-md btn-primary" type="submit">Tambahkan Register</button>
+            </div>
+        </div>
+
+    </div>
+
     </div>
                                         
                                         </div>
@@ -1323,12 +1332,10 @@ function show2(){
 function simselect(){
   document.getElementById('sim').style.display ='block';
   document.getElementById('ktp').style.display ='none';
-  $('#idktp').val('');
 };
 function ktpselect(){
   document.getElementById('sim').style.display ='none';
   document.getElementById('ktp').style.display ='block';
-  $('#idsim').val('');
 };
 
 function showRDT(){
@@ -1338,7 +1345,143 @@ function showRDT2(){
   document.getElementById('ifrdt').style.display = 'block';
 };
    
+/*
+    This code will determine when a code has been either entered manually or
+    entered using a scanner.
+    It assumes that a code has finished being entered when one of the following
+    events occurs:
+        • The enter key (keycode 13) is input
+        • The input has a minumum length of text and loses focus
+        • Input stops after being entered very fast (assumed to be a scanner)
+*/
+
+var inputStart, inputStop, firstKey, lastKey, timing, userFinishedEntering;
+var minChars = 3;
+
+// handle a key value being entered by either keyboard or scanner
+$("#scanInput").keypress(function (e) {
+    // restart the timer
+    if (timing) {
+        clearTimeout(timing);
+    }
+    
+    // handle the key event
+    if (e.which == 13) {
+        // Enter key was entered
+        
+        // don't submit the form
+        e.preventDefault();
+        
+        // has the user finished entering manually?
+        if ($("#scanInput").val().length >= minChars){
+            userFinishedEntering = true; // incase the user pressed the enter key
+            inputComplete();
+        }
+    }
+    else {
+        // some other key value was entered
+        
+        // could be the last character
+        inputStop = performance.now();
+        lastKey = e.which;
+        
+        // don't assume it's finished just yet
+        userFinishedEntering = false;
+        
+        // is this the first character?
+        if (!inputStart) {
+            firstKey = e.which;
+            inputStart = inputStop;
+            
+            // watch for a loss of focus
+            $("body").on("blur", "#scanInput", inputBlur);
+        }
+        
+        // start the timer again
+        timing = setTimeout(inputTimeoutHandler, 500);
+    }
+});
+
+// Assume that a loss of focus means the value has finished being entered
+function inputBlur(){
+    clearTimeout(timing);
+    if ($("#scanInput").val().length >= minChars){
+        userFinishedEntering = true;
+        inputComplete();
+    }
+};
+
+
+// reset the page
+$("#reset").click(function (e) {
+    e.preventDefault();
+    resetValues();
+});
+
+function resetValues() {
+    // clear the variables
+    inputStart = null;
+    inputStop = null;
+    firstKey = null;
+    lastKey = null;
+    // clear the results
+    inputComplete();
+}
+
+// Assume that it is from the scanner if it was entered really fast
+function isScannerInput() {
+    return (((inputStop - inputStart) / $("#scanInput").val().length) < 15);
+}
+
+// Determine if the user is just typing slowly
+function isUserFinishedEntering(){
+    return !isScannerInput() && userFinishedEntering;
+}
+
+function inputTimeoutHandler(){
+    // stop listening for a timer event
+    clearTimeout(timing);
+    // if the value is being entered manually and hasn't finished being entered
+    if (!isUserFinishedEntering() || $("#scanInput").val().length < 3) {
+        // keep waiting for input
+        return;
+    }
+    else{
+        reportValues();
+    }
+}
+
+// here we decide what to do now that we know a value has been completely entered
+function inputComplete(){
+    // stop listening for the input to lose focus
+    $("body").off("blur", "#scanInput", inputBlur);
+    // report the results
+    reportValues();
+}
+
+function reportValues() {
+    // update the metrics
+    if (!inputStart) {
+        // clear the results
+        $("#resultsList").html("");
+        $("#scanInput").focus().select();
+    } else {
+        // prepend another result item
+        var inputMethod = isScannerInput() ? "Scanner" : "Keyboard";
+
+        $("#resultsList").append("<div class='form-group row'><label class='col-md-2 col-form-label'>Nomor Sampel : </label><input class='form-control-plaintext col-md-4' type='text' name='nomorsampel[]' value='"+ $("#scanInput").val()+"' readonly><button class='btn btn-sm btn-danger remove_field'><i class='uil-trash'></i></button></div>")
+ 
+        $("#scanInput").focus();
+        document.getElementById('scanInput').value = '';
+        inputStart = null;
+    }
+}
+$(document).on('click', '.remove_field', function() {
+    $(this).parent().remove();
+});
+
 $(document).ready(function(){
+
 if(document.getElementById('selectktpid').checked) {
   document.getElementById('sim').style.display ='none';
   document.getElementById('ktp').style.display ='block';
@@ -1364,6 +1507,10 @@ if(document.getElementById("rsfasyankes").value == "Other"){
 $("#smartwizard-default").smartWizard({
 useURLhash:!1,
 showStepURLhash:!1, 
+anchorSettings: {
+          anchorClickable: true, // Enable/Disable anchor navigation
+          enableAllAnchors: true, // Activates all anchors clickable all times
+      },
 keyNavigation:false, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
 lang: {  // Language variables
 next: 'Selanjutnya', 
