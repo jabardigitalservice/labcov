@@ -36,20 +36,23 @@
               <td width="60%">{{$reg->reg_nama_pasien}}</td>
             </tr>
             <tr>
-                <td width="40%"><b>@if($reg->reg_jenisidentitas == "KTP")
-                Nomor Induk Kependudukan
-                @elseif($reg->reg_jenisidentitas == "SIM")
-                Nomor Surat Izin Mengemudi
-              @endif</b></td>
-                <td width="60%">@if($reg->reg_jenisidentitas == "KTP")
-                {{$reg->reg_nik}}
-                @elseif($reg->reg_jenisidentitas == "SIM")
-                {{$reg->reg_nosim}}
-              @endif</td>
+                <td width="40%"><b>Nomor Induk Kependudukan</b></td>  <td width="60%"> {{$reg->reg_nik}} </td>
               </tr>
               <tr>
-                <td width="40%"><b>Tanggal Lahir & Usia</b></td>
-                <td width="60%">{{$reg->reg_tanggallahir}}</td>
+                <td width="40%"><b>Nomor Surat Izin Mengemudi</b></td>
+                <td width="60%">{{$reg->reg_nosim}}</td>
+              </tr>
+              <tr>
+                <td width="40%"><b>Nomor Kartu Keluarga</b></td>
+                <td width="60%">{{$reg->reg_nkk}}</td>
+              </tr>
+              <tr>
+                <td width="40%"><b>Pekerjaan</b></td>
+                <td width="60%">{{$reg->reg_pekerjaan}}</td>
+              </tr>
+              <tr>
+                <td width="40%"><b>Tempat, Tanggal Lahir & Usia</b></td>
+                <td width="60%">{{$reg->reg_tempatlahir}}, {{Carbon\Carbon::parse($reg->reg_tanggallahir)->Format('d F Y')}} ({{$reg->reg_usia}})</td>
               </tr>
               <tr>
                 <td width="40%"><b>Jenis Kelamin</b></td>
@@ -60,7 +63,7 @@
               </tr>
               <tr>
                 <td width="40%"><b>Alamat Pasien</b></td>
-                <td width="60%">{{$reg->reg_alamat}}, {{$reg->reg_domisilikotakab}}, {{$reg->reg_domisilikecamatan}}, {{$reg->reg_domisilikelurahan}}</td>
+                <td width="60%">{{$reg->reg_alamat}} {{$reg->reg_domisilirt}} {{$reg->reg_domisilirw}}, {{$reg->reg_domisilikotakab}}, {{$reg->reg_domisilikecamatan}}, {{$reg->reg_domisilikelurahan}}</td>
               </tr>
               <tr>
                 <td width="40%"><b>No Telp Pasien</b></td>

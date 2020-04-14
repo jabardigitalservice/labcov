@@ -172,8 +172,18 @@
   
         </div>
         <div id="sw-default-step-2">
+          <div class="form-group row mt-4">
+            <label class="col-md-2">Kewarganegaraan <span style="color:red;">*</span></label>
+            <div class="col-md-6">
+              <select class="multisteps-form__input form-control col-md-6" name="reg_kewarganegaraan" required>
+                <option value="{{$edit->reg_kewarganegaraan}}">{{$edit->reg_kewarganegaraan}}</option>
+                <option value="WNI">WNI</option>
+                <option value="WNA">WNA</option>
+              </select>
+            </div>
+          </div> 
             <div class="form-group row mt-4">
-                <label class="col-md-2">Nama Pasien</label>
+                <label class="col-md-2">Nama Pasien <span style="color:red;">*</span></label>
                 <div class="col-md-6">
                <input class="multisteps-form__input form-control" type="text" name="reg_nama_pasien" value="{{$edit->reg_nama_pasien}}"/>
                 </div>
@@ -207,6 +217,13 @@
                   </div>
                 </div>
               </div>
+              
+ <div class="form-group row mt-4">
+  <label class="col-md-2">Nomor Kartu Keluarga </label>
+  <div class="col-md-6">
+ <input class="multisteps-form__input form-control" type="text" name="reg_nkk" value="{{$edit->reg_nkk}}"/>
+  </div>
+</div>
               <div class="form-group row mt-4">
                 <label class="col-md-2" >Tanggal Lahir <span style="color:red;">*</span><br>
                  <small>Format : yyyy-mm-dd (contoh : 2020/12/01)</small></label>
@@ -214,7 +231,19 @@
                <input class="multisteps-form__input form-control" id="tanggallahir" type="text" name="reg_tanggallahir" value="{{$edit->reg_tanggallahir}}" required/>
                 </div>
               </div>
-                    
+                          
+   <div class="form-group row mt-4">
+    <label class="col-md-2">Tempat Lahir <span style="color:red;">*</span></label>
+    <div class="col-md-6">
+   <input class="multisteps-form__input form-control" type="text" name="reg_tempatlahir" value="{{$edit->reg_tempatlahir}}" required/>
+    </div>
+  </div>              
+  <div class="form-group row mt-4">
+    <label class="col-md-2">Pekerjaan </label>
+    <div class="col-md-6">
+   <input class="multisteps-form__input form-control" type="text" name="reg_pekerjaan" value="{{$edit->reg_pekerjaan}}">
+    </div>
+       </div> 
    <div class="form-group row mt-4">
     <label class="col-md-2" >Jenis Kelamin <span style="color:red;">*</span></label>
     <div class="col-md-6">
@@ -242,10 +271,10 @@
                 </div>
               </div>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Alamat</label>
+                <label class="col-md-2" >Alamat <span style="color:red;">*</span></label>
                 <div class="col-md-8">
                   <div class="row">
-                  <select class="multisteps-form__input col-md-3 form-control" id="domisilikotakab" name="reg_domisilikotakab">
+                  <select class="multisteps-form__input col-md-3 form-control" id="domisilikotakab" name="reg_domisilikotakab" required>
                     <option value="{{$edit->reg_domisilikotakab}}" selected>{{$edit->reg_domisilikotakab}}</option> 
                     <option value="Kota Bandung">Kota Bandung</option>
                     <option value="Kabupaten Bandung">Kabupaten Bandung</option>
@@ -278,25 +307,37 @@
                   <div class="col-md-9">  
                     <div class="input-group">
                     <div class="input-group-preppend">
-                      <span class="input-group-text">Alamat</span>
+                      <span class="input-group-text">Alamat <span style="color:red;">*</span></span>
                     </div>
-                    <input class="multisteps-form__input form-control" type="text" name="reg_alamat" value="{{$edit->reg_alamat}}"/>
+                    <input class="multisteps-form__input form-control" type="text" name="reg_alamat" value="{{$edit->reg_alamat}}" required/>
                   </div>
               
               </div>
               </div>
                <div class="row mt-2">
-               <div class="input-group col-md-6">
+               <div class="input-group col-md-4">
                 <div class="input-group-preppend">
-                  <span class="input-group-text">Kecamatan</span>
+                  <span class="input-group-text">Kecamatan <span style="color:red;">*</span></span>
                 </div>
-                <input class="multisteps-form__input form-control" type="text" name="reg_domisilikecamatan" value="{{$edit->reg_domisilikecamatan}}"/>
+                <input class="multisteps-form__input form-control" type="text" name="reg_domisilikecamatan" value="{{$edit->reg_domisilikecamatan}}" required/>
               </div>
-              <div class="input-group col-md-6">
+              <div class="input-group col-md-4">
                 <div class="input-group-preppend">
-                  <span class="input-group-text">Kelurahan</span>
+                  <span class="input-group-text">Kelurahan <span style="color:red;">*</span></span>
                 </div>
-                <input class="multisteps-form__input form-control" type="text" name="reg_domisilikelurahan" value="{{$edit->reg_domisilikelurahan}}"/>
+                <input class="multisteps-form__input form-control" type="text" name="reg_domisilikelurahan" value="{{$edit->reg_domisilikelurahan}}" required/>
+              </div>
+              <div class="input-group col-md-2">
+                <div class="input-group-preppend">
+                  <span class="input-group-text">RT <span style="color:red;">*</span</span>
+                </div>
+                <input class="multisteps-form__input form-control" type="text" name="reg_domisilirt" value="{{$edit->reg_domisilirt}}" required/>
+              </div>
+              <div class="input-group col-md-2">
+                <div class="input-group-preppend">
+                  <span class="input-group-text">RW <span style="color:red;">*</span</span>
+                </div>
+                <input class="multisteps-form__input form-control" type="text" name="reg_domisilirw" value="{{$edit->reg_domisilirw}}" required/>
               </div>
             </div>
                 </div>
@@ -306,6 +347,13 @@
                 <label class="col-md-2">Nomor Telp/HP</label>
                 <div class="col-md-6">
                <input class="multisteps-form__input form-control" type="text" name="reg_notelp_pasien" value="{{$edit->reg_notelp_pasien}}"/>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label">Keterangan lain</label>
+                <div class="col-md-10">
+      <textarea class="form-control" rows="3" name="reg_keteranganpasien">{{$edit->reg_keteranganpasien}}</textarea>
                 </div>
               </div>
               <hr>
@@ -1328,12 +1376,10 @@ function show2(){
 function simselect(){
   document.getElementById('sim').style.display ='block';
   document.getElementById('ktp').style.display ='none';
-  $('#idktp').val('');
 };
 function ktpselect(){
   document.getElementById('sim').style.display ='none';
   document.getElementById('ktp').style.display ='block';
-  $('#idsim').val('');
 };
 
 function showRDT(){

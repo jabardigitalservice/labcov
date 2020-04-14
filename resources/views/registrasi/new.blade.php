@@ -171,6 +171,15 @@
   
         </div>
         <div id="sw-default-step-2">
+          <div class="form-group row mt-4">
+            <label class="col-md-2">Kewarganegaraan <span style="color:red;">*</span></label>
+            <div class="col-md-6">
+              <select class="multisteps-form__input form-control col-md-6" name="reg_kewarganegaraan" required>
+                <option value="WNI">WNI</option>
+                <option value="WNA">WNA</option>
+              </select>
+            </div>
+          </div> 
             <div class="form-group row mt-4">
                 <label class="col-md-2">Nama Pasien <span style="color:red;">*</span></label>
                 <div class="col-md-6">
@@ -206,6 +215,14 @@
      </div>
    </div>
  </div>
+        
+ <div class="form-group row mt-4">
+  <label class="col-md-2">Nomor Kartu Keluarga </label>
+  <div class="col-md-6">
+ <input class="multisteps-form__input form-control" type="text" name="reg_nkk" placeholder="Nomor Kartu Keluarga"/>
+  </div>
+</div>
+
    <div class="form-group row mt-4">
      <label class="col-md-2" >Tanggal Lahir <span style="color:red;">*</span><br>
       <small>Format : yyyy/mm/dd (contoh : 2020/12/01)</small></label>
@@ -213,7 +230,19 @@
     <input class="multisteps-form__input form-control" id="tanggallahir" type="text" name="reg_tanggallahir" placeholder="Tanggal Lahir" required/>
      </div>
    </div>
-          
+         
+   <div class="form-group row mt-4">
+    <label class="col-md-2">Tempat Lahir <span style="color:red;">*</span></label>
+    <div class="col-md-6">
+   <input class="multisteps-form__input form-control" type="text" name="reg_tempatlahir" placeholder="Tempat Lahir" required/>
+    </div>
+  </div>              
+  <div class="form-group row mt-4">
+    <label class="col-md-2">Pekerjaan </label>
+    <div class="col-md-6">
+   <input class="multisteps-form__input form-control" type="text" name="reg_pekerjaan" placeholder="Pekerjaan"/>
+    </div>
+       </div>
    <div class="form-group row mt-4">
      <label class="col-md-2" >Jenis Kelamin <span style="color:red;">*</span></label>
      <div class="col-md-6">
@@ -242,11 +271,18 @@
                 </div>
               </div> <!-- -->
             </div>
+                
+            <div class="form-group row mt-4">
+              <label class="col-md-2">Pekerjaan <span style="color:red;">*</span></label>
+              <div class="col-md-6">
+             <input class="multisteps-form__input form-control" type="text" name="reg_notelp_pasien" placeholder="Nomor Telp/HP Pasien / Keluarga" required/>
+              </div>
+            </div>
               <div class="form-group row mt-4">
                 <label class="col-md-2" >Alamat <span style="color:red;">*</span></label>
                 <div class="col-md-8">
                   <div class="row">
-                  <select class="multisteps-form__input col-md-3 form-control" id="domisilikotakab" name="reg_domisilikotakab">
+                  <select class="multisteps-form__input col-md-3 form-control" id="domisilikotakab" name="reg_domisilikotakab" required>
                     <option value="Kota Bandung">Kota Bandung</option>
                     <option value="Kabupaten Bandung">Kabupaten Bandung</option>
                     <option value="Kabupaten Bandung Barat">Kabupaten Bandung Barat</option>
@@ -278,25 +314,37 @@
                   <div class="col-md-9">  
                     <div class="input-group">
                     <div class="input-group-preppend">
-                      <span class="input-group-text">Alamat</span>
+                      <span class="input-group-text">Alamat <span style="color:red;">*</span></span>
                     </div>
-                    <input class="multisteps-form__input form-control" type="text" name="reg_alamat" placeholder="Alamat Pasien"/>
+                    <input class="multisteps-form__input form-control" type="text" name="reg_alamat" placeholder="Alamat Pasien" required/>
                   </div>
               
               </div>
               </div>
                <div class="row mt-2">
-               <div class="input-group col-md-6">
+               <div class="input-group col-md-4">
                 <div class="input-group-preppend">
-                  <span class="input-group-text">Kecamatan</span>
+                  <span class="input-group-text">Kecamatan <span style="color:red;">*</span></span>
                 </div>
-                <input class="multisteps-form__input form-control" type="text" name="reg_domisilikecamatan"/>
+                <input class="multisteps-form__input form-control" type="text" name="reg_domisilikecamatan" required/>
               </div>
-              <div class="input-group col-md-6">
+              <div class="input-group col-md-4">
                 <div class="input-group-preppend">
-                  <span class="input-group-text">Kelurahan</span>
+                  <span class="input-group-text">Kelurahan <span style="color:red;">*</span></span>
                 </div>
-                <input class="multisteps-form__input form-control" type="text" name="reg_domisilikelurahan"/>
+                <input class="multisteps-form__input form-control" type="text" name="reg_domisilikelurahan" required/>
+              </div>
+              <div class="input-group col-md-2">
+                <div class="input-group-preppend">
+                  <span class="input-group-text">RT <span style="color:red;">*</span></span>
+                </div>
+                <input class="multisteps-form__input form-control" type="text" name="reg_domisilirt" required/>
+              </div>
+              <div class="input-group col-md-2">
+                <div class="input-group-preppend">
+                  <span class="input-group-text">RW <span style="color:red;">*</span></span>
+                </div>
+                <input class="multisteps-form__input form-control" type="text" name="reg_domisilirw" required/>
               </div>
             </div>
                 </div>
@@ -308,11 +356,20 @@
                <input class="multisteps-form__input form-control" type="text" name="reg_notelp_pasien" placeholder="Nomor Telp/HP Pasien / Keluarga" required/>
                 </div>
               </div>
+
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label">Keterangan lain</label>
+                <div class="col-md-10">
+      <textarea class="form-control" rows="3" name="reg_keteranganpasien">Keterangan lain</textarea>
+                </div>
+              </div>
+
+
               <hr>
-              <h4 class="mb-1 mt-0">Riwayat Kunjungan <span style="color:red;">*</span></h4>
+              <h4 class="mb-1 mt-0">Riwayat Kunjungan</h4>
               <p>Isi pada baris yang merupakan kali kunjungan saat ini.</p>
               <div class="form-group row mt-4">
-                <label class="col-md-2" >Kunjungan Ke</label>
+                <label class="col-md-2" >Kunjungan Ke <span style="color:red;">*</span></label>
                 <div class="col-md-6">
                 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" id="kunke1" name="reg_kunke" value="1" required>
