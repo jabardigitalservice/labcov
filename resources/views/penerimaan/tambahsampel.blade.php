@@ -28,12 +28,12 @@
       <label class="col-md-2" >Sampel Diterima</label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="pen_sampel_diterima" value="1" >
-<label class="form-check-label">Ya</label>
+<input class="form-check-input" id="diterimaya" type="radio" name="pen_sampel_diterima" value="1" >
+<label class="form-check-label" for="diterimaya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="pen_sampel_diterima" value="0" >
-<label class="form-check-label">Tidak</label>
+<input class="form-check-input" id="diterimano" type="radio" name="pen_sampel_diterima" value="0" >
+<label class="form-check-label" for="diterimano">Tidak</label>
 </div>
       </div>
     </div>
@@ -42,12 +42,12 @@
       <label class="col-md-2" >Sampel Diambil dari Fasyankes Rujukan</label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="1" >
-<label class="form-check-label">Ya</label>
+<input class="form-check-input" id="fasyankesya" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="1" >
+<label class="form-check-label" for="fasyankesya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="0" >
-<label class="form-check-label">Tidak</label>
+<input class="form-check-input" id="fasyankesno" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="0" >
+<label class="form-check-label" for="fasyankesno">Tidak</label>
 </div>
       </div>
     </div>
