@@ -150,7 +150,7 @@ if($request->reg_jenisidentitas == "KTP"){
 
     $newpengambilansampel = new PengambilanSampel;
     $newpengambilansampel->pen_noreg = $regis->reg_no;
-    $newpengambilansampel->pen_noreg = $regis->reg_nik;
+    $newpengambilansampel->pen_nik = $regis->reg_nik;
     $newpengambilansampel->save();
     
     $sampelArray = array();
