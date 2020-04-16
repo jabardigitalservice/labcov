@@ -49,7 +49,7 @@ class EkstraksiController extends Controller
         ->select('sampel.sam_barcodenomor_sampel', 'ekstraksisampel.*')
         ->where('ekstraksisampel.eks_status', 1)->get();
        //return $avail_pen;
-      return view('ekstraksi.index')->with(compact('arr','avail_pen','not_avail_pen','pengembalian'));
+      return view('ekstraksi.index')->with(compact('arr','avail_pen','not_avail_pen'));
     }
 
     /**
