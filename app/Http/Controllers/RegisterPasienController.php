@@ -141,7 +141,7 @@ if($request->reg_jenisidentitas == "KTP"){
         $rdt->rar_hasil_rdt = $request->rar_hasil_rdt;
         $rdt->rar_tanggal_rdt = $request->rar_tanggal_rdt;
         $rdt->rar_keterangan = $request->rar_keterangan;
-        $rdt-save();
+        $rdt->save();
     }
     
     try{
