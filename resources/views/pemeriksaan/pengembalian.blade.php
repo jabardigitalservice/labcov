@@ -67,8 +67,9 @@
   <input type="hidden" name="note_item_id" value="{{$eksreturn->eks_id}}" >
   <input type="hidden" name="note_item_type" value="22">
   <input type="hidden" name="note_userid" value="{{Auth::user()->id}}">
-@if(!is_null($pem->pem_id) || isset($pem))
+@if(!is_null($pem))
 <input type="hidden" name="pemid" value="{{$pem->pem_id}}">
+@else
 @endif
 
   <div class="form-group row mt-4">
