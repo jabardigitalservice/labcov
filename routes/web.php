@@ -68,6 +68,11 @@ Route::post('ekstraksi/pilih','EkstraksiController@store')->middleware('auth');
 Route::get('ekstraksi/edit/{id}','EkstraksiController@edit')->middleware('auth');
 Route::post('ekstraksi/update','EkstraksiController@update')->middleware('auth');
 
+
+Route::get('ekstraksi/sampeldikembalikan/','EkstraksiController@sampeldikembalikan')->middleware('auth');
+Route::get('ekstraksi/sampeldikembalikan/pilihulang/{id}','EkstraksiController@terima')->middleware('auth');
+Route::post('ekstraksi/sampeldikembalikan/pilihulang/','EkstraksiController@kirimkembali')->middleware('auth');
+
 Route::get('ekstraksi/delete/{id}','EkstraksiController@delete')->middleware('auth');
 Route::post('ekstraksi/apidel/','EkstraksiController@apidelete')->middleware('auth');
 
@@ -87,5 +92,33 @@ Route::post('pemeriksaansampel/periksa','PemeriksaanSampelController@store')->mi
 Route::get('pemeriksaansampel/edit/{id}','PemeriksaanSampelController@edit')->middleware('auth');
 Route::post('pemeriksaansampel/update','PemeriksaanSampelController@update')->middleware('auth');
 
+
+Route::get('pemeriksaansampel/kembalikan/{id}','PemeriksaanSampelController@return')->middleware('auth');
+Route::post('pemeriksaansampel/kembalikan','PemeriksaanSampelController@returnupdate')->middleware('auth');
+
 Route::get('pemeriksaansampel/delete/{id}','PemeriksaanSampelController@delete')->middleware('auth');
 Route::post('pemeriksaansampel/apidel/','PemeriksaanSampelController@apidelete')->middleware('auth');
+
+/*
+|--------------------------------------------------------------------------
+| Ekstraksi Sampel dan Importnya Routes
+|--------------------------------------------------------------------------
+|
+*/ 
+
+Route::get('validasi','ValidasiController@index')->middleware('auth');
+Route::get('validasi/detail/{pemid}','ValidasiController@show')->middleware('auth');
+Route::get('validasi/periksa','ValidasiController@create')->middleware('auth');
+Route::get('validasi/print/doc/{pemid}','ValidasiController@create')->middleware('auth');
+Route::post('validasi/print/bulk/','ValidasiController@create')->middleware('auth');
+
+
+Route::get('validasi/edit/{id}','ValidasiController@edit')->middleware('auth');
+Route::post('validasi/update','ValidasiController@update')->middleware('auth');
+
+
+Route::get('validasi/kembalikan/{id}','ValidasiController@return')->middleware('auth');
+Route::post('validasi/kembalikan','ValidasiController@returnupdate')->middleware('auth');
+
+Route::get('validasi/delete/{id}','ValidasiController@delete')->middleware('auth');
+Route::post('validasi/apidel/','ValidasiController@apidelete')->middleware('auth');

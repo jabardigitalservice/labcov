@@ -79,8 +79,8 @@
                                         <table id="basic-datatable2"  class="table table-striped dt-responsive table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Keterangan Status</th>
-                                                    <th>Status Sampel</th>
+                                                    <th>Keterangan Sampel</th>
+                                                    <th>Identitas Pasien</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>

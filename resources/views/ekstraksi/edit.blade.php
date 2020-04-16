@@ -28,12 +28,11 @@
                 @else
                 <p><span class="badge badge-danger">Identitas Pasien Belum Dimasukan Register</span></p>
                  @endif
-                <h4 class="header-title mt-0 mb-1">No. Ekstraksi : <u>{{$selected->pen_no_ekstraksi}}</u></h4>
+                <h4 class="header-title mt-0 mb-1">No. Ekstraksi : <u>{{$selected->pen_nomor_ekstraksi}}</u></h4>
 <hr>
 <form method="POST" action="{{url('ekstraksi/update')}}">
     @csrf
-    <p><b>Pilih sampel untuk dikirimkan</b></p>
-    <p><b>Sampel yang tidak dipilih harap memasukan informasi letak penyimpanan sampel (dapat diubah dikemudian)</b></p>
+    <p><span class="badge badge-info">Pilih sampel untuk dikirimkan ke bagian pemeriksaan sampel</span></p>
     <!-- <div id="form-group row mt-4">
       <div class="col-md-3">
         <input class="form-check-input" type="radio" name="samid" value="0" checked>
@@ -49,13 +48,13 @@
     @foreach($selected_sampel as $s)
  <div id="form-group row">
    <div class="col-md-3">
-    <input class="form-check-input" type="radio" name="eks_samid" value="{{$s->sam_id}}" required  @if($edit->eks_samid == $s->sam_id) checked @endif>
+    <input class="form-check-input" id="samid{{$s->sam_id}}" type="radio" name="eks_samid" value="{{$s->sam_id}}" required  @if($edit->eks_samid == $s->sam_id) checked @endif>
    </div>
    <div class="col-md-9">
     <div class="media mb-3">
         <div class="media-body row">
-        <div class="col-md-4">
-            <h4 class="mt-0 mb-1 font-size-16">Sampel No : #{{$s->sam_barcodenomor_sampel}} <a data-samid="<b>Nomor Sampel</b> : #{{$s->sam_barcodenomor_sampel}}" data-petugas="<b>Petugas Pengambil Sampel</b> : {{$s->sam_petugas_pengambil_sampel}}" data-tanggal="<b>Tanggal Sampel</b> : {{$s->sam_tanggal_sampel}}" data-pukul="<b>Pukul Sampel</b> : {{$s->sam_pukul_sampel}}" id="modals" class="modals btn btn-xs btn-info"><i class="uil-search-alt"></i></a></h4>
+        <div class="col-md-6">
+           <p><label for="samid{{$s->sam_id}}" class="mt-0 mb-1 font-size-16">Sampel No : #{{$s->sam_barcodenomor_sampel}} </label> <a data-samid="<b>Nomor Sampel</b> : #{{$s->sam_barcodenomor_sampel}}" data-petugas="<b>Petugas Pengambil Sampel</b> : {{$s->sam_petugas_pengambil_sampel}}" data-tanggal="<b>Tanggal Sampel</b> : {{$s->sam_tanggal_sampel}}" data-pukul="<b>Pukul Sampel</b> : {{$s->sam_pukul_sampel}}" id="modals" class="modals btn btn-xs btn-info"><i class="uil-search-alt"></i></a></p>
             <p><span class="text-muted">@if($s->sam_jenis_sampel == 1)
               Usap Nasofaring & Orofaring
               @elseif($s->sam_jenis_sampel == 2)
@@ -83,11 +82,7 @@
               @endif</span></p>
              
         </div>
-        <div class="col-md-8">
-          <small>Isi apabila sampel tidak dipilih</small>
-           <input type="text" class="form-control col-md-4" name="penyimpanansampel[{{$s->sam_id}}]">
-           
-           </div>
+        
 </div>
     </div>
   </div>
@@ -216,17 +211,16 @@
   </div>
   
 <hr>
-<h5>Catatan Pengubahan</h5>
+<h5>Catatan Pengubahan <span style="color:red">*</span></h5>
 <p><b>Silahkan isi keterangan pengubahan ini, semua bentuk ubahan akan dicatat dan dapat dilihat oleh semua pihak. Silahkan berikan keterangan tentang apa yang diubah</b></p>
 
 <div class="form-group row">
-      <label class="col-md-2 col-form-label" for="gejlain">Catatan Pengubahan</label>
+      <label class="col-md-2 col-form-label" for="gejlain">Catatan Pengubahan  <span style="color:red">*</span></label>
       <div class="col-md-10">
 <textarea class="form-control" rows="5" name="note_isi" required></textarea>
       </div>
   </div>
   <input type="hidden" name="note_item_id" value="{{$edit->eks_id}}">
-  <input type="hidden" name="note_item_type" value="1">
   <input type="hidden" name="note_userid" value="{{Auth::user()->id}}">
 
 <div class="form-group row mt-4">
@@ -236,6 +230,30 @@
 </div>
 
   </form>
+  <hr>
+<h3 class="header-title mt-2 mb-2">Riwayat Perubahan atau Pengiriman Kembali</h3>
+@if(!empty($notes))
+       <table class="table">
+        <thead>
+            <tr>
+                <th>Tanggal Perubahan</th>
+                <th>Keterangan</th>
+                
+            </tr>
+        </thead>
+          <tbody>
+              @foreach($notes as $n)
+            <tr>
+              <td>{{$n->created_at}}</td>
+              <td><p>{!! $n->note_isi !!}</p></td>
+            
+            </tr>
+           @endforeach
+          </tbody>
+        </table>
+@else
+<p>Hasil Ekstraksi dan Pengiriman Sampel ini belum pernah diubah atau belum ada pengiriman kembali</p>
+@endif
                                 </div>
                             </div>
                         </div>

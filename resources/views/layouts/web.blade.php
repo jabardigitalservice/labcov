@@ -135,24 +135,22 @@
                         </li>
 
                         <li>
-                        <a href="javascript: void(0);">     
-                        <i class="uil-user-square"></i>
-                       <span>Ekstraksi Sampel </span>
-                       <span class="menu-arrow"></span>
-                            </a>
+                                <a href="javascript: void(0);">     
+                                <i class="uil-flask"></i>
+                                    <span> Ekstraksi </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
 
-                            <ul class="nav-second-level mm-collapse">
-                       <li>
-                           <a href="{{url('ekstraksi')}}">Ekstrasi Sampel</a>
-                       </li>
-                       <li>
-                           <a href="{{url('penyimpanan')}}">Penyimpanan Sampel</a>
-                       </li>
-                       <li>
-                           <a href="{{url('pemusnahan')}}">Pemusnahan Sampel</a>
-                       </li>
+                                <ul class="nav-second-level mm-collapse">
+                                    <li>
+                                        <a href="{{url('ekstraksi')}}">Ekstraksi</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('ekstraksi/sampeldikembalikan')}}">Sampel yang dikembalikan/ditolak</a>
+                                    </li>
                                     
                                 </ul>
+                        </li>
                       
                         <li>
                             <a href="{{url('pemeriksaansampel')}}">

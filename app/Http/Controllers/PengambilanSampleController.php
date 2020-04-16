@@ -149,7 +149,7 @@ class PengambilanSampleController extends Controller
                  }
         }
        
-       $pasienstatus = RegisterPasien::where('reg_no',$pen->no_reg)->first();
+       $pasienstatus = RegisterPasien::where('reg_no',$pen->pen_noreg)->first();
        $pasienstatus->reg_statusreg = 3;
 
             $store->put('pen_id_sampel',implode(",",$sampelArray));
@@ -205,19 +205,26 @@ class PengambilanSampleController extends Controller
         $sampelArray = array();
         $store = PengambilanSampel::create($insert->all());
         $id_pen = $store->pen_id;
+        $duplicate = 0;
         for($i=0; $i< count($request->sam_jenis_sampel); $i++){
-            $sampel = new Sampel();
-            $sampel->sam_penid = $id_pen;
-            $sampel->sam_noreg = $request->pen_noreg;
-            $sampel->sam_jenis_sampel = $request->sam_jenis_sampel[$i];
-            $sampel->sam_petugas_pengambil_sampel = $request->petugas_pengambil[$i];
-            $sampel->sam_tanggal_sampel = $request->tanggalsampel[$i];
-            $sampel->sam_pukul_sampel = $request->pukulsampel[$i];
-            $sampel->sam_barcodenomor_sampel = $request->nomorsampel[$i];
-            $sampel->sam_statussam = 0;
-            $sampel->sam_userid = Auth::user()->id;
-            $sampel->save();
-            array_push($sampelArray,$sampel->sam_id);
+            $ceksam = Sampel::where('sam_barcodenomor_sampel',$request->nomorsampel[$i])->first();
+            if($ceksam){
+               $duplicate++;
+            }else {
+                $sampel = new Sampel();
+                $sampel->sam_penid = $id_pen;
+                $sampel->sam_noreg = $request->pen_noreg;
+                $sampel->sam_jenis_sampel = $request->sam_jenis_sampel[$i];
+                $sampel->sam_petugas_pengambil_sampel = $request->petugas_pengambil[$i];
+                $sampel->sam_tanggal_sampel = $request->tanggalsampel[$i];
+                $sampel->sam_pukul_sampel = $request->pukulsampel[$i];
+                $sampel->sam_barcodenomor_sampel = $request->nomorsampel[$i];
+                $sampel->sam_statussam = 0;
+                $sampel->sam_userid = Auth::user()->id;
+                $sampel->save();
+                array_push($sampelArray,$sampel->sam_id);
+            }
+           
         }
         $inserttopensampel = PengambilanSampel::where('pen_id',$id_pen)->first();
         $inserttopensampel->pen_id_sampel = implode(",",$sampelArray);
@@ -230,8 +237,11 @@ class PengambilanSampleController extends Controller
         $inserttogroup->save();
              }catch(QE $e){  return $e; } //show db error message
 
-
+             if($duplicate > 0){
+                notify()->warning('Ada Sampel yang bernomor sama ! Sampel bernomor sama tidak akan dimasukan ke pengambilan!');
+             }else {
              notify()->success('Status Pengambilan telah sukses ditambahkan !');
+             }
                 return redirect('pengambilansampel');
     
     }
@@ -287,7 +297,7 @@ class PengambilanSampleController extends Controller
                  array_push($sampelArray,$newsam->sam_id);
                  }
         }
-       $pasienstatus = RegisterPasien::where('reg_no',$pen->no_reg)->first();
+       $pasienstatus = RegisterPasien::where('reg_no',$pen->pen_noreg)->first();
        $pasienstatus->reg_statusreg = 3;
 
             $store->put('pen_id_sampel',implode(",",$sampelArray));

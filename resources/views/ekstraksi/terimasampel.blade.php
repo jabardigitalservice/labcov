@@ -1,5 +1,5 @@
 @extends('layouts.web')
-@section('title','- Penerimaan dan Ekstraksi RNA Baru')
+@section('title','- Pengembalian Sampel')
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/libs/smartwizard/smart_wizard.min.css')}}" type="text/css" />
 @endsection
@@ -9,7 +9,7 @@
                 <div class="container-fluid">
                     <div class="row page-title align-items-center">
                          <div class="col-sm-4 col-xl-6">
-                            <h4 class="mb-1 mt-0">Penerimaan dan Ekstraksi RNA Baru</h4>
+                            <h4 class="mb-1 mt-0">Pengembalian Sampel</h4>
                         </div>
                         <div class="col-sm-8 col-xl-6">
                            <a href="{{url('ekstraksi')}}" class="btn btn-md btn-primary float-right"><i class="uil-arrow-left"></i> Kembali</a>
@@ -21,21 +21,34 @@
   <div class="row">
       <div class="col-12">
           <div class="card">
-              <div class="card-body">
-                @if(is_null($selected->pen_noreg))
-                <p><span class="badge badge-danger">Identitas Pasien Belum Dimasukan Register</span></p>
-                @else
-                <h4 class="header-title mt-0 mb-1">No. Registrasi : <u>#{{$selected->pen_noreg}}</u></h4>
-                <h4 class="header-title mt-0 mb-1">No. Induk Kependudukan : <u>{{$selected->pen_nik}}</u></h4>
-                @endif
-                <h4 class="header-title mt-0 mb-1">No. Ekstraksi : <u>{{$selected->pen_nomor_ekstraksi}}</u></h4>
+              <div class="card-body">  
+              <h3 class="header-title mt-2 mb-2">Riwayat Pengubahan atau Pengiriman Kembali</h3>
+@if(!empty($notes))
+       <table class="table">
+        <thead>
+            <tr>
+                <th>Tanggal Pengubahan</th>
+                <th>Keterangan</th>
+                
+            </tr>
+        </thead>
+          <tbody>
+              @foreach($notes as $n)
+            <tr>
+              <td>{{$n->created_at}}</td>
+              <td><p>{!! $n->note_isi !!}</p></td>
+            
+            </tr>
+           @endforeach
+          </tbody>
+        </table>
+@else
+<p>Hasil Ekstraksi dan Pengiriman Sampel ini belum pernah diubah atau belum ada pengiriman kembali</p>
+@endif
 <hr>
-<form method="POST" action="{{url('ekstraksi/pilih')}}">
+<form method="POST" action="{{url('ekstraksi/sampeldikembalikan/pilihulang')}}">
     @csrf
-    @if(!is_null($selected->pen_noreg))
-    <input type="hidden" name="regno" value="{{$selected->pen_noreg}}">
-    @endif
-    <p><span class="badge badge-info">Pilih sampel untuk dikirimkan ke bagian pemeriksaan sampel</span></p>
+    <p><span class="badge badge-info">Pilih sampel untuk dikirimkan kembali</span> <span class="badge badge-warning">PERHATIAN : Status ini dikirimkan ulang oleh Lab Pemeriksaan, harap periksa kembali pilihan sampel sesuai dengan petunjuk dan alasan pengembalian Lab Pemeriksaan</span></p>
     <!-- <div id="form-group row mt-4">
       <div class="col-md-3">
         <input class="form-check-input" type="radio" name="samid" value="0" checked>
@@ -49,17 +62,15 @@
      </div>
     </div> -->
     @foreach($selected_sampel as $s)
-    
-    <input type="hidden" name="penid" value="{{$selected->pen_id}}">
  <div id="form-group row">
-   <div class="col-md-2">
-    <input class="form-check-input" id="samid{{$s->sam_id}}" type="radio" name="eks_samid" value="{{$s->sam_id}}" required>
+   <div class="col-md-3">
+    <input class="form-check-input" id="samid{{$s->sam_id}}" type="radio" name="eks_samid" value="{{$s->sam_id}}" required  @if($kirimulang->eks_samid == $s->sam_id) checked @endif>
    </div>
-   <div class="col-md-10">
+   <div class="col-md-9">
     <div class="media mb-3">
         <div class="media-body row">
         <div class="col-md-6">
-            <label class="mt-0 mb-1 font-size-16" for="samid{{$s->sam_id}}">Sampel No : #{{$s->sam_barcodenomor_sampel}}</label> <a data-samid="<b>Nomor Sampel</b> : #{{$s->sam_barcodenomor_sampel}}" data-petugas="<b>Petugas Pengambil Sampel</b> : {{$s->sam_petugas_pengambil_sampel}}" data-tanggal="<b>Tanggal Sampel</b> : {{$s->sam_tanggal_sampel}}" data-pukul="<b>Pukul Sampel</b> : {{$s->sam_pukul_sampel}}" id="modals" class="modals btn btn-xs btn-info"><i class="uil-search-alt"></i></a>
+           <p><label for="samid{{$s->sam_id}}" class="mt-0 mb-1 font-size-16">Sampel No : #{{$s->sam_barcodenomor_sampel}} </label> <a data-samid="<b>Nomor Sampel</b> : #{{$s->sam_barcodenomor_sampel}}" data-petugas="<b>Petugas Pengambil Sampel</b> : {{$s->sam_petugas_pengambil_sampel}}" data-tanggal="<b>Tanggal Sampel</b> : {{$s->sam_tanggal_sampel}}" data-pukul="<b>Pukul Sampel</b> : {{$s->sam_pukul_sampel}}" id="modals" class="modals btn btn-xs btn-info"><i class="uil-search-alt"></i></a></p>
             <p><span class="text-muted">@if($s->sam_jenis_sampel == 1)
               Usap Nasofaring & Orofaring
               @elseif($s->sam_jenis_sampel == 2)
@@ -76,7 +87,7 @@
                Serum Akut (kurang dari 7 hari demam) 
                @elseif($s->sam_jenis_sampel == 8)
                Serum konvalesen (2-3 minggu demam)
-                @elseif($s->sam_jenis_sampel == 9)
+               @elseif($s->sam_jenis_sampel == 9)
                Whole Blood
                @elseif($s->sam_jenis_sampel == 10)
                Plasma
@@ -85,10 +96,10 @@
                @else
                Jenis Sampel Lainnya : {{$s->sam_namadiluarjenis}}
               @endif</span></p>
-              </div>
-           
-        
+             
         </div>
+        
+</div>
     </div>
   </div>
 @endforeach
@@ -117,112 +128,126 @@
   
  <input type="hidden" name="eks_noreg" value="{{$selected->pen_noreg}}">
  <input type="hidden" name="eks_nik" value="{{$selected->pen_nik}}">
- <input type="hidden" name="eks_penid" value="{{$selected->pen_id}}">
+ <input type="hidden" name="eks_id" value="{{$kirimulang->eks_id}}">
+ <input type="hidden" name="oldsamid" value="{{$kirimulang->eks_samid}}">
     <div class="form-group row mt-4">
       <label class="col-md-2">Tanggal penerimaan sampel</label>
       <div class="col-md-6">
-        <input class="form-control" type="text" id="tglpenerimaansampel" name="eks_tanggal_penerimaan_sampel" placeholder="YYYY/MM/DD"/>
+        <input class="form-control" type="text" id="tglpenerimaansampel" name="eks_tanggal_penerimaan_sampel" value="{{$kirimulang->eks_tanggal_penerimaan_sampel}}"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam penerimaan sampel</label>
+      <label class="col-md-2" >Jam penerimaan sampem</label>
       <div class="col-md-6">
-        <input class="form-control" type="text" name="eks_jam_penerimaan_sampel" placeholder="JJ:MM"/>
+        <input class="form-control" type="text" name="eks_jam_penerimaan_sampel" value="{{$kirimulang->eks_jam_penerimaan_sampel}}"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
       <label class="col-md-2" >Petugas penerima sampel</label>
       <div class="col-md-6">
-        <input class="form-control" type="text" name="eks_petugas_penerima_sampel" placeholder="Petugas penerima sampel"/>
+        <input class="form-control" type="text" name="eks_petugas_penerima_sampel" value="{{$kirimulang->eks_petugas_penerima_sampel}}"/>
       </div>
     </div>
     
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Operator ekstraksi </label>
+      <label class="col-md-2" >Operator ekstraksi</label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="eks_operator_ekstraksi" placeholder="Operator ekstraksi"/>
+     <input class="form-control" type="text" name="eks_operator_ekstraksi" value="{{$kirimulang->eks_operator_ekstraksi}}"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
       <label class="col-md-2">Tanggal mulai ekstraksi</label>
       <div class="col-md-6">
-        <input class="form-control" type="text" id="tglmulaiekstraksi" name="eks_tanggal_mulai_ekstraksi" placeholder="YYYY/MM/DD"/>
+        <input class="form-control" type="text" id="tglmulaiekstraksi" name="eks_tanggal_mulai_ekstraksi" value="{{$kirimulang->eks_tanggal_mulai_ekstraksi}}"/>
       </div>
     </div>
     <div class="form-group row mt-4">
       <label class="col-md-2" >Jam mulai ekstraksi</label>
       <div class="col-md-6">
-        <input class="form-control" type="text" name="eks_jam_mulai_ekstraksi" placeholder="JJ:MM"/>
+        <input class="form-control" type="text" name="eks_jam_mulai_ekstraksi" value="{{$kirimulang->eks_jam_mulai_ekstraksi}}"/>
       </div>
     </div>
     
     
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Metode ekstraksi </label>
+      <label class="col-md-2" >Metode ekstraksi</label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="eks_metode_ekstraksi" placeholder="Metode ekstraksi"/>
+     <input class="form-control" type="text" name="eks_metode_ekstraksi" value="{{$kirimulang->eks_metode_ekstraksi}}"/>
       </div>
     </div>
     <div class="form-group row mt-4">
       <label class="col-md-2" >Nama kit ekstraksi </label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="eks_nama_kit_ekstraksi" placeholder="Nama kit ekstraksi"/>
+     <input class="form-control" type="text" name="eks_nama_kit_ekstraksi" value="{{$kirimulang->eks_nama_kit_ekstraksi}}"/>
       </div>
     </div>
     <div class="form-group row mt-4">
       <label class="col-md-2" >Dikirim ke Lab </label>
       <div class="col-md-6">
-        <input class="form-check-input" type="radio" name="eks_dikirim_ke_lab" id="labunpad" value="Unpad" ><label for="labunpad">Unpad</label>
+        <input class="form-check-input" type="radio" name="eks_dikirim_ke_lab" value="Unpad" @if($kirimulang->eks_dikirim_ke_lab == "Unpad") checked @endif><label>Unpad</label>
         <br>
-        <input class="form-check-input" type="radio" name="eks_dikirim_ke_lab" id="lablabkes" value="LABKES" ><label for="lablabkes">LABKES</label>
+        <input class="form-check-input" type="radio" name="eks_dikirim_ke_lab" value="LABKES" @if($kirimulang->eks_dikirim_ke_lab == "LABKES") checked @endif><label>LABKES</label>
         <br>
         <label>Lainnya, sebutkan nama lab <small>kosongkan jika terdapat pilihannya</small></label>
-     <input class="form-control" type="text" name="eks_nama_lab_lain"/>
+     <input class="form-control" type="text" name="eks_nama_lab_lain" @if(is_null($kirimulang->eks_dikirim_ke_lab)) {{$kirimulang->eks_nama_lab_lain}} @endif/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
       <label class="col-md-2" >Nama pengirim RNA</label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="eks_nama_pengirim_rna" placeholder="Nama pengirim RNA"/>
+     <input class="form-control" type="text" name="eks_nama_pengirim_rna" value="{{$kirimulang->eks_nama_pengirim_rna}}"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
       <label class="col-md-2" >Tanggal pengiriman RNA</label>
       <div class="col-md-6">
-     <input class="form-control" type="text" id="tanggalpengirimanrna" name="eks_tanggal_pengiriman_rna" placeholder="YYYY/MM/DD"/>
+     <input class="form-control" type="text" id="tanggalpengirimanrna" name="eks_tanggal_pengiriman_rna" value="{{$kirimulang->eks_tanggal_pengiriman_rna}}"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
       <label class="col-md-2" >Jam pengiriman RNA</label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="eks_jam_pengiriman_rna" placeholder="JJ:MM"/>
+     <input class="form-control" type="text" name="eks_jam_pengiriman_rna" value="{{$kirimulang->eks_jam_pengiriman_rna}}"/>
       </div>
     </div>
 
 
     <div class="form-group row">
-      <label class="col-md-2 col-form-label" for="gejlain">Catatan Lain</label>
+      <label class="col-md-2 col-form-label">Catatan Lain</label>
       <div class="col-md-10">
-<textarea class="form-control" rows="5" name="eks_catatan" placeholder="Catatan"></textarea>
+<textarea class="form-control" rows="5" name="eks_catatan" placeholder="Catatan">{{$kirimulang->eks_catatan}}</textarea>
       </div>
   </div>
   
+<hr>
+<h5>Catatan Pengubahan <span style="color:red">*</span></h5>
+<p><b>Silahkan isi keterangan tentang pengubahan yang dibuat</b></p>
 
+<div class="form-group row">
+      <label class="col-md-2 col-form-label" for="gejlain">Catatan Pengubahan  <span style="color:red">*</span></label>
+      <div class="col-md-10">
+<textarea class="form-control" rows="5" name="note_isi" required></textarea>
+      </div>
+  </div>
+  <input type="hidden" name="note_item_id" value="{{$kirimulang->eks_id}}">
+  <input type="hidden" name="note_userid" value="{{Auth::user()->id}}">
 
-  <div class="form-group row mt-4">
+<div class="form-group row mt-4">
     <div class="col-md-12">
-<button class="btn btn-md btn-primary" type="submit">Pilih dan Kirim Sampel</button>
+<button class="btn btn-md btn-primary" type="submit">Kirim</button>
     </div>
 </div>
 
   </form>
+  <hr>
+
                                 </div>
                             </div>
                         </div>
@@ -249,9 +274,9 @@
 </script>
 </script>
 <script>
-$("#tglpenerimaansampel").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
-$("#tglmulaiekstraksi").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
-$("#tanggalpengirimanrna").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
+$("#tglpenerimaansampel").flatpickr();
+$("#tglmulaiekstraksi").flatpickr();
+$("#tanggalpengirimanrna").flatpickr();
 </script>
 @endsection
 
