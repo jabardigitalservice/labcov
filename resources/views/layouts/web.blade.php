@@ -151,12 +151,22 @@
                                     
                                 </ul>
                         </li>
-                      
                         <li>
-                            <a href="{{url('pemeriksaansampel')}}">
+                                <a href="javascript: void(0);">     
                                 <i class="uil-atom"></i>
-                                <span>Pemeriksaan rRT-PCR</span>
-                            </a> <!-- ini ada sub menunya -->
+                                    <span> Pemeriksaan rRT-PCR </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+
+                                <ul class="nav-second-level mm-collapse">
+                                    <li>
+                                        <a href="{{url('pemeriksaansampel')}}">Pemeriksaan Sampel</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('pemeriksaansampel/pemeriksaandikembalikan')}}">Pemeriksaan yang dikembalikan/ditolak</a>
+                                    </li>
+                                    
+                                </ul>
                         </li>
 
                         <li>
