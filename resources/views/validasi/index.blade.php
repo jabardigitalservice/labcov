@@ -38,7 +38,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($validasi as $a)
+                                                @foreach($belum_validasi as $a)
                                          <tr>
                                              <td>Sampel <span class="badge badge-primary">#{{$a->sam_barcodenomor_sampel}}</span>
                                                 @if($a->sam_jenis_sampel == 1)
@@ -80,6 +80,64 @@
                                         @endforeach
                                             </tbody>
                                         </table>
+<hr>
+<h4 class="header-title mt-0 mb-1">Validasi & Verifikasi Pemeriksaan Sampel</h4>
+<p class="sub-header">
+  Berikut adalah hasil pemeriksaan laboratorium yang perlu divalidasi
+</p>
+    <table id="basic-datatable"  class="table table-striped dt-responsive table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Hasil Pemeriksaan</th>
+                <th>Identitas Fasien</th>
+                <th>Informasi Pemeriksa</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($validasi as $a)
+     <tr>
+         <td>Sampel <span class="badge badge-primary">#{{$a->sam_barcodenomor_sampel}}</span>
+            @if($a->sam_jenis_sampel == 1)
+            Usap Nasofaring & Orofaring
+            @elseif($a->sam_jenis_sampel == 2)
+            Sputum
+            @elseif($a->sam_jenis_sampel == 3)
+            Bronchoalveolar Lavage
+             @elseif($a->sam_jenis_sampel == 4)
+             Tracheal Aspirate
+             @elseif($a->sam_jenis_sampel == 5)
+             Nasal Wash
+             @elseif($a->sam_jenis_sampel == 6)
+             Jaringan Biopsi/Otopsi
+             @elseif($a->sam_jenis_sampel == 7)
+             Serum Akut (kurang dari 7 hari demam) 
+             @elseif($a->sam_jenis_sampel == 8)
+             Serum konvalesen (2-3 minggu demam)
+             @elseif($a->sam_jenis_sampel == 9)
+             Whole Blood
+             @elseif($a->sam_jenis_sampel == 10)
+             Plasma
+             @elseif($a->sam_jenis_sampel == 11)
+             Fingerprick 
+             @elseif($a->sam_jenis_sampel == 12)
+             Jenis Sampel Lainnya : {{$a->sam_namadiluarjenis}}
+             @else
+             Jenis Sampel Lainnya : {{$a->sam_namadiluarjenis}}
+            @endif</td>
+         <td><p>Nomor Register : {{$a->reg_no}}</p>
+            <p>Nomor Identitas {{$a->reg_jenisidentitas}} : @if($a->reg_jenisidentitas == "KTP") {{$a->reg_nik}} @else {{$a->reg_nosim}}@endif</p></td>
+<td><p>Kesimpulan Pemeriksaan : @if($a->pem_kesimpulan_pemeriksaan == "Positif")
+<span class="badge badge-danger">{{$a->pem_kesimpulan_pemeriksaan }}</span> 
+@else 
+<span class="badge badge-success">{{$a->pem_kesimpulan_pemeriksaan }}</span> 
+@endif </p></td>
+<td><a href="{{url('validasi/print/'.$a->val_id)}}" class="btn btn-sm btn-primary"><i class="uil-print"></i> Print / Download</a>
+    <a href="{{url('validasi/detail/'.$a->val_id)}}" class="btn btn-sm btn-info"><i class="uil-info-circle"></i> Detail</a>
+    </tr>
+    @endforeach
+        </tbody>
+    </table>
 
                                        
                                 </div>

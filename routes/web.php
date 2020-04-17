@@ -114,7 +114,7 @@ Route::post('pemeriksaansampel/apidel/','PemeriksaanSampelController@apidelete')
 Route::get('validasi','ValidasiController@index')->middleware('auth');
 Route::get('validasi/detail/{pemid}','ValidasiController@show')->middleware('auth');
 Route::post('validasi/verify','ValidasiController@verify')->middleware('auth');
-Route::get('validasi/print/','ValidasiController@print')->middleware('auth');
+Route::get('validasi/print/{id}','ValidasiController@print')->middleware('auth');
 
 
 Route::get('validasi/edit/{id}','ValidasiController@edit')->middleware('auth');
@@ -126,3 +126,17 @@ Route::post('validasi/kembalikan','ValidasiController@kembalikanupdate')->middle
 
 Route::get('validasi/delete/{id}','ValidasiController@delete')->middleware('auth');
 Route::post('validasi/apidel/','ValidasiController@apidelete')->middleware('auth');
+
+/*
+|--------------------------------------------------------------------------
+| Ekstraksi Sampel dan Importnya Routes
+|--------------------------------------------------------------------------
+|
+*/ 
+
+
+
+Route::get('pelacakan','TracingController@pagetracing')->middleware('auth');
+Route::post('pelacakan/sampel/','TracingController@tracingsampel')->middleware('auth');
+Route::post('pelacakan/register/','TracingController@tracingregister')->middleware('auth');
+Route::get('pelacakan/print/','TracingController@print')->middleware('auth');

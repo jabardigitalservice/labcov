@@ -11,9 +11,12 @@
                             <a href="{{url('validasi/')}}" class="btn btn-xs btn-primary float-left mr-3"><i class="uil-arrow-left"></i></a> <h3 class="header-title  mb-1 mt-0">Detail Status </h3>
                         </div>
                         <div class="col-sm-8 col-xl-6">
-                         <a href="{{url('validasi/verifikasi/'.$show->pem_id)}}" class="btn btn-md btn-info ml-2 float-right"><i class="uil-print"></i> Verifikasi / Setujui Pemeriksaan</a>
+                          @if(is_null($validated))
                        <a href="{{url('validasi/kembalikan/'.$show->pem_id)}}" class="btn btn-md btn-danger float-right"><i class="uil-backward"></i> Kembalikan ke Lab Pemeriksaan</a>
-                        </div>
+                       @else
+                       <a href="{{url('validasi/print/'.$validated->val_id)}}" class="btn btn-sm btn-primary float-right ml-2"><i class="uil-print"></i> Print / Download</a>
+                       @endif
+                      </div>
                     </div>
 
                     <!-- content -->
@@ -164,7 +167,7 @@
           </tbody>
         </table>
         
-       
+       @if(is_null($validated))
 <hr>
 
 <h3 class="header-title mt-2 mb-2">Setujui Pemeriksaan & Print Hasil</h3>
@@ -198,6 +201,7 @@
 </div>
 
   </form>
+  @endif
 <hr>
 <h3 class="header-title mt-2 mb-2">Riwayat Perubahan atau Pengiriman Kembali</h3>
 @if(!empty($notes))

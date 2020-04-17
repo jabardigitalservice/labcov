@@ -31,7 +31,7 @@
       <tr>
         <td>&nbsp;</td>
         <td><center><h4>HASIL PEMERIKSAANTES PRO AKTIF COVID-19<br>
-            No.______/Lap.COV/III/2020</h4></center></td>
+            No.{{$nosurat}}/Lap.COV/{{$bulansurat}}/2020</h4></center></td>
         <td>&nbsp;</td>
       </tr>
       <tr>
@@ -44,38 +44,38 @@
     <table width="100%" style="border: solid 1px #000; width:100%;   border-collapse: collapse;">
         <tr>
           <td><b>Nama Pasien</b></td>
-          <td>:<u> {{$namapasien}}</u></td>
+          <td>: {{$namapasien}}</td>
         </tr>
         <tr>
             <td width="50%"><b>Jenis Kelamin</b></td>
-            <td width="50%">:<u> {{$jk}}</u></td>
+            <td width="50%">: {{$jk}}</td>
           </tr>
           <tr>
             <td width="50%"><b>Tanggal Lahir / Umur</b></td>
-            <td width="50%">: <u>{{$ttl}}</u></td>
+            <td width="50%">: {{$ttl}}</td>
           </tr>
           <tr>
             <td width="50%"><b>Nomor Registrasi Lab</b></td>
-            <td width="50%">: <u>{{$noreg}}</u></td>
+            <td width="50%">: {{$noreg}}</td>
           </tr>
       </table>
       <br><br>
       <table width="100%" style="border: solid 1px #000; width:100%;   border-collapse: collapse;">
         <tr>
           <td width="50%"><b>Bahan Pemeriksa</b></td>
-          <td width="50%">: <u>{{$bp}}</u></td>
+          <td width="50%">: {{$bp}}</td>
         </tr>
         <tr>
             <td width="50%"><b>Tanggal Terima Sampel</b></td>
-            <td width="50%">: <u>{{$tanggal}}</u></td>
+            <td width="50%">: {{$tanggal}}</td>
           </tr>
           <tr>
             <td width="50%"><b>Metode</b></td>
-            <td width="50%">: <u>{{$metode}}</u></td>
+            <td width="50%">: {{$metode}}</td>
           </tr>
           <tr>
             <td width="50%"><b>Nomor Sampel</b></td>
-            <td width="50%">: <u>{{$kodesampel}}</u></td>
+            <td width="50%">: {{$kodesampel}}</td>
           </tr>
       </table>
       <br>
@@ -97,7 +97,7 @@
       <table width="100%" style="width:100%" >
         <tr>
           <td  width="50%"></td> 
-          <td  width="50%" align="center">Bandung, 28  September 2020<br><br><br><br><br><br><br><br>
+          <td  width="50%" align="center">Bandung, {{$tanggalsurat}}<br><br><br><br><br><br><br><br>
         <u>{{$nama}}</u><br>{{$nip}}</td>
         </tr>
         <tr>
