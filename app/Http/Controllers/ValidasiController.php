@@ -137,7 +137,7 @@ $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC'
          'tanggalsurat' =>  $date->isoFormat('D MMMM Y'),   // dimanche 22 mars 2020 17:45, 
         ];
         
-    $pdf = PDF::loadView('validasi.pdf_view', $data)->save('surat-keterangan-hasil'.$changeregstatus->reg_no.'.pdf');
+    $pdf = PDF::loadView('validasi.pdf_view', $data)->save('surat-keterangan-hasil-'.$changeregstatus->reg_no.'.pdf');
     $insert->put('val_file','surat-keterangan-hasil'.$changeregstatus->reg_no.'.pdf');
     $insert->put('val_status', 2);
 
