@@ -90,7 +90,7 @@
 <tr>
 <td width="40%"><b>Jenis Kelamin</b></td>
 <td width="60%"><p>{{$register->reg_kelamin}}</p>
-@if(!is_null($register->hamil_pasca))
+@if(isset($register->hamil_pasca))
 <p>{{$register->reg_hamil_pasca}}</p>
 @endif</td>
 </tr>
@@ -108,6 +108,7 @@
                      
 </div>
 </div>
+@if(isset($sampel))
 <hr>
 <h3 class="header-title mt-2 mb-2">Sampel Pasien</h3>
        <table class="table">
@@ -158,58 +159,76 @@
             @endforeach
           </tbody>
         </table>
+@else
+<span class="badge badge-danger">Belum ada sampel yang dimasukan untuk register ini</span>
+@endif
+@if(isset($ekstraksisampel))
 <hr>
 <h3 class="header-title mt-2 mb-2">Ekstraksi Sampel</h3>
 <table class="table">
     <tbody>
     <tr>
     <td width="40%"><b>Tanggal mulai ekstraksi</b></td>
-    <td width="60%">{{$register->eks_tanggal_mulai_ekstraksi }}</td>
+    <td width="60%">{{$ekstraksisampel->eks_tanggal_mulai_ekstraksi }}</td>
     </tr>
     <tr>
     <td width="40%"><b>Jam mulai ekstraksi</b></td>
-    <td width="60%">{{$register->eks_jam_mulai_ekstraksi}}</td>
+    <td width="60%">{{$ekstraksisampel->eks_jam_mulai_ekstraksi}}</td>
     </tr>
     <tr>
       <tr>
         <td width="40%"><b>Dikirim ke Lab</b></td>
         <td width="60%">
-        @if(!is_null($register->eks_dikirim_ke_lab))
-        {{$register->eks_dikirim_ke_lab}}
+        @if(isset($ekstraksisampel->eks_dikirim_ke_lab))
+        {{$ekstraksisampel->eks_dikirim_ke_lab}}
         @else
-        {{$register->eks_nama_lab_lain }}
+        {{$ekstraksisampel->eks_nama_lab_lain }}
         @endif</td>
       </tr>
     </tbody>
     </table>     
-    
+@else
+<span class="badge badge-danger">Sampel belum diperiksa oleh Lab Ekstraksi</span>
+@endif
+@if(isset($pemeriksaansampel))
 <hr>
 <h3 class="header-title mt-2 mb-2">Pemeriksaan Realtime PCR</h3>
 <table class="table">
     <tbody>
     <tr>
     <td width="40%"><b>Tanggal Mulai Pemeriksaan</b></td>
-    <td width="60%">{{$register->pem_tanggal_mulai_pemeriksaan}}</td>
+    <td width="60%">{{$$pemeriksaansampel->pem_tanggal_mulai_pemeriksaan}}</td>
     </tr>
     <tr>
     <td width="40%"><b>Jam mulai ekstraksi</b></td>
-    <td width="60%">{{$register->pem_jam_mulai_pemeriksaan}}</td>
+    <td width="60%">{{$$pemeriksaansampel->pem_jam_mulai_pcr}}</td>
     </tr>
     
     </tbody>
-    </table>                
-
+    </table>     
+  @else
+  <span class="badge badge-danger">Sampel belum diperiksa oleh Pemeriksa Sampel</span>
+@endif
+    @if(isset($validasi))
     <hr>
     <h3 class="header-title mt-2 mb-2">Keluar Hasil</h3>
     <table class="table">
         <tbody>
         <tr>
         <td width="40%"><b>Kesimpulan pemeriksaan</b></td>
-        <td width="60%">{{$register->pem_kesimpulan_pemeriksaan}}</td>
+        <td width="60%">
+          @if($pemeriksaansampel->pem_kesimpulan_pemeriksaan = "Positif")
+         <span class="badge badge-danger">{{$pemeriksaansampel->pem_kesimpulan_pemeriksaan}}</span>
+        @else
+        <span class="badge badge-success">{{$pemeriksaansampel->pem_kesimpulan_pemeriksaan}}</span>
+      @endif</td>
         </tr>
         
         </tbody>
         </table>     
+        @else
+        <span class="badge badge-danger">Hasil belum keluar</span>
+        @endif
                                 </div>
                             </div>
                         </div>

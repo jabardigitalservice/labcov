@@ -34,13 +34,14 @@ class ValidasiController extends Controller
     }
 
     public function show($id){
+        
+       $validated = Validasi::where('val_id',$id)->first();
         $show =  PemeriksaanSampel::join('sampel','sampel.sam_id','=','pemeriksaansampel.pem_samid')
         ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
         ->join('register','register.reg_no','=','pemeriksaansampel.pem_noreg')
         ->select('pemeriksaansampel.*','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
-       ->where('pemeriksaansampel.pem_id',$id)->first();
-       $validated = Validasi::where('val_pemid',$id)->first();
-       $notes = Notes::where('note_item_id',$show->pem_id)->where('note_item_type',2)->orderBy('created_at','desc')->get();
+       ->where('pemeriksaansampel.pem_id',$validated->val_pemid)->first();
+       $notes = Notes::where('note_item_id',$validated->val_pemid)->where('note_item_type',2)->orderBy('created_at','desc')->get();
        return view('validasi.show')->with(compact('show','notes','validated'));
     }
 
