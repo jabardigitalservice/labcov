@@ -96,6 +96,11 @@ Route::post('pemeriksaansampel/update','PemeriksaanSampelController@update')->mi
 Route::get('pemeriksaansampel/kembalikan/{id}','PemeriksaanSampelController@return')->middleware('auth');
 Route::post('pemeriksaansampel/kembalikan','PemeriksaanSampelController@returnupdate')->middleware('auth');
 
+
+Route::get('pemeriksaansampel/periksaulang/{id}','PemeriksaanSampelController@periksakembali')->middleware('auth');
+Route::get('pemeriksaansampel/pemeriksaandikembalikan','PemeriksaanSampelController@pemeriksaandikembalikan')->middleware('auth');
+Route::post('pemeriksaansampel/periksaulang','PemeriksaanSampelController@kirimulang')->middleware('auth');
+
 Route::get('pemeriksaansampel/delete/{id}','PemeriksaanSampelController@delete')->middleware('auth');
 Route::post('pemeriksaansampel/apidel/','PemeriksaanSampelController@apidelete')->middleware('auth');
 
@@ -108,17 +113,16 @@ Route::post('pemeriksaansampel/apidel/','PemeriksaanSampelController@apidelete')
 
 Route::get('validasi','ValidasiController@index')->middleware('auth');
 Route::get('validasi/detail/{pemid}','ValidasiController@show')->middleware('auth');
-Route::get('validasi/periksa','ValidasiController@create')->middleware('auth');
-Route::get('validasi/print/doc/{pemid}','ValidasiController@create')->middleware('auth');
-Route::post('validasi/print/bulk/','ValidasiController@create')->middleware('auth');
+Route::post('validasi/verify','ValidasiController@verify')->middleware('auth');
+Route::get('validasi/print/','ValidasiController@print')->middleware('auth');
 
 
 Route::get('validasi/edit/{id}','ValidasiController@edit')->middleware('auth');
 Route::post('validasi/update','ValidasiController@update')->middleware('auth');
 
 
-Route::get('validasi/kembalikan/{id}','ValidasiController@return')->middleware('auth');
-Route::post('validasi/kembalikan','ValidasiController@returnupdate')->middleware('auth');
+Route::get('validasi/kembalikan/{id}','ValidasiController@kembalikan')->middleware('auth');
+Route::post('validasi/kembalikan','ValidasiController@kembalikanupdate')->middleware('auth');
 
 Route::get('validasi/delete/{id}','ValidasiController@delete')->middleware('auth');
 Route::post('validasi/apidel/','ValidasiController@apidelete')->middleware('auth');

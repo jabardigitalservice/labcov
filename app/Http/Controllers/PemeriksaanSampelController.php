@@ -255,4 +255,82 @@ class PemeriksaanSampelController extends Controller
            return redirect('pemeriksaansampel');
          // return $request->all();
     }
+
+    public function pemeriksaandikembalikan(){
+        $pemdikembalikan = PemeriksaanSampel::join('sampel','sampel.sam_id','=','pemeriksaansampel.pem_samid')
+        ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
+        ->select('pemeriksaansampel.*','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis')
+       ->where('pemeriksaansampel.pem_status',99)->get();
+        return view('pemeriksaan.pemeriksaandikembalikan')->with(compact('pemdikembalikan'));
+    }
+
+    public function periksakembali($id){
+        $edit = PemeriksaanSampel::join('sampel','sampel.sam_id','=','pemeriksaansampel.pem_samid')
+        ->join('pengambilansampel','pengambilansampel.pen_id','=','pemeriksaansampel.pem_penid')
+        ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
+        ->select('pemeriksaansampel.*','ekstraksisampel.eks_operator_ekstraksi',
+        'ekstraksisampel.eks_tanggal_mulai_ekstraksi',
+        'ekstraksisampel.eks_metode_ekstraksi',
+        'ekstraksisampel.eks_nama_kit_ekstraksi',
+        'ekstraksisampel.eks_jam_mulai_ekstraksi',
+        'sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','pengambilansampel.pen_nomor_ekstraksi')
+        ->where('pemeriksaansampel.pem_id',$id)->first();
+
+        return view('pemeriksaan.periksakembali')->with(compact('edit'));
+    }
+
+    public function kirimulang(Request $request){
+        $update = PemeriksaanSampel::where('pem_id',$request->pem_id)->first();
+        $insert = collect($request->all());
+        $update->pem_status = 1;
+        $changestatusam = Sampel::where('sam_id',$update->pem_samid)->first();
+        $changestatusam->sam_statussam = 3;
+        $changepenstatus = Ekstraksi::where('eks_id',$update->pem_eksid)->first();
+
+        if(!is_null($changepenstatus->eks_noreg)){
+            $changeregstatus = RegisterPasien::where('reg_no',$update->pem_noreg)->first();
+            $changeregstatus->reg_statusreg = 4;
+            $changeregstatus->update();
+          }
+
+        $notes = new Notes;
+        $notes->note_isi = $request->note_isi."<br> Pengubahan Hasil Pemeriksaan ID : ".$request->pem_id." sesuai permintaan validator Pada ".Carbon::now();
+        $notes->note_item_id  = $request->note_item_id;
+        $notes->note_item_type = $request->note_item_type;
+        $notes->note_userid  = $request->note_userid;
+
+        if ($request->file('grafik') == '') {
+        } else {
+            $file = $request->file('grafik');
+            $fileArray = ['image' => $file];
+            $rules = ['image' => 'mimes:jpeg,jpg,png,gif|required|max:1000000'];
+            $validator = Validator::make($fileArray, $rules);
+            if ($validator->fails()) {
+                // Redirect or return json to frontend with a helpful message to inform the user
+                // that the provided file was not an adequate type
+
+               notify()->warning('File yang anda unggah bukan sebuah file gambar');
+
+                return redirect()->back();
+            } else {
+                // Store the File Now
+                // read image from temporary file
+                $filethumb = time().'Grafik_'.$request->pem_penid.'_'.$file->getClientOriginalName();
+                Image::make($file)->save('grafik/'.$filethumb);
+                $insert->put('pem_grafik', 'grafik/'.$filethumb);
+            }
+        }
+
+
+     try{
+          $update->update($insert->all());
+          $changestatusam->update();
+          $notes->save();
+                }catch(QE $e){  return $e; } //show db error message
+                 
+       notify()->success('Pemeriksaan Sampel telah sukses diubah !');
+         return redirect('pemeriksaansampel');
+       // return $request->all();
+
+    }
 }
