@@ -75,7 +75,7 @@
                 @else 
                  <span class="badge badge-success">{{$a->pem_kesimpulan_pemeriksaan }}</span> 
                 @endif </p></td>
-              <td><a href="{{url('validasi/detail/'.$a->pem_id)}}" class="btn btn-sm btn-primary"><i class="uil-eye"></i>Detail</a>
+              <td><a href="{{url('validasi/verify/'.$a->pem_id)}}" class="btn btn-sm btn-primary"><i class="uil-eye"></i>Detail</a>
                                         </tr>
                                         @endforeach
                                             </tbody>

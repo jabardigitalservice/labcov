@@ -168,6 +168,10 @@
 <table class="table">
     <tbody>
     <tr>
+    <td width="40%"><b>Sampel yang di ekstraksi</b></td>
+    <td width="60%"><span class="badge badge-primary">{{$ekstraksisampel->sam_barcodenomor_sampel}}</span></td>
+    </tr>
+    <tr>
     <td width="40%"><b>Tanggal mulai ekstraksi</b></td>
     <td width="60%">{{$ekstraksisampel->eks_tanggal_mulai_ekstraksi }}</td>
     </tr>
@@ -197,11 +201,11 @@
     <tbody>
     <tr>
     <td width="40%"><b>Tanggal Mulai Pemeriksaan</b></td>
-    <td width="60%">{{$$pemeriksaansampel->pem_tanggal_mulai_pemeriksaan}}</td>
+    <td width="60%">{{$pemeriksaansampel->pem_tanggal_mulai_pemeriksaan}}</td>
     </tr>
     <tr>
     <td width="40%"><b>Jam mulai ekstraksi</b></td>
-    <td width="60%">{{$$pemeriksaansampel->pem_jam_mulai_pcr}}</td>
+    <td width="60%">{{$pemeriksaansampel->pem_jam_mulai_pcr}}</td>
     </tr>
     
     </tbody>
@@ -217,7 +221,7 @@
         <tr>
         <td width="40%"><b>Kesimpulan pemeriksaan</b></td>
         <td width="60%">
-          @if($pemeriksaansampel->pem_kesimpulan_pemeriksaan = "Positif")
+          @if($pemeriksaansampel->pem_kesimpulan_pemeriksaan == "Positif")
          <span class="badge badge-danger">{{$pemeriksaansampel->pem_kesimpulan_pemeriksaan}}</span>
         @else
         <span class="badge badge-success">{{$pemeriksaansampel->pem_kesimpulan_pemeriksaan}}</span>

@@ -108,7 +108,8 @@ Route::post('pemeriksaansampel/periksaulang','PemeriksaanSampelController@kirimu
 */ 
 
 Route::get('validasi','ValidasiController@index')->middleware('auth');
-Route::get('validasi/detail/{pemid}','ValidasiController@show')->middleware('auth');
+Route::get('validasi/detail/{pemid}','ValidasiController@showvalidated')->middleware('auth');
+Route::get('validasi/verify/{pemid}','ValidasiController@show')->middleware('auth');
 Route::post('validasi/verify','ValidasiController@verify')->middleware('auth');
 Route::get('validasi/print/{id}','ValidasiController@print')->middleware('auth');
 

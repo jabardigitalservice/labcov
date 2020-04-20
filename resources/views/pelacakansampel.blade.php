@@ -96,7 +96,7 @@
     </tbody>
     </table>     
 @else
-<span class="badge badge-danger">Sampel belum diperiksa oleh Lab Ekstraksi</span>
+<span class="badge badge-danger">Sampel belum atau tidak diperiksa oleh Lab Ekstraksi</span>
 @endif
 @if(isset($pemeriksaansampel))
 <hr>
@@ -115,7 +115,7 @@
     </tbody>
     </table>     
   @else
-  <span class="badge badge-danger">Sampel belum diperiksa oleh Pemeriksa Sampel</span>
+  <span class="badge badge-danger">Sampel belum atau tidak diperiksa oleh Pemeriksa Sampel</span>
 @endif
     @if(isset($validasi))
     <hr>
@@ -124,7 +124,7 @@
         <tbody>
         <tr>
         <td width="40%"><b>Kesimpulan pemeriksaan</b></td>
-        <td width="60%">  @if($pemeriksaansampel->pem_kesimpulan_pemeriksaan = "Positif")
+        <td width="60%">  @if($pemeriksaansampel->pem_kesimpulan_pemeriksaan == "Positif")
           <span class="badge badge-danger">{{$pemeriksaansampel->pem_kesimpulan_pemeriksaan}}</span>
          @else
          <span class="badge badge-success">{{$pemeriksaansampel->pem_kesimpulan_pemeriksaan}}</span>
@@ -134,7 +134,7 @@
         </tbody>
         </table>     
         @else
-        <span class="badge badge-danger">Hasil belum keluar</span>
+        <span class="badge badge-danger">Hasil belum atau tidak keluar</span>
         @endif
                                 </div>
                             </div>

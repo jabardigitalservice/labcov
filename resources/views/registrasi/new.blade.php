@@ -36,7 +36,7 @@
     <div class="p-3">
         <div id="sw-default-step-1">
   <div class="form-group row mt-4">
-      <label class="col-md-2">Nomor Registrasi</label>
+      <label class="col-md-2">Nomor Registrasi <span style="color:red;">*</span></label>
       <div class="col-md-6">
      <input class="multisteps-form__input form-control" type="text" name="reg_no" placeholder="Nomor Registrasi" required/>
       </div>
