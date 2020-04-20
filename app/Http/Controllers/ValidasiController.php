@@ -23,13 +23,13 @@ class ValidasiController extends Controller
         $belum_validasi = PemeriksaanSampel::join('sampel','sampel.sam_id','=','pemeriksaansampel.pem_samid')
         ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
         ->join('register','register.reg_no','=','ekstraksisampel.eks_noreg')
-        ->select('pemeriksaansampel.*','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
+        ->select('pemeriksaansampel.*','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no','register.reg_jenisidentitas','register.reg_nosim')
        ->where('pemeriksaansampel.pem_status',1)->get();
 
        $validasi = Validasi::join('sampel','sampel.sam_id','=','validasi.val_samid')
        ->join('pemeriksaansampel','pemeriksaansampel.pem_id','=','validasi.val_pemid')
        ->join('register','register.reg_no','=','validasi.val_noreg')
-       ->select('validasi.*','pemeriksaansampel.*','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
+       ->select('validasi.*','pemeriksaansampel.*','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no','register.reg_jenisidentitas','register.reg_nosim')
       ->where('validasi.val_status',2)->get();
        return view('validasi.index')->with(compact('validasi','belum_validasi'));
     }
