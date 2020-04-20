@@ -40,10 +40,12 @@ class ValidasiController extends Controller
         ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
         ->join('register','register.reg_no','=','pemeriksaansampel.pem_noreg')
         ->select('pemeriksaansampel.*','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
-       ->where('pemeriksaansampel.pem_id',$validated->val_pemid)->first();
-       $notes = Notes::where('note_item_id',$validated->val_pemid)->where('note_item_type',2)->orderBy('created_at','desc')->get();
+       ->where('pemeriksaansampel.pem_id',$id)->first();
+       $notes = Notes::where('note_item_id',$id)->where('note_item_type',2)->orderBy('created_at','desc')->get();
        return view('validasi.show')->with(compact('show','notes','validated'));
     }
+
+ 
 
     public function print($id){
         $validasipdf = Validasi::where('val_id',$id)->first();
@@ -138,8 +140,8 @@ $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC'
          'tanggalsurat' =>  $date->isoFormat('D MMMM Y'),   // dimanche 22 mars 2020 17:45, 
         ];
         
-    $pdf = PDF::loadView('validasi.pdf_view', $data)->save('surat-keterangan-hasil-'.$changeregstatus->reg_no.'.pdf');
-    $insert->put('val_file','surat-keterangan-hasil'.$changeregstatus->reg_no.'.pdf');
+    $pdf = PDF::loadView('validasi.pdf_view', $data)->save('pdf/surat-keterangan-hasil-'.$changeregstatus->reg_no.'.pdf');
+    $insert->put('val_file','pdf/surat-keterangan-hasil-'.$changeregstatus->reg_no.'.pdf');
     $insert->put('val_status', 2);
 
     try{

@@ -196,7 +196,7 @@
 
   <div class="form-group row mt-4">
     <div class="col-md-12">
-<button class="btn btn-md btn-primary" type="submit">Kembalikan</button>
+<button class="btn btn-md btn-primary" type="submit">Validasi</button>
     </div>
 </div>
 
