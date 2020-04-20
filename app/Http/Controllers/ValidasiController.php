@@ -25,6 +25,7 @@ class ValidasiController extends Controller
         ->join('register','register.reg_no','=','ekstraksisampel.eks_noreg')
         ->select('pemeriksaansampel.*','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
        ->where('pemeriksaansampel.pem_status',1)->get();
+
        $validasi = Validasi::join('sampel','sampel.sam_id','=','validasi.val_samid')
        ->join('pemeriksaansampel','pemeriksaansampel.pem_id','=','validasi.val_pemid')
        ->join('register','register.reg_no','=','validasi.val_noreg')
@@ -75,16 +76,16 @@ class ValidasiController extends Controller
      $jenis = "Tracheal Aspirate";
     }
     else if($sampel->sam_jenis_sampel == 5){
-     $jenis = " Nasal Wash";
+     $jenis = "Nasal Wash";
     }
     else if($sampel->sam_jenis_sampel == 6){
-    $jenis = " Jaringan Biopsi/Otopsi";}
+    $jenis = "Jaringan Biopsi/Otopsi";}
 
     else if($sampel->sam_jenis_sampel == 7){
-    $jenis = " Serum Akut (kurang dari 7 hari demam)";
+    $jenis = "Serum Akut (kurang dari 7 hari demam)";
     }
     else if($sampel->sam_jenis_sampel == 8){
-    $jenis = " Serum konvalesen (2-3 minggu demam)";
+    $jenis = "Serum konvalesen (2-3 minggu demam)";
     }
     else if($sampel->sam_jenis_sampel == 12){
     $jenis = "Jenis Sampel Lainnya : ".$sampel->sam_namadiluarjenis;
@@ -100,7 +101,7 @@ class ValidasiController extends Controller
         notify()->warning('TIDAK BISA VERIFIKASI, Tidak ada informasi pasien / belum di tambahkan register!');
         return redirect('validasi');
       }
-if($request->val_ttd = 1) {
+if($request->val_ttd == 1) {
     $nama = "dr. RYAN B. RISTANDI, Sp.PK., MMRS";
     $nip = "NIP. 19820507 200902 1 004";
 }else {

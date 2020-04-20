@@ -115,64 +115,64 @@
  <input type="hidden" name="eks_id" value="{{$edit->eks_id}}">
  <input type="hidden" name="oldsamid" value="{{$edit->eks_samid}}">
     <div class="form-group row mt-4">
-      <label class="col-md-2">Tanggal penerimaan sampel</label>
+      <label class="col-md-2">Tanggal penerimaan sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" id="tglpenerimaansampel" name="eks_tanggal_penerimaan_sampel" value="{{$edit->eks_tanggal_penerimaan_sampel}}"/>
+        <input class="form-control" type="text" id="tglpenerimaansampel" name="eks_tanggal_penerimaan_sampel" value="{{$edit->eks_tanggal_penerimaan_sampel}}" required/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam penerimaan sampem</label>
+      <label class="col-md-2" >Jam penerimaan sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" name="eks_jam_penerimaan_sampel" value="{{$edit->eks_jam_penerimaan_sampel}}"/>
+        <input class="form-control" type="text" name="eks_jam_penerimaan_sampel" value="{{$edit->eks_jam_penerimaan_sampel}}" required/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Petugas penerima sampel</label>
+      <label class="col-md-2" >Petugas penerima sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" name="eks_petugas_penerima_sampel" value="{{$edit->eks_petugas_penerima_sampel}}"/>
+        <input class="form-control" type="text" name="eks_petugas_penerima_sampel" value="{{$edit->eks_petugas_penerima_sampel}}" required/>
       </div>
     </div>
     
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Operator ekstraksi</label>
+      <label class="col-md-2" >Operator ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="eks_operator_ekstraksi" value="{{$edit->eks_operator_ekstraksi}}"/>
+     <input class="form-control" type="text" name="eks_operator_ekstraksi" value="{{$edit->eks_operator_ekstraksi}}" required/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2">Tanggal mulai ekstraksi</label>
+      <label class="col-md-2">Tanggal mulai ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" id="tglmulaiekstraksi" name="eks_tanggal_mulai_ekstraksi" value="{{$edit->eks_tanggal_mulai_ekstraksi}}"/>
+        <input class="form-control" type="text" id="tglmulaiekstraksi" name="eks_tanggal_mulai_ekstraksi" value="{{$edit->eks_tanggal_mulai_ekstraksi}}" required/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam mulai ekstraksi</label>
+      <label class="col-md-2" >Jam mulai ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" name="eks_jam_mulai_ekstraksi" value="{{$edit->eks_jam_mulai_ekstraksi}}"/>
+        <input class="form-control" type="text" name="eks_jam_mulai_ekstraksi" value="{{$edit->eks_jam_mulai_ekstraksi}}" required/>
       </div>
     </div>
     
     
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Metode ekstraksi</label>
+      <label class="col-md-2" >Metode ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="eks_metode_ekstraksi" value="{{$edit->eks_metode_ekstraksi}}"/>
+     <input class="form-control" type="text" name="eks_metode_ekstraksi" value="{{$edit->eks_metode_ekstraksi}}" required/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Nama kit ekstraksi </label>
+      <label class="col-md-2" >Nama kit ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="eks_nama_kit_ekstraksi" value="{{$edit->eks_nama_kit_ekstraksi}}"/>
+     <input class="form-control" type="text" name="eks_nama_kit_ekstraksi" value="{{$edit->eks_nama_kit_ekstraksi}}" required/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Dikirim ke Lab </label>
+      <label class="col-md-2" >Dikirim ke Lab <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-check-input" type="radio" name="eks_dikirim_ke_lab" value="Unpad" @if($edit->eks_dikirim_ke_lab == "Unpad") checked @endif><label>Unpad</label>
+        <input class="form-check-input" type="radio" name="eks_dikirim_ke_lab" value="Unpad" @if($edit->eks_dikirim_ke_lab == "Unpad") checked @endif required><label>Unpad</label>
         <br>
         <input class="form-check-input" type="radio" name="eks_dikirim_ke_lab" value="LABKES" @if($edit->eks_dikirim_ke_lab == "LABKES") checked @endif><label>LABKES</label>
         <br>
@@ -182,23 +182,23 @@
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Nama pengirim RNA</label>
+      <label class="col-md-2" >Nama pengirim RNA <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="eks_nama_pengirim_rna" value="{{$edit->eks_nama_pengirim_rna}}"/>
+     <input class="form-control" type="text" name="eks_nama_pengirim_rna" value="{{$edit->eks_nama_pengirim_rna}}" required/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Tanggal pengiriman RNA</label>
+      <label class="col-md-2" >Tanggal pengiriman RNA <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" id="tanggalpengirimanrna" name="eks_tanggal_pengiriman_rna" value="{{$edit->eks_tanggal_pengiriman_rna}}"/>
+     <input class="form-control" type="text" id="tanggalpengirimanrna" name="eks_tanggal_pengiriman_rna" value="{{$edit->eks_tanggal_pengiriman_rna}}" required/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam pengiriman RNA</label>
+      <label class="col-md-2" >Jam pengiriman RNA <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="eks_jam_pengiriman_rna" value="{{$edit->eks_jam_pengiriman_rna}}"/>
+     <input class="form-control" type="text" name="eks_jam_pengiriman_rna" value="{{$edit->eks_jam_pengiriman_rna}}" required/>
       </div>
     </div>
 

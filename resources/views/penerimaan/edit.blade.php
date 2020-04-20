@@ -29,10 +29,10 @@
     
     <input type="hidden" name="pen_id" value="{{$show->pen_id}}">
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Sampel Diambil</label>
+      <label class="col-md-2" >Sampel Diambil <span style="color:red">*</span></label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="sampeldiambilya" name="pen_sampel_diambil" value="1" @if($show->pen_sampel_diambil == 1) checked @endif>
+<input class="form-check-input" type="radio" id="sampeldiambilya" name="pen_sampel_diambil" value="1" @if($show->pen_sampel_diambil == 1) checked @endif required>
 <label class="form-check-label" for="sampeldiambilya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
@@ -43,10 +43,10 @@
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Sampel Diterima</label>
+      <label class="col-md-2" >Sampel Diterima <span style="color:red">*</span></label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="sampelditerimaya" name="pen_sampel_diterima" value="1" @if($show->pen_sampel_diterima == 1) checked @endif>
+<input class="form-check-input" type="radio" id="sampelditerimaya" name="pen_sampel_diterima" value="1" @if($show->pen_sampel_diterima == 1) checked @endif required>
 <label class="form-check-label" for="sampelditerimaya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
@@ -57,10 +57,10 @@
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Sampel Diambil dari Fasyankes Rujukan</label>
+      <label class="col-md-2" >Sampel Diambil dari Fasyankes Rujukan <span style="color:red">*</span></label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="fasyankesya" name="pen_sampel_diterima_dari_fas_rujukan" value="1" @if($show->pen_sampel_diterima_dari_fas_rujukan == 1) checked @endif>
+<input class="form-check-input" type="radio" id="fasyankesya" name="pen_sampel_diterima_dari_fas_rujukan" value="1" @if($show->pen_sampel_diterima_dari_fas_rujukan == 1) checked @endif required>
 <label class="form-check-label" for="fasyankesya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
@@ -72,7 +72,7 @@
     <div class="form-group row mt-4">
       <label class="col-md-2" >Petugas Penerima Sampel <small>Isi bila diterima dari fasyankes rujukan</small></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="pen_penerima_sampel" value="{{$show->pen_penerima_sampel}}"/>
+     <input class="form-control" type="text" name="pen_penerima_sampel" value="{{$show->pen_penerima_sampel}}" required/>
       </div>
     </div>
     
@@ -84,13 +84,13 @@
   </div>
   
   <div class="form-group row">
-      <label class="col-md-2 col-form-label" >Nomor Ekstraksi</label>
+      <label class="col-md-2 col-form-label" >Nomor Ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-10">
-      <input class="form-control" type="text" name="pen_nomor_ekstraksi" value="{{$show->pen_nomor_ekstraksi}}"/>
+      <input class="form-control" type="text" name="pen_nomor_ekstraksi" value="{{$show->pen_nomor_ekstraksi}}" required/>
       </div>
   </div>
     <hr>
-    <h4 class="mb-1 mt-0">Sampel</h4>
+    <h4 class="mb-1 mt-0">Sampel <span style="color:red">*</span></h4>
     <p>Dibawah ini adalah sampel yang diambil atau diterima, klik tambahkan sesuai dengan banyaknya sampel</p>
     <button class="btn btn-sm btn-primary" id="tambah">Tambah Sampel</button>
     <table class="table table-striped dt-responsive table-bordered" style="width:100%">
@@ -110,7 +110,7 @@
         <td>
         
     <input type="hidden" name="eks_samid[]" value="{{$s->sam_id}}">
-        <select class="form-control" name="eks_jenis_sampel[]">\
+        <select class="form-control" name="eks_jenis_sampel[]">
       <option value="{{$s->sam_jenis_sampel}}">@if($s->sam_jenis_sampel == 1)
               Usap Nasofaring & Orofaring
               @elseif($s->sam_jenis_sampel == 2)

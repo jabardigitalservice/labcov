@@ -119,21 +119,21 @@
  <input type="hidden" name="eks_nik" value="{{$selected->pen_nik}}">
  <input type="hidden" name="eks_penid" value="{{$selected->pen_id}}">
     <div class="form-group row mt-4">
-      <label class="col-md-2">Tanggal penerimaan sampel</label>
+      <label class="col-md-2">Tanggal penerimaan sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" id="tglpenerimaansampel" name="eks_tanggal_penerimaan_sampel" placeholder="YYYY/MM/DD"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam penerimaan sampel</label>
+      <label class="col-md-2" >Jam penerimaan sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" name="eks_jam_penerimaan_sampel" placeholder="JJ:MM"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Petugas penerima sampel</label>
+      <label class="col-md-2" >Petugas penerima sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" name="eks_petugas_penerima_sampel" placeholder="Petugas penerima sampel"/>
       </div>
@@ -141,20 +141,20 @@
     
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Operator ekstraksi </label>
+      <label class="col-md-2" >Operator ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-6">
      <input class="form-control" type="text" name="eks_operator_ekstraksi" placeholder="Operator ekstraksi"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2">Tanggal mulai ekstraksi</label>
+      <label class="col-md-2">Tanggal mulai ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" id="tglmulaiekstraksi" name="eks_tanggal_mulai_ekstraksi" placeholder="YYYY/MM/DD"/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam mulai ekstraksi</label>
+      <label class="col-md-2" >Jam mulai ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" name="eks_jam_mulai_ekstraksi" placeholder="JJ:MM"/>
       </div>
@@ -162,19 +162,19 @@
     
     
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Metode ekstraksi </label>
+      <label class="col-md-2" >Metode ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-6">
      <input class="form-control" type="text" name="eks_metode_ekstraksi" placeholder="Metode ekstraksi"/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Nama kit ekstraksi </label>
+      <label class="col-md-2" >Nama kit ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-6">
      <input class="form-control" type="text" name="eks_nama_kit_ekstraksi" placeholder="Nama kit ekstraksi"/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Dikirim ke Lab </label>
+      <label class="col-md-2" >Dikirim ke Lab <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-check-input" type="radio" name="eks_dikirim_ke_lab" id="labunpad" value="Unpad" ><label for="labunpad">Unpad</label>
         <br>
@@ -186,21 +186,21 @@
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Nama pengirim RNA</label>
+      <label class="col-md-2" >Nama pengirim RNA <span style="color:red">*</span></label>
       <div class="col-md-6">
      <input class="form-control" type="text" name="eks_nama_pengirim_rna" placeholder="Nama pengirim RNA"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Tanggal pengiriman RNA</label>
+      <label class="col-md-2" >Tanggal pengiriman RNA <span style="color:red">*</span></label>
       <div class="col-md-6">
      <input class="form-control" type="text" id="tanggalpengirimanrna" name="eks_tanggal_pengiriman_rna" placeholder="YYYY/MM/DD"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam pengiriman RNA</label>
+      <label class="col-md-2" >Jam pengiriman RNA <span style="color:red">*</span></label>
       <div class="col-md-6">
      <input class="form-control" type="text" name="eks_jam_pengiriman_rna" placeholder="JJ:MM"/>
       </div>

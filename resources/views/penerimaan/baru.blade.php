@@ -31,11 +31,11 @@
       <label class="col-md-2" >Sampel Diambil</label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="sampeldiambilya" name="pen_sampel_diambil" value="1" @if($pen->pen_sampel_diambil == 1) checked @endif>
+<input class="form-check-input" type="radio" id="sampeldiambilya" name="pen_sampel_diambil" value="1" @if($pen->pen_sampel_diambil == 1) checked @endif required>
 <label class="form-check-label" for="sampeldiambilya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="sampeldiambilno" name="pen_sampel_diambil" value="0"  @if($pen->pen_sampel_diambil  == 0 && !is_null($pen->pen_sampel_diambil)) checked @endif>
+<input class="form-check-input" type="radio" id="sampeldiambilno" name="pen_sampel_diambil" value="0"  @if($pen->pen_sampel_diambil  == 0 && !is_null($pen->pen_sampel_diambil)) checked @endif required>
 <label class="form-check-label" for="sampeldiambilno">Tidak</label>
 </div>
       </div>
@@ -45,11 +45,11 @@
       <label class="col-md-2" >Sampel Diterima</label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="sampel_diterimaya" name="pen_sampel_diterima" value="1" @if($pen->pen_sampel_diterima == 1) checked @endif>
+<input class="form-check-input" type="radio" id="sampel_diterimaya" name="pen_sampel_diterima" value="1" @if($pen->pen_sampel_diterima == 1) checked @endif required>
 <label class="form-check-label" for="sampel_diterimaya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="sampel_diterimano" name="pen_sampel_diterima" value="0" @if($pen->pen_sampel_diterima == 0 && !is_null($pen->pen_sampel_diterima)) checked @endif>
+<input class="form-check-input" type="radio" id="sampel_diterimano" name="pen_sampel_diterima" value="0" @if($pen->pen_sampel_diterima == 0 && !is_null($pen->pen_sampel_diterima)) checked @endif required>
 <label class="form-check-label" for="sampel_diterimano">Tidak</label>
 </div>
       </div>
@@ -59,11 +59,11 @@
       <label class="col-md-2" >Sampel Diambil dari Fasyankes Rujukan</label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="fas_rujukanya" name="pen_sampel_diterima_dari_fas_rujukan" value="1" @if($pen->pen_sampel_diterima_dari_fas_rujukan == 1) checked @endif>
+<input class="form-check-input" type="radio" id="fas_rujukanya" name="pen_sampel_diterima_dari_fas_rujukan" value="1" @if($pen->pen_sampel_diterima_dari_fas_rujukan == 1) checked @endif required>
 <label class="form-check-label" for="fas_rujukanya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="fas_rujukanno" name="pen_sampel_diterima_dari_fas_rujukan" value="0" @if($pen->pen_sampel_diterima_dari_fas_rujukan == 0 && !is_null($pen->pen_sampel_diterima_dari_fas_rujukan)) checked  @endif>
+<input class="form-check-input" type="radio" id="fas_rujukanno" name="pen_sampel_diterima_dari_fas_rujukan" value="0" @if($pen->pen_sampel_diterima_dari_fas_rujukan == 0 && !is_null($pen->pen_sampel_diterima_dari_fas_rujukan)) checked  @endif required>
 <label class="form-check-label" for="fas_rujukanno">Tidak</label>
 </div>
       </div>
@@ -85,7 +85,7 @@
   <div class="form-group row">
       <label class="col-md-2 col-form-label" >Nomor Ekstraksi</label>
       <div class="col-md-10">
-      <input class="form-control" type="text" name="pen_nomor_ekstraksi" value="{{$pen->pen_nomor_ekstraksi}}"/>
+      <input class="form-control" type="text" name="pen_nomor_ekstraksi" value="{{$pen->pen_nomor_ekstraksi}}" required/>
       </div>
   </div>
     <hr>

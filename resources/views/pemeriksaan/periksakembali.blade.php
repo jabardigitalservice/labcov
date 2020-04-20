@@ -64,21 +64,21 @@
  <input type="hidden" name="pem_noreg" value="{{$edit->pem_noreg}}">
  @endif
     <div class="form-group row mt-4">
-      <label class="col-md-2">Tanggal penerimaan sampel</label>
+      <label class="col-md-2">Tanggal penerimaan sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" id="tglpenerimaansampel" name="pem_tanggal_penerimaan_sampel"  value="{{$edit->pem_tanggal_penerimaan_sampel}}"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam penerimaan sampel</label>
+      <label class="col-md-2" >Jam penerimaan sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" name="pem_jam_penerimaan_sampel"  value="{{$edit->pem_jam_penerimaan_sampel}}"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Laboratorium Penerima Sampel</label>
+      <label class="col-md-2" >Laboratorium Penerima Sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-check-input" id="unped" type="radio" name="pem_lab_penerima_sampel" value="Unpad"  @if($edit->pem_lab_penerima_sampel == "Unpad") checked @endif><label for="unped">Unpad</label>
         <br>
@@ -90,7 +90,7 @@
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Petugas penerima sampel RNA</label>
+      <label class="col-md-2" >Petugas penerima sampel RNA <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" name="pem_petugas_penerima_sampel_rna" value="{{$edit->pem_petugas_penerima_sampel_rna}}"/>
       </div>
@@ -98,46 +98,46 @@
     
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Operator real time RPCR </label>
+      <label class="col-md-2" >Operator real time RPCR <span style="color:red">*</span></label>
       <div class="col-md-6">
      <input class="form-control" type="text" name="pem_operator_real_time_pcr" value="{{$edit->pem_operator_real_time_pcr}}"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2">Tanggal mulai pemeriksaan</label>
+      <label class="col-md-2">Tanggal mulai pemeriksaan <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" id="tglmulaipemeriksaan" name="pem_tanggal_mulai_pemeriksaan" value="{{$edit->pem_tanggal_mulai_pemeriksaan}}"/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam mulai PCR</label>
+      <label class="col-md-2" >Jam mulai PCR <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" name="pem_jam_mulai_pcr" value="{{$edit->pem_jam_mulai_pcr}}"/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam selesai PCR</label>
+      <label class="col-md-2" >Jam selesai PCR <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-control" type="text" name="pem_jam_selesai_pcr" value="{{$edit->pem_jam_selesai_pcr}}"/>
       </div>
     </div>
     
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Metode pemeriksaan </label>
+      <label class="col-md-2" >Metode pemeriksaan <span style="color:red">*</span></label>
       <div class="col-md-6">
      <input class="form-control" type="text" name="pem_metode_pemeriksaan" value="{{$edit->pem_metode_pemeriksaan}}"/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Nama kit pemeriksaan </label>
+      <label class="col-md-2" >Nama kit pemeriksaan <span style="color:red">*</span></label>
       <div class="col-md-6">
      <input class="form-control" type="text" name="pem_nama_kit_pemeriksaan" value="{{$edit->pem_nama_kit_pemeriksaan}}"/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Target gen </label>
+      <label class="col-md-2" >Target gen <span style="color:red">*</span></label>
       <div class="col-md-6">
      <input class="form-control" type="text" name="pem_target_gen" value="{{$edit->pem_target_gen}}"/>
       </div>
@@ -145,11 +145,11 @@
 
     
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Hasil Deteksi</label>
+      <label class="col-md-2" >Hasil Deteksi <span style="color:red">*</span></label>
       <div class="col-md-6">
         <div class="input-group">
           <div class="input-group-preppend">
-            <span class="input-group-text">CT Value</span>
+            <span class="input-group-text">CT Value <span style="color:red">*</span></span>
           </div>
           <input class="multisteps-form__input form-control" type="text" name="pem_hasil_deteksi" value="{{$edit->pem_hasil_deteksi}}"/>
       </div>
@@ -157,7 +157,7 @@
   </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Kesimpulan Pemeriksaan</label>
+      <label class="col-md-2" >Kesimpulan Pemeriksaan <span style="color:red">*</span></label>
       <div class="col-md-6">
         <input class="form-check-input"  id="positif" type="radio" name="pem_kesimpulan_pemeriksaan" value="Positif" @if($edit->pem_kesimpulan_pemeriksaan == "Positif") checked @endif><label for="positif">Positif</label>
         <br>

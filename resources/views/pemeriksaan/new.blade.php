@@ -42,25 +42,25 @@
  <input type="hidden" name="pem_penid" value="{{$periksa->pen_id}}">
  <input type="hidden" name="pem_eksid" value="{{$periksa->eks_id}}">
     <div class="form-group row mt-4">
-      <label class="col-md-2">Tanggal penerimaan sampel</label>
+      <label class="col-md-2">Tanggal penerimaan sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" id="tglpenerimaansampel" name="pem_tanggal_penerimaan_sampel" placeholder="YYYY/MM/DD"/>
+        <input class="form-control" type="text" id="tglpenerimaansampel" name="pem_tanggal_penerimaan_sampel" placeholder="YYYY/MM/DD" required/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam penerimaan sampel</label>
+      <label class="col-md-2" >Jam penerimaan sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" name="pem_jam_penerimaan_sampel" placeholder="JJ:MM"/>
+        <input class="form-control" type="text" name="pem_jam_penerimaan_sampel" placeholder="JJ:MM" required/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Laboratorium Penerima Sampel</label>
+      <label class="col-md-2" >Laboratorium Penerima Sampel <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-check-input" id="unped" type="radio" name="pem_lab_penerima_sampel" value="Unpad" ><label for="unped">Unpad</label>
+        <input class="form-check-input" id="unped" type="radio" name="pem_lab_penerima_sampel" value="Unpad" required><label for="unped">Unpad</label>
         <br>
-        <input class="form-check-input" id="labkes" type="radio" name="pem_lab_penerima_sampel" value="LABKES" ><label for="labkes">LABKES</label>
+        <input class="form-check-input" id="labkes" type="radio" name="pem_lab_penerima_sampel" value="LABKES"><label for="labkes">LABKES</label>
         <br>
         <label>Lainnya, sebutkan nama lab <small>kosongkan jika terdapat pilihannya</small></label>
      <input class="form-control" type="text" name="pem_lab_penerima_sampel_lainnya"/>
@@ -68,78 +68,78 @@
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Petugas penerima sampel RNA</label>
+      <label class="col-md-2" >Petugas penerima sampel RNA <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" name="pem_petugas_penerima_sampel_rna" placeholder="Petugas penerima sampel"/>
+        <input class="form-control" type="text" name="pem_petugas_penerima_sampel_rna" placeholder="Petugas penerima sampel" required/>
       </div>
     </div>
     
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Operator rRT-PCR</label>
+      <label class="col-md-2" >Operator rRT-PCR <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="pem_operator_real_time_pcr" placeholder="Operator rRT-PCR"/>
+     <input class="form-control" type="text" name="pem_operator_real_time_pcr" placeholder="Operator rRT-PCR" required/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2">Tanggal mulai pemeriksaan</label>
+      <label class="col-md-2">Tanggal mulai pemeriksaan <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" id="tglmulaipemeriksaan" name="pem_tanggal_mulai_pemeriksaan" placeholder="YYYY/MM/DD"/>
+        <input class="form-control" type="text" id="tglmulaipemeriksaan" name="pem_tanggal_mulai_pemeriksaan" placeholder="YYYY/MM/DD" required/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam mulai rRT-PCR</label>
+      <label class="col-md-2" >Jam mulai rRT-PCR <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" name="pem_jam_mulai_pcr" placeholder="JJ:MM"/>
+        <input class="form-control" type="text" name="pem_jam_mulai_pcr" placeholder="JJ:MM" required/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Jam selesai rRT-PCR</label>
+      <label class="col-md-2" >Jam selesai rRT-PCR <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-control" type="text" name="pem_jam_selesai_pcr" placeholder="JJ:MM"/>
+        <input class="form-control" type="text" name="pem_jam_selesai_pcr" placeholder="JJ:MM" required/>
       </div>
     </div>
     
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Metode pemeriksaan </label>
+      <label class="col-md-2" >Metode pemeriksaan <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="pem_metode_pemeriksaan" placeholder="Metode pemeriksaan"/>
+     <input class="form-control" type="text" name="pem_metode_pemeriksaan" placeholder="Metode pemeriksaan" required/>
       </div>
     </div>
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Nama kit pemeriksaan </label>
+      <label class="col-md-2" >Nama kit pemeriksaan <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="pem_nama_kit_pemeriksaan" placeholder="Nama kit pemeriksaan"/>
+     <input class="form-control" type="text" name="pem_nama_kit_pemeriksaan" placeholder="Nama kit pemeriksaan" required/>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Target gen </label>
+      <label class="col-md-2" >Target gen <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="pem_target_gen" placeholder="Target gen"/>
+     <input class="form-control" type="text" name="pem_target_gen" placeholder="Target gen" required />
       </div>
     </div>
 
     
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Hasil Deteksi</label>
+      <label class="col-md-2" >Hasil Deteksi <span style="color:red">*</span></label>
       <div class="col-md-6">
         <div class="input-group">
           <div class="input-group-preppend">
             <span class="input-group-text">CT Value</span>
           </div>
-          <input class="multisteps-form__input form-control" type="text" name="pem_hasil_deteksi"/>
+          <input class="multisteps-form__input form-control" type="text" name="pem_hasil_deteksi" required />
       </div>
     </div>
   </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Kesimpulan Pemeriksaan</label>
+      <label class="col-md-2" >Kesimpulan Pemeriksaan <span style="color:red">*</span></label>
       <div class="col-md-6">
-        <input class="form-check-input" id="positif" type="radio" name="pem_kesimpulan_pemeriksaan" value="Positif" ><label for="positif">Positif</label>
+        <input class="form-check-input" id="positif" type="radio" name="pem_kesimpulan_pemeriksaan" value="Positif" required><label for="positif">Positif</label>
         <br>
-        <input class="form-check-input" id="negatif" type="radio" name="pem_kesimpulan_pemeriksaan" value="Negatif" ><label for="negatif">Negatif</label>
+        <input class="form-check-input" id="negatif" type="radio" name="pem_kesimpulan_pemeriksaan" value="Negatif"><label for="negatif">Negatif</label>
       </div>
     </div>
 

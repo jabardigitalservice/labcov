@@ -25,28 +25,28 @@
     @csrf
      
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Sampel Diterima</label>
+      <label class="col-md-2" >Sampel Diterima <span style="color:red">*</span></label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" id="diterimaya" type="radio" name="pen_sampel_diterima" value="1" >
+<input class="form-check-input" id="diterimaya" type="radio" name="pen_sampel_diterima" value="1" required>
 <label class="form-check-label" for="diterimaya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" id="diterimano" type="radio" name="pen_sampel_diterima" value="0" >
+<input class="form-check-input" id="diterimano" type="radio" name="pen_sampel_diterima" value="0" required>
 <label class="form-check-label" for="diterimano">Tidak</label>
 </div>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Sampel Diambil dari Fasyankes Rujukan</label>
+      <label class="col-md-2" >Sampel Diambil dari Fasyankes Rujukan <span style="color:red">*</span></label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
-<input class="form-check-input" id="fasyankesya" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="1" >
+<input class="form-check-input" id="fasyankesya" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="1" required>
 <label class="form-check-label" for="fasyankesya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" id="fasyankesno" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="0" >
+<input class="form-check-input" id="fasyankesno" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="0" required>
 <label class="form-check-label" for="fasyankesno">Tidak</label>
 </div>
       </div>
@@ -56,7 +56,7 @@
     <div class="form-group row mt-4">
       <label class="col-md-2" >Petugas Penerima Sampel <small>Isi bila diterima dari fasyankes rujukan</small></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="pen_penerima_sampel " placeholder="Nama Petugas Penerima Sampel"/>
+     <input class="form-control" type="text" name="pen_penerima_sampel " placeholder="Nama Petugas Penerima Sampel" required />
       </div>
     </div>
     
@@ -68,13 +68,13 @@
   </div>
   
   <div class="form-group row">
-      <label class="col-md-2 col-form-label" >Nomor Ekstraksi</label>
+      <label class="col-md-2 col-form-label" >Nomor Ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-10">
-      <input class="form-control" type="text" name="pen_nomor_ekstraksi" placeholder="Nomor Ekstraksi"/>
+      <input class="form-control" type="text" name="pen_nomor_ekstraksi" placeholder="Nomor Ekstraksi" required/>
       </div>
   </div>
     <hr>
-    <h4 class="mb-1 mt-0">Sampel</h4>
+    <h4 class="mb-1 mt-0">Sampel <span style="color:red">*</span></h4>
     <p>Dibawah ini adalah sampel yang diambil atau diterima, klik tambahkan sesuai dengan banyaknya sampel</p>
     <button class="btn btn-sm btn-primary" id="tambah">Tambah Sampel</button>
     <table class="table table-striped dt-responsive table-bordered" style="width:100%">

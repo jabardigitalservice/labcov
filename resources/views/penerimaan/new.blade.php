@@ -29,7 +29,7 @@
  
  <input type="hidden" name="pen_nik" value="{{$selected_reg->reg_nik}}">
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Sampel Diambil</label>
+      <label class="col-md-2" >Sampel Diambil <span style="color:red">*</span></label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
 <input class="form-check-input" type="radio" name="pen_sampel_diambil" value="1" >
@@ -43,7 +43,7 @@
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Sampel Diterima</label>
+      <label class="col-md-2" >Sampel Diterima <span style="color:red">*</span></label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
 <input class="form-check-input" type="radio" name="pen_sampel_diterima" value="1" >
@@ -57,7 +57,7 @@
     </div>
 
     <div class="form-group row mt-4">
-      <label class="col-md-2" >Sampel Diambil dari Fasyankes Rujukan</label>
+      <label class="col-md-2" >Sampel Diambil dari Fasyankes Rujukan <span style="color:red">*</span></label>
       <div class="col-md-6">
       <div class="form-check form-check-inline">
 <input class="form-check-input" type="radio" name="pen_sampel_diterima_dari_fas_rujukan" value="1" >
@@ -86,13 +86,13 @@
   </div>
   
   <div class="form-group row">
-      <label class="col-md-2 col-form-label" >Nomor Ekstraksi</label>
+      <label class="col-md-2 col-form-label" >Nomor Ekstraksi <span style="color:red">*</span></label>
       <div class="col-md-10">
-      <input class="form-control" type="text" name="pen_nomor_ekstraksi" placeholder="Nomor Ekstraksi"/>
+      <input class="form-control" type="text" name="pen_nomor_ekstraksi" placeholder="Nomor Ekstraksi" required/>
       </div>
   </div>
     <hr>
-    <h4 class="mb-1 mt-0">Sampel</h4>
+    <h4 class="mb-1 mt-0">Sampel <span style="color:red">*</span></h4>
     <p>Dibawah ini adalah sampel yang diambil atau diterima, klik tambahkan sesuai dengan banyaknya sampel</p>
     <button class="btn btn-sm btn-primary" id="tambah">Tambah Sampel</button>
     <table class="table table-striped dt-responsive table-bordered" style="width:100%">
