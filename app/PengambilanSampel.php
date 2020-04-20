@@ -37,6 +37,7 @@ class PengambilanSampel extends Model
    'pen_userid',
    'pen_statuspen',
    'pen_nomor_ekstraksi',
+   'pen_rdt',
    'created_at',
    'updated_at'];
 }

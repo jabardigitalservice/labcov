@@ -20,26 +20,31 @@ class PengambilanSampleController extends Controller
      */
     public function index()
     {   
-        $avail_regis = RegisterPasien::where('reg_statusreg','1')->get(); 
         $not_avail_regis = PengambilanSampel::join('sampel','sampel.sam_penid','=','pengambilansampel.pen_id')
         ->select('pengambilansampel.*','sampel.sam_barcodenomor_sampel')
         ->where('pengambilansampel.pen_statuspen',1)->get();
-        $group = $not_avail_regis->groupby('pen_id');
-        return view('penerimaan.index')->with(compact('avail_regis','not_avail_regis','group'));
+
+        $avail_regis = PengambilanSampel::join('sampel','sampel.sam_penid','=','pengambilansampel.pen_id')
+        ->select('pengambilansampel.*','sampel.sam_barcodenomor_sampel')
+        ->where('pengambilansampel.pen_statuspen',0)->get();
+        $group = $avail_regis->groupby('pen_id');
+        
+        $group2 = $not_avail_regis->groupby('pen_id');
+        return view('penerimaan.index')->with(compact('avail_regis','not_avail_regis','group', 'group2'));
      // return $group;
     }
 
-    /**
+    /*
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+    
     public function create($noreg)
     {
         $selected_reg = RegisterPasien::where('reg_no',$noreg)->first();
         return view('penerimaan.new')->with(compact('selected_reg'));
     }
-
+ */
     /*
      * Store a newly created resource in storage.
      * @param  \Illuminate\Http\Request  $request
@@ -121,8 +126,10 @@ class PengambilanSampleController extends Controller
     public function update(Request $request)
     {
         $pen = PengambilanSampel::where('pen_id',$request->pen_id)->first();
+        $pen->pen_statuspen = 1;
         $store = collect($request->all());
         $sampelArray= array();
+        if($request->eks_samid){
         for($i = 0; $i<count($request->eks_samid); $i++){
         $sam = Sampel::where('sam_id',$request->eks_samid[$i])->first();
         $sam->sam_jenis_sampel = $request->eks_jenis_sampel[$i];
@@ -134,31 +141,36 @@ class PengambilanSampleController extends Controller
         $sam->update();
         array_push($sampelArray,$sam->sam_id);
         }
+    }
 
         if($request->sam_jenis_sampel){
             for($i = 0; $i<count($request->sam_jenis_sampel); $i++){
                 $newsam = new Sampel;
-                $newsam->sam_jenis_sampel = $request->jenis_sampel[$i];
+                $newsam->sam_penid = $pen->pen_id;
+                $newsam->sam_noreg = $pen->pen_noreg;
+                $newsam->sam_jenis_sampel = $request->sam_jenis_sampel[$i];
                 $newsam->sam_namadiluarjenis = $request->namadiluarjenis[$i];
                 $newsam->sam_petugas_pengambil_sampel = $request->petugas_pengambil[$i];
                 $newsam->sam_tanggal_sampel = $request->tanggalsampel[$i];
                 $newsam->sam_pukul_sampel = $request->pukulsampel[$i];
-                $newsam->sam_barcodenomor_sampel = $request->nomor_sampel[$i];
+                $newsam->sam_barcodenomor_sampel = $request->nomorsampel[$i];
                 $newsam->save();
                  array_push($sampelArray,$newsam->sam_id);
                  }
         }
        
-       $pasienstatus = RegisterPasien::where('reg_no',$pen->pen_noreg)->first();
-       $pasienstatus->reg_statusreg = 3;
-
+        if(!is_null($pen->pen_noreg)){
+            $pasienstatus = RegisterPasien::where('reg_no',$pen->pen_noreg)->first();
+            $pasienstatus->reg_statusreg = 3;
+            $pasienstatus->update();
+        }
             $store->put('pen_id_sampel',implode(",",$sampelArray));
             try{
             $pen->update($store->all());
                  }catch(QE $e){  return $e; } //show db error message
     
                  notify()->success('Status pengambilan telah sukses diubah !');
-                    return redirect('pengambilansampel');
+                   return redirect('pengambilansampel');
     }
 
     /**
@@ -252,7 +264,7 @@ class PengambilanSampleController extends Controller
         $pen = PengambilanSampel::where('pen_id',$sam->sam_penid)->first();
         if($pen){
             $sampel = Sampel::where('sam_penid',$pen->pen_id)->get();
-            return view('penerimaan.baru')->with(compact('sam','pen','sampel'));
+            return redirect('pengambilansampel/edit/'.$pen->pen_id);
 
         }else {
             
@@ -267,6 +279,7 @@ class PengambilanSampleController extends Controller
 
     }
     }
+    /*
 
     public function savebyscan(Request $request){
         $pen = PengambilanSampel::where('pen_id',$request->pen_id)->first();
@@ -310,4 +323,5 @@ class PengambilanSampleController extends Controller
                     return redirect('pengambilansampel');
         
     }
+    */
 }

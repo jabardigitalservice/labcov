@@ -36,20 +36,7 @@
     <input type="hidden" name="regno" value="{{$selected->pen_noreg}}">
     @endif
     <p><span class="badge badge-info">Pilih sampel untuk dikirimkan ke bagian pemeriksaan sampel</span></p>
-    <!-- <div id="form-group row mt-4">
-      <div class="col-md-3">
-        <input class="form-check-input" type="radio" name="samid" value="0" checked>
-      </div>
-      <div class="col-md-9">
-       <div class="media mb-3">
-           <div class="media-body">
-               <h4 class="mt-0 mb-1 font-size-16">Tidak Pilih Sampel</h4>
-           </div>
-       </div>
-     </div>
-    </div> -->
-    @foreach($selected_sampel as $s)
-    
+    @foreach($selected_sampel as $s)    
     <input type="hidden" name="penid" value="{{$selected->pen_id}}">
  <div id="form-group row">
    <div class="col-md-2">

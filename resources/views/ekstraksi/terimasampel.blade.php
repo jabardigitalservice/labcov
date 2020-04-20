@@ -49,18 +49,6 @@
 <form method="POST" action="{{url('ekstraksi/sampeldikembalikan/pilihulang')}}">
     @csrf
     <p><span class="badge badge-info">Pilih sampel untuk dikirimkan kembali</span> <span class="badge badge-warning">PERHATIAN : Status ini dikirimkan ulang oleh Lab Pemeriksaan, harap periksa kembali pilihan sampel sesuai dengan petunjuk dan alasan pengembalian Lab Pemeriksaan</span></p>
-    <!-- <div id="form-group row mt-4">
-      <div class="col-md-3">
-        <input class="form-check-input" type="radio" name="samid" value="0" checked>
-      </div>
-      <div class="col-md-9">
-       <div class="media mb-3">
-           <div class="media-body">
-               <h4 class="mt-0 mb-1 font-size-16">Tidak Pilih Sampel</h4>
-           </div>
-       </div>
-     </div>
-    </div> -->
     @foreach($selected_sampel as $s)
  <div id="form-group row">
    <div class="col-md-3">

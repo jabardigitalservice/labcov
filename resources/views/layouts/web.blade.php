@@ -173,14 +173,27 @@
                             <a href="{{url('pemeriksaanrdt')}}">
                                 <i class="uil-atom"></i>
                                 <span>Pemeriksaan RDT</span>
-                            </a> <!-- ini ada sub menunya -->
+                            </a> 
                         </li>
                         <li>
-                            <a href="{{url('validasi')}}" aria-expanded="false">
+                                <a href="javascript: void(0);">     
                                 <i class="uil-eye"></i>
-                                <span> Validasi Sample </span>
-                            </a>
+                                    <span> Validasi </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+
+                                <ul class="nav-second-level mm-collapse">
+                                    <li>
+                                        <a href="{{url('validasi')}}">Validasi rRT-PCR</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('validasi/rdt')}}">Validasi RDT</a>
+                                    </li>
+                                    
+                                </ul>
                         </li>
+
+                        
                         <li>
                             <a href="{{url('pelacakan')}}" aria-expanded="false">
                                 <i class="uil-search-alt "></i>

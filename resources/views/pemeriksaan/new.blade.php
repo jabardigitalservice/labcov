@@ -104,7 +104,14 @@
     <div class="form-group row mt-4">
       <label class="col-md-2" >Metode pemeriksaan <span style="color:red">*</span></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="pem_metode_pemeriksaan" placeholder="Metode pemeriksaan" required/>
+        <select class="multisteps-form__input form-control " id="metodepemeriksaan" name="pem_metode_pemeriksaan" onchange="otheroptionselect(this);">
+          <option value="RSUP Dr. Hasan Sadikin">RSUP Dr. Hasan Sadikin</option>
+          <option value="RSUP Dr. Hasan Sadikin">RSUP Dr. Hasan Sadikin</option>
+          <option value="RSUP Dr. Hasan Sadikin">RSUP Dr. Hasan Sadikin</option>
+          <option value="Other">RS Lainnya, Sebutkan</option>
+        </select>
+
+     <input class="form-control" type="text" name="metode_pemeriksaan_lainnya" placeholder="Metode pemeriksaan lainnya" required/>
       </div>
     </div>
     <div class="form-group row mt-4">

@@ -72,7 +72,7 @@
     <div class="form-group row mt-4">
       <label class="col-md-2" >Petugas Penerima Sampel <small>Isi bila diterima dari fasyankes rujukan</small></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="pen_penerima_sampel" value="{{$show->pen_penerima_sampel}}" required/>
+     <input class="form-control" type="text" name="pen_penerima_sampel" value="{{$show->pen_penerima_sampel}}" />
       </div>
     </div>
     
@@ -88,6 +88,20 @@
       <div class="col-md-10">
       <input class="form-control" type="text" name="pen_nomor_ekstraksi" value="{{$show->pen_nomor_ekstraksi}}" required/>
       </div>
+  </div>
+
+  <div class="form-group row mt-4">
+    <label class="col-md-2" >Apakah merupakan sampel RDT (Rapid Diagnostic Test)? <span style="color:red">*</span></label>
+    <div class="col-md-6">
+    <div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" id="rdtya" name="pen_rdt" value="1" @if($show->pen_rdt == 1) checked @endif required>
+<label class="form-check-label" for="rdtya">Ya, merupakan sampel RDT</label>
+</div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" id="rdtno" name="pen_rdt" value="0" @if($show->pen_rdt == 0) checked  @endif>
+<label class="form-check-label" for="rdtno">Tidak, bukan sampel RDT</label>
+</div>
+    </div>
   </div>
     <hr>
     <h4 class="mb-1 mt-0">Sampel <span style="color:red">*</span></h4>
@@ -106,7 +120,7 @@
       </thead>
       <tbody class="field_wrapper">
       @foreach($sampel as $s)
-      <tr>
+      <tr id="x{{$s->sam_id}}">
         <td>
         
     <input type="hidden" name="eks_samid[]" value="{{$s->sam_id}}">
@@ -156,7 +170,7 @@
         <td><input type="text" class="form-control"  name="eks_tanggal_sampel[]" value="{{$s->sam_tanggal_sampel}}"></td>
         <td><input type="text" class="form-control"  name="eks_pukul_sampel[]" value="{{$s->sam_pukul_sampel}}"></td>
         <td><input type="text" class="form-control"  name="eks_barcodenomor_sampel[]" value="{{$s->sam_barcodenomor_sampel}}"></td>
-        <td><button class="btn btn-sm btn-danger remove_field"><i class="uil-trash"></i></button></td>
+        <td><button class="btn btn-sm btn-danger deletebtn" samid="{{$s->sam_id}}"><i class="uil-trash"></i></button></td>
       </tr>
       
       @endforeach
@@ -199,11 +213,31 @@ $(wrapper).append('<tr><td><select class="form-control" id="jenissampel" name="s
 $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
 e.preventDefault(); $(this).parent().parent('tr').remove(); x--;
 })
-
+$(document).on("click",".deletebtn",function(e) {
+  e.preventDefault();
+       var samid = $(this).attr('samid');
+       var oThis = $(this);
+        $.ajax({
+            url: '/pengambilansampel/apidel',
+          type: 'POST',
+            data: {
+              _token :  "{{csrf_token()}}",
+                sam_id: samid,
+            },
+            success: function(data){
+              document.getElementById("x"+samid).remove();
+              x--;
+            },
+            error: function(data) {
+        console.log('Cannot retrieve data.');
+    }
+        });
+   
+ 
+      });
  });
 </script>
-<script>
-</script>
+
 @endsection
 
 @endsection

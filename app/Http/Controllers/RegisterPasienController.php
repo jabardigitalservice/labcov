@@ -169,7 +169,7 @@ if($request->reg_jenisidentitas == "KTP"){
     $inserttopensampel = PengambilanSampel::where('pen_id',$id_pen)->first();
     $inserttopensampel->pen_id_sampel = implode(",",$sampelArray);
     $inserttopensampel->pen_userid = Auth::user()->id;
-    $inserttopensampel->pen_statuspen = 1;
+    $inserttopensampel->pen_statuspen = 0;
     $changestatus = RegisterPasien::where('reg_no',$regis->reg_no)->first();
     $changestatus->reg_statusreg = 2;
     $changestatus->reg_penid = $id_pen;

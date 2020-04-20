@@ -34,7 +34,7 @@ class EkstraksiController extends Controller
     public function index()
     {
         $arr = array();
-        $avail_pen = PengambilanSampel::where('pen_statuspen', 1)->orderBy('pen_nomor_ekstraksi','ASC')->get();
+        $avail_pen = PengambilanSampel::where('pen_statuspen', 1)->where('pen_rdt', 0)->orderBy('pen_nomor_ekstraksi','ASC')->get();
         foreach($avail_pen as $a){
         $sampelarray = array();
            foreach(explode(",",$a->pen_id_sampel) as $b){

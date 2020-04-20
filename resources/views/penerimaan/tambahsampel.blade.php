@@ -56,7 +56,7 @@
     <div class="form-group row mt-4">
       <label class="col-md-2" >Petugas Penerima Sampel <small>Isi bila diterima dari fasyankes rujukan</small></label>
       <div class="col-md-6">
-     <input class="form-control" type="text" name="pen_penerima_sampel " placeholder="Nama Petugas Penerima Sampel" required />
+     <input class="form-control" type="text" name="pen_penerima_sampel " placeholder="Nama Petugas Penerima Sampel" />
       </div>
     </div>
     
@@ -73,6 +73,21 @@
       <input class="form-control" type="text" name="pen_nomor_ekstraksi" placeholder="Nomor Ekstraksi" required/>
       </div>
   </div>
+  
+  <div class="form-group row mt-4">
+        <label class="col-md-2" >Apakah merupakan sampel RDT (Rapid Diagnostic Test)? <span style="color:red">*</span></label>
+        <div class="col-md-6">
+        <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="rdtya" name="pen_rdt" value="1"  required>
+  <label class="form-check-label" for="rdtya">Ya, merupakansampel RDT</label>
+  </div>
+  <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="rdtno" name="pen_rdt" value="0">
+  <label class="form-check-label" for="rdtno">Tidak, bukan sampel RDT</label>
+  </div>
+        </div>
+      </div>
+
     <hr>
     <h4 class="mb-1 mt-0">Sampel <span style="color:red">*</span></h4>
     <p>Dibawah ini adalah sampel yang diambil atau diterima, klik tambahkan sesuai dengan banyaknya sampel</p>

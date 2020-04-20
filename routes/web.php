@@ -74,8 +74,6 @@ Route::get('ekstraksi/sampeldikembalikan/pilihulang/{id}','EkstraksiController@t
 Route::post('ekstraksi/sampeldikembalikan/pilihulang/','EkstraksiController@kirimkembali')->middleware('auth');
 
 Route::get('ekstraksi/delete/{id}','EkstraksiController@delete')->middleware('auth');
-Route::post('ekstraksi/apidel/','EkstraksiController@apidelete')->middleware('auth');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -122,7 +120,6 @@ Route::get('validasi/kembalikan/{id}','ValidasiController@kembalikan')->middlewa
 Route::post('validasi/kembalikan','ValidasiController@kembalikanupdate')->middleware('auth');
 
 Route::get('validasi/delete/{id}','ValidasiController@delete')->middleware('auth');
-Route::post('validasi/apidel/','ValidasiController@apidelete')->middleware('auth');
 
 /*
 |--------------------------------------------------------------------------
@@ -147,22 +144,17 @@ Route::get('pelacakan/print/','TracingController@print')->middleware('auth');
 */ 
 
 
-Route::get('pemeriksaanrdt','PemeriksaanSampelController@index')->middleware('auth');
-Route::get('pemeriksaanrdt/detail/{eksid}','PemeriksaanSampelController@show')->middleware('auth');
-Route::get('pemeriksaanrdt/periksa/{noreg}','PemeriksaanSampelController@create')->middleware('auth');
-Route::post('pemeriksaanrdt/periksa','PemeriksaanSampelController@store')->middleware('auth');
+Route::get('pemeriksaanrdt','RDTController@index')->middleware('auth');
+Route::get('pemeriksaanrdt/detail/{eksid}','RDTController@show')->middleware('auth');
+Route::get('pemeriksaanrdt/periksa/{nosam}','RDTController@create')->middleware('auth');
+Route::post('pemeriksaanrdt/periksa','RDTController@store')->middleware('auth');
 
-Route::get('pemeriksaanrdt/edit/{id}','PemeriksaanSampelController@edit')->middleware('auth');
-Route::post('pemeriksaanrdt/update','PemeriksaanSampelController@update')->middleware('auth');
+Route::get('pemeriksaanrdt/edit/{id}','RDTController@edit')->middleware('auth');
+Route::post('pemeriksaanrdt/update','RDTController@update')->middleware('auth');
 
+Route::get('pemeriksaanrdt/periksaulang/{id}','RDTController@periksakembali')->middleware('auth');
+Route::get('pemeriksaanrdt/pemeriksaandikembalikan','RDTController@pemeriksaandikembalikan')->middleware('auth');
+Route::post('pemeriksaanrdt/periksaulang','RDTController@kirimulang')->middleware('auth');
 
-Route::get('pemeriksaanrdt/kembalikan/{id}','PemeriksaanSampelController@return')->middleware('auth');
-Route::post('pemeriksaanrdt/kembalikan','PemeriksaanSampelController@returnupdate')->middleware('auth');
-
-
-Route::get('pemeriksaanrdt/periksaulang/{id}','PemeriksaanSampelController@periksakembali')->middleware('auth');
-Route::get('pemeriksaanrdt/pemeriksaandikembalikan','PemeriksaanSampelController@pemeriksaandikembalikan')->middleware('auth');
-Route::post('pemeriksaanrdt/periksaulang','PemeriksaanSampelController@kirimulang')->middleware('auth');
-
-Route::get('pemeriksaanrdt/delete/{id}','PemeriksaanSampelController@delete')->middleware('auth');
-Route::post('pemeriksaanrdt/apidel/','PemeriksaanSampelController@apidelete')->middleware('auth');
+Route::get('pemeriksaanrdt/delete/{id}','RDTController@delete')->middleware('auth');
+Route::post('pemeriksaanrdt/apidel/','RDTController@apidelete')->middleware('auth');
