@@ -135,7 +135,7 @@
     </tbody>
     </table>     
   @else
-  <span class="badge badge-danger">Sampel belum atau tidak diperiksa oleh Pemeriksa Sampel</span>
+  <span class="badge badge-danger">Sampel belum atau tidak diperiksa oleh Pemeriksa RDT</span>
 @endif
     @if(isset($validasi))
     <hr>
