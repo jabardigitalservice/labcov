@@ -159,11 +159,11 @@ class PengambilanSampleController extends Controller
                  }
         }
        
-        if(!is_null($pen->pen_noreg)){
-            $pasienstatus = RegisterPasien::where('reg_no',$pen->pen_noreg)->first();
-            $pasienstatus->reg_statusreg = 3;
-            $pasienstatus->update();
-        }
+    //    if(!is_null($pen->pen_noreg)){
+      //      $pasienstatus = RegisterPasien::where('reg_no',$pen->pen_noreg)->first();
+        //    $pasienstatus->reg_statusreg = 3;
+          //  $pasienstatus->update();
+       // }
             $store->put('pen_id_sampel',implode(",",$sampelArray));
             try{
             $pen->update($store->all());
