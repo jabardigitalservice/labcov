@@ -295,7 +295,7 @@ if($request->reg_jenisidentitas == "KTP"){
         if($sampel){
         $pen = PengambilanSampel::where('pen_id',$sampel->sam_penid)->first();
         $register = RegisterPasien::where('reg_penid',$sampel->sam_penid)->first();
-            if(is_null($pen->pen_noreg) && is_null($register)){
+            if(is_null($pen->pen_noreg) || is_null($register->reg_no)){
                 return redirect('rujukan/registersampel/'.$sampel->sam_penid);
             }else {
             notify()->warning('Sampel tersebut telah memiliki informasi pasien !');
