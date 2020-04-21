@@ -154,7 +154,27 @@
         </tbody>
         </table>     
         @else
-        <span class="badge badge-danger">Hasil belum atau tidak keluar</span>
+        <span class="badge badge-danger">Hasil PCR belum atau tidak keluar</span>
+        @endif
+
+        @if(isset($validasirdt))
+    <hr>
+    <h3 class="header-title mt-2 mb-2">Keluar Hasil</h3>
+    <table class="table">
+        <tbody>
+        <tr>
+        <td width="40%"><b>Kesimpulan pemeriksaan</b></td>
+        <td width="60%">  @if($validasirdt->rapid_kesimpulan_rdt_1 == "Reaktif")
+          <span class="badge badge-danger">{{$validasirdt->rapid_kesimpulan_rdt_1}}</span>
+         @else
+         <span class="badge badge-success">{{$validasirdt->rapid_kesimpulan_rdt_1}}</span>
+       @endif</td>
+        </tr>
+        
+        </tbody>
+        </table>     
+        @else
+        <span class="badge badge-danger">Hasil RDT belum atau tidak keluar</span>
         @endif
                                 </div>
                             </div>

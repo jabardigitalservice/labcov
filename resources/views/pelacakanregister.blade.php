@@ -233,6 +233,27 @@
         @else
         <span class="badge badge-danger">Hasil belum keluar</span>
         @endif
+
+        @if(isset($validasirdt))
+    <hr>
+    <h3 class="header-title mt-2 mb-2">Keluar Hasil RDT</h3>
+    <table class="table">
+        <tbody>
+        @foreach($validasirdt as $val)
+        <tr>
+        <td width="40%"><b>Kesimpulan pemeriksaan RDT</b> <span class="badge badge-primary"></span></td>
+        <td width="60%">  @if($val->rapid_kesimpulan_rdt_1 == "Reaktif")
+          <span class="badge badge-danger">Reaktif</span>
+         @else
+         <span class="badge badge-success">Non Reaktif</span>
+       @endif</td>
+        </tr>
+        @endforeach
+        </tbody>
+        </table>     
+        @else
+        <span class="badge badge-danger">Hasil RDT belum atau tidak keluar</span>
+        @endif
                                 </div>
                             </div>
                         </div>
