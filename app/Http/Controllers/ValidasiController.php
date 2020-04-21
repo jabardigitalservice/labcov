@@ -15,6 +15,7 @@ use App\RegisterPasien;
 use Illuminate\Http\Request;
 use PDF;
 use App\Validasi;
+use App\PencatatanRapid;
   
 
 class ValidasiController extends Controller
@@ -208,4 +209,145 @@ $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC'
          // return $request->all();
     }
 
+    /*
+    * VALIDASI RDT
+    *
+    */
+
+    public function indexrdt(){
+        $belum_validasi = PencatatanRapid::join('sampel','sampel.sam_id','=','pencatatanrapid.rapid_sampel_id')
+        ->join('pengambilansampel','pengambilansampel.pen_id','=','pencatatanrapid.rapid_penid')
+        ->join('register','register.reg_no','=','pengambilansampel.pen_noreg')
+        ->select('pencatatanrapid.*','sampel.sam_penid','sampel.sam_jenis_sampel','sampel.sam_barcodenomor_sampel','pengambilansampel.pen_noreg','pengambilansampel.pen_nik','register.reg_nik','register.reg_no','register.reg_jenisidentitas','register.reg_nosim')
+        ->where('pencatatanrapid.rapid_status',2)
+        ->get();
+
+        $validasi = Validasi::join('sampel','sampel.sam_id','=','validasi.val_samid')
+        ->join('pencatatanrapid','pencatatanrapid.rapid_id','=','validasi.val_pemid')
+        ->join('register','register.reg_no','=','validasi.val_noreg')
+        ->select('validasi.*','pencatatanrapid.*','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no','register.reg_jenisidentitas','register.reg_nosim')
+       ->where('validasi.val_status',2)->where('validasi.val_is_rapid',1)->get();
+        return view('validasi.rdt.index')->with(compact('belum_validasi','validasi'));
+    }
+
+    public function verifyrdt(Request $request){
+        $insert = collect($request->all());
+        $insert->put('val_date_print',Carbon::now());
+        $validate = new Validasi;
+        $pencatatanrdt = PencatatanRapid::where('rapid_id',$request->val_pemid)->first();
+        $pencatatanrdt->rapid_status = 3;
+        $sampel = Sampel::where('sam_id',$request->val_samid)->first();
+        $sampel->sam_statussam = 4;
+        if($pencatatanrdt->rapid_jenistes == 1) {
+            $jenistes = "IgG"; } 
+        elseif($pencatatanrdt->rapid_jenistes == 2){
+            $jenistes = "IgM";
+            } elseif($pencatatanrdt->rapid_jenistes == 3){
+                $jenistes = "IgG/IgM";
+            }elseif($pencatatanrdt->rapid_jenistes == 4){
+                $jenistes = "Antigen";
+            }
+        if($sampel->sam_jenis_sampel == 9){
+        $jenis = "Usap Nasofaring & Orofaring";
+        }
+        else if($sampel->sam_jenis_sampel == 10){
+        $jenis = "Sputum";
+        }
+        else if($sampel->sam_jenis_sampel == 11){
+        $jenis = "Bronchoalveolar Lavage";
+        }
+        else if($sampel->sam_jenis_sampel == 12){
+        $jenis = "Jenis Sampel Lainnya : ".$sampel->sam_namadiluarjenis;
+        }
+         else{
+         $jenis = "Jenis Sampel Lainnya : ".$sampel->sam_namadiluarjenis;
+        }
+        if(!is_null($request->val_noreg)){
+            $changeregstatus = RegisterPasien::where('reg_no',$request->val_noreg)->first();
+            $changeregstatus->reg_statusreg = 5;
+            $changeregstatus->update();
+          }else {
+            notify()->warning('TIDAK BISA VERIFIKASI, Tidak ada informasi pasien / belum di tambahkan register!');
+            return redirect('validasi');
+          }
+    if($request->val_ttd == 1) {
+        $nama = "dr. RYAN B. RISTANDI, Sp.PK., MMRS";
+        $nip = "NIP. 19820507 200902 1 004";
+    }else {
+        $nama = "dr. CUT NUR CINTHIA ALAMANDA, Sp.PK., M.Kes";
+        $nip = "NIP. 19740906 201412 2 001";
+    }
+    $date = Carbon::now()->locale('id_ID');
+    $monthnumber = $date->isoFormat('M');
+    $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1);
+        $romannumber= '';
+        while ($monthnumber > 0) {
+            foreach ($map as $roman => $int) {
+                if($monthnumber >= $int) {
+                    $monthnumber -= $int;
+                    $romannumber.= $roman;
+                    break;
+                }
+            }
+        }
+    
+        $data = [ 'namapasien' => $changeregstatus->reg_nama_pasien,       
+             'ttl' => $changeregstatus->reg_nama_pasien.', '.$changeregstatus->reg_tempatlahir.' '.$changeregstatus->reg_tanggallahir,       
+             'jk' =>  $changeregstatus->reg_kelamin,
+             'noreg' =>  $changeregstatus->reg_no,
+             'bp' =>  $jenis,
+             'tanggal' =>  $pencatatanrdt->rapid_tanggal_rdt_1,
+             'jenistes' => $jenistes,
+             'keteranganlain' =>  $pencatatanrdt->rapid_catatan_1,
+             'kesimpulanpemeriksaan' =>  $pencatatanrdt->rapid_kesimpulan_rdt_1,
+             'nama' =>  $nama,
+             'nip' => $nip,
+             'nosurat' => $validate->val_id,
+             'bulansurat' => $romannumber,
+             'tanggalsurat' =>  $date->isoFormat('D MMMM Y'),   // dimanche 22 mars 2020 17:45, 
+            ];
+            
+        $pdf = PDF::loadView('validasi.rdt.pdf_view_rdt', $data)->save('pdf/surat-keterangan-hasil-rdt-'.$changeregstatus->reg_no.'.pdf');
+        $insert->put('val_file','pdf/surat-keterangan-hasil-rdt-'.$changeregstatus->reg_no.'.pdf');
+        $insert->put('val_status', 2);
+        $insert->put('val_is_rapid', 1);
+    
+        try{
+            $validate->create($insert->all());
+            $sampel->update();
+            $pencatatanrdt->update();
+                 }catch(QE $e){  return $e; } //show db error message
+        notify()->success('Pemeriksaan telah selesai diverifikasi !');
+        return redirect('validasi/rdt');
+        }
+
+        public function showrdt($id){
+        
+            $validated = Validasi::where('val_pemid',$id)->where('val_is_rapid',1)->first();
+             $show =  PencatatanRapid::join('sampel','sampel.sam_id','=','pencatatanrapid.rapid_sampel_id')
+             ->join('pengambilansampel','pengambilansampel.pen_id','pencatatanrapid.rapid_penid')
+             ->join('register','register.reg_no','=','pengambilansampel.pen_noreg')
+             ->select('pencatatanrapid.*','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
+            ->where('pencatatanrapid.rapid_id',$id)->first();
+            $notes = Notes::where('note_item_id',$id)->where('note_item_type',4)->orderBy('created_at','desc')->get();
+            return view('validasi.rdt.new')->with(compact('show','notes','validated'));
+         }
+         public function showvalidatedrdt($id){
+             
+             $validated = Validasi::where('val_id',$id)->first();
+             $show =  PencatatanRapid::join('sampel','sampel.sam_id','=','pencatatanrapid.rapid_sampel_id')
+             ->join('pengambilansampel','pengambilansampel.pen_id','pencatatanrapid.rapid_penid')
+             ->join('register','register.reg_no','=','pengambilansampel.pen_noreg')
+             ->select('pencatatanrapid.*','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
+            ->where('pencatatanrapid.rapid_id',$validated->val_pemid)->first();
+             $notes = Notes::where('note_item_id',$validated->val_pemid)->where('note_item_type',4)->orderBy('created_at','desc')->get();
+             return view('validasi.rdt.show')->with(compact('show','notes','validated'));
+          }
+      
+     
+         public function printrdt($id){
+             $validasipdf = Validasi::where('val_id',$id)->first();
+         return redirect($validasipdf->val_file);
+     }
+     
 }

@@ -38,6 +38,7 @@ class Validasi extends Model
    'val_file',
    'val_status',
    'val_userid',
+   'val_is_rapid',
    'created_at',
    'updated_at'];
 }

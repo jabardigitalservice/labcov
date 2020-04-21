@@ -117,6 +117,26 @@
   @else
   <span class="badge badge-danger">Sampel belum atau tidak diperiksa oleh Pemeriksa Sampel</span>
 @endif
+
+@if(isset($pemeriksaanrdt))
+<hr>
+<h3 class="header-title mt-2 mb-2">Pemeriksaan RDT</h3>
+<table class="table">
+    <tbody>
+    <tr>
+    <td width="40%"><b>Tanggal Pemeriksaan</b></td>
+    <td width="60%">{{$pemeriksaanrdt->rapid_tanggal_rdt_1}}</td>
+    </tr>
+    <tr>
+    <td width="40%"><b>Jam pemeriksaan</b></td>
+    <td width="60%">{{$pemeriksaanrdt->rapid_jam_rdt_1}}</td>
+    </tr>
+    
+    </tbody>
+    </table>     
+  @else
+  <span class="badge badge-danger">Sampel belum atau tidak diperiksa oleh Pemeriksa Sampel</span>
+@endif
     @if(isset($validasi))
     <hr>
     <h3 class="header-title mt-2 mb-2">Keluar Hasil</h3>

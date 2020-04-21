@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use App\RegisterPasien;
 use Illuminate\Http\Request;
 use App\Validasi;
+use App\PencatatanRapid;
 class TracingController extends Controller
 {
     public function pagetracing(){
@@ -25,6 +26,7 @@ class TracingController extends Controller
         if(!is_null($register)){
             $pengambilansampel = PengambilanSampel::where('pen_noreg',$register->reg_no)->first();
             $sampel = Sampel::where('sam_penid',$register->reg_penid)->get();
+            $pemeriksaanrdt = PencatatanRapid::where('rapid_penid',$pengambilansampel->pen_id)->get();
             if($pengambilansampel){
                 $ekstraksisampel = Ekstraksi::join('sampel','sampel.sam_id','=','ekstraksisampel.eks_samid')
                 ->select('ekstraksisampel.*','sampel.sam_id','sam_barcodenomor_sampel')
@@ -50,6 +52,7 @@ class TracingController extends Controller
 
     public function tracingsampel(Request $request){
         $sampel = Sampel::where('sam_barcodenomor_sampel',$request->nomor_sampel)->first();
+        $pemeriksaanrdt = PencatatanRapid::where('rapid_sampel_id',$sampel->sam_id)->first();
         if(!is_null($sampel)){
             $pengambilansampel = PengambilanSampel::where('pen_id',$sampel->sam_penid)->first();
             if($pengambilansampel){
@@ -59,10 +62,12 @@ class TracingController extends Controller
                     $pemeriksaansampel = PemeriksaanSampel::where('pem_eksid',$ekstraksisampel->eks_id)->first();
                     if($pemeriksaansampel){
                         $validasi =   Validasi::where('val_pemid',$pemeriksaansampel->pem_id)->first();
+                    }elseif($pemeriksaanrdt){
+                        $validasi =   Validasi::where('val_rapid',$pemeriksaanrdt->rapid_id)->first();
                     }
                 }
             }
-        return view('pelacakansampel')->with(compact('pengambilansampel','sampel','pemeriksaansampel','ekstraksisampel','validasi'));
+        return view('pelacakansampel')->with(compact('pengambilansampel','sampel','pemeriksaansampel','ekstraksisampel','validasi','pemeriksaanrdt'));
 
         }else {
             notify()->warning('Nomor sampel tidak ditemukan!');

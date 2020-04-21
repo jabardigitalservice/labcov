@@ -100,7 +100,7 @@ Route::get('pemeriksaansampel/pemeriksaandikembalikan','PemeriksaanSampelControl
 Route::post('pemeriksaansampel/periksaulang','PemeriksaanSampelController@kirimulang')->middleware('auth');
 /*
 |--------------------------------------------------------------------------
-| Ekstraksi Sampel dan Importnya Routes
+| Validasi
 |--------------------------------------------------------------------------
 |
 */ 
@@ -118,12 +118,27 @@ Route::post('validasi/update','ValidasiController@update')->middleware('auth');
 
 Route::get('validasi/kembalikan/{id}','ValidasiController@kembalikan')->middleware('auth');
 Route::post('validasi/kembalikan','ValidasiController@kembalikanupdate')->middleware('auth');
+/*
+|--------------------------------------------------------------------------
+| Validasi RAPID Test
+|--------------------------------------------------------------------------
+|
+*/ 
 
-Route::get('validasi/delete/{id}','ValidasiController@delete')->middleware('auth');
+Route::get('validasi/rdt','ValidasiController@indexrdt')->middleware('auth');
+Route::get('validasi/rdt/detail/{pemid}','ValidasiController@showvalidatedrdt')->middleware('auth');
+Route::get('validasi/rdt/verify/{pemid}','ValidasiController@showrdt')->middleware('auth');
+Route::post('validasi/rdt/verify','ValidasiController@verifyrdt')->middleware('auth');
+Route::get('validasi/rdt/print/{id}','ValidasiController@printrdt')->middleware('auth');
+
+
+Route::get('validasi/rdt/edit/{id}','ValidasiController@editrdt')->middleware('auth');
+Route::post('validasi/rdt/update','ValidasiController@updaterdt')->middleware('auth');
+
 
 /*
 |--------------------------------------------------------------------------
-| Ekstraksi Sampel dan Importnya Routes
+| Pelacakan
 |--------------------------------------------------------------------------
 |
 */ 
@@ -138,7 +153,7 @@ Route::get('pelacakan/print/','TracingController@print')->middleware('auth');
 
 /*
 |--------------------------------------------------------------------------
-| Ekstraksi Sampel dan Importnya Routes
+| RDT
 |--------------------------------------------------------------------------
 |
 */ 
