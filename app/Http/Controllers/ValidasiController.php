@@ -23,8 +23,9 @@ class ValidasiController extends Controller
     public function index(Request $request){
         $belum_validasi = PemeriksaanSampel::join('sampel','sampel.sam_id','=','pemeriksaansampel.pem_samid')
         ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
-        ->join('register','register.reg_no','=','ekstraksisampel.eks_noreg')
-        ->select('pemeriksaansampel.*','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no','register.reg_jenisidentitas','register.reg_nosim')
+        ->join('pengambilansampel','pengambilansampel.pen_id','=','sampel.sam_penid')
+        ->join('register','register.reg_no','=','pengambilansampel.pen_noreg')
+        ->select('pemeriksaansampel.*','register.reg_no','register.reg_nik','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no','register.reg_jenisidentitas','register.reg_nosim')
        ->where('pemeriksaansampel.pem_status',1)->get();
 
        $validasi = Validasi::join('sampel','sampel.sam_id','=','validasi.val_samid')
@@ -38,10 +39,11 @@ class ValidasiController extends Controller
     public function show($id){
         
        $validated = Validasi::where('val_id',$id)->first();
-        $show =  PemeriksaanSampel::join('sampel','sampel.sam_id','=','pemeriksaansampel.pem_samid')
+     $show =  PemeriksaanSampel::join('sampel','sampel.sam_id','=','pemeriksaansampel.pem_samid')
+         ->join('pengambilansampel','pengambilansampel.pen_id','=','sampel.sam_penid')
         ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
-        ->join('register','register.reg_no','=','pemeriksaansampel.pem_noreg')
-        ->select('pemeriksaansampel.*','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
+        ->join('register','register.reg_no','=','pengambilansampel.pen_noreg')
+        ->select('pemeriksaansampel.*','register.reg_no','register.reg_nik','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
        ->where('pemeriksaansampel.pem_id',$id)->first();
        $notes = Notes::where('note_item_id',$id)->where('note_item_type',2)->orderBy('created_at','desc')->get();
        return view('validasi.new')->with(compact('show','notes','validated'));
@@ -50,9 +52,10 @@ class ValidasiController extends Controller
         
         $validated = Validasi::where('val_id',$id)->first();
          $show =  PemeriksaanSampel::join('sampel','sampel.sam_id','=','pemeriksaansampel.pem_samid')
-         ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
-         ->join('register','register.reg_no','=','pemeriksaansampel.pem_noreg')
-         ->select('pemeriksaansampel.*','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
+         ->join('pengambilansampel','pengambilansampel.pen_id','=','sampel.sam_penid')
+        ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
+        ->join('register','register.reg_no','=','pengambilansampel.pen_noreg')
+         ->select('pemeriksaansampel.*','register.reg_no','register.reg_nik','ekstraksisampel.eks_status','sampel.sam_id','sampel.sam_barcodenomor_sampel','sampel.sam_jenis_sampel','sampel.sam_namadiluarjenis','register.reg_nik','register.reg_no')
         ->where('pemeriksaansampel.pem_id',$validated->val_pemid)->first();
         $notes = Notes::where('note_item_id',$validated->val_pemid)->where('note_item_type',2)->orderBy('created_at','desc')->get();
         return view('validasi.show')->with(compact('show','notes','validated'));

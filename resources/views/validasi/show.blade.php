@@ -47,10 +47,10 @@
           <tbody>
             <tr>
               <td width="40%"><b>Nomor Registrasi</b></td>
-              <td width="60%">@if(is_null($show->reg_nik))
+              <td width="60%">@if(is_null($show->reg_no))
               <span class="badge badge-danger">Identitas Pasien belum dimasukan Register</span>
               @else
-              {{$show->pem_noreg}}
+              {{$show->reg_no}}
               @endif</td>
             </tr>
             <tr>

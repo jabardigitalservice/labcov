@@ -47,10 +47,10 @@
           <tbody>
             <tr>
               <td width="40%"><b>Nomor Registrasi</b></td>
-              <td width="60%">@if(is_null($show->reg_nik))
+              <td width="60%">@if(is_null($show->reg_no))
               <span class="badge badge-danger">Identitas Pasien belum dimasukan Register</span>
               @else
-              {{$show->pem_noreg}}
+              {{$show->reg_no}}
               @endif</td>
             </tr>
             <tr>
@@ -189,7 +189,7 @@
               </div>
   <input type="hidden" name="val_pemid" value="{{$show->pem_id}}" >
   <input type="hidden" name="val_samid" value="{{$show->pem_samid}}" >
-  <input type="hidden" name="val_noreg" value="{{$show->pem_noreg}}">
+  <input type="hidden" name="val_noreg" value="{{$show->reg_no}}">
   <input type="hidden" name="val_userid" value="{{Auth::user()->id}}">
   <input type="hidden" name="val_status" value="1">
 
