@@ -253,6 +253,8 @@ class RegisterPasienController extends Controller
     /**
      * Update the specified resource in storage.
      * docs same as function above this
+     * nomor registrasi tidak terikat ke beberapa model lainnya jadi 
+     * kalau NIK diubah dari register setelah stagenya sampai di pemeriksaansampel maka NIK di pemeriksaan sampel ga keganti
      */
     public function updatex(Request $request, $id)
     {
@@ -304,8 +306,8 @@ class RegisterPasienController extends Controller
 
 
     /**
-     * Remove the specified resource from storage.
-     *
+     * nomor registrasi tidak terikat ke beberapa model lainnya jadi 
+     * kalau NIK diubah dari register setelah stagenya sampai di pemeriksaansampel maka NIK di pemeriksaan sampel ga keganti
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
