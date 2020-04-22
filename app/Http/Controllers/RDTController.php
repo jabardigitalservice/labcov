@@ -70,7 +70,7 @@ class RDTController extends Controller
         $changestatusam->sam_statussam = 3;
 
         if(!is_null($changepenstatus->pen_noreg)){
-            $changeregstatus = RegisterPasien::where('reg_no',$changepenstatus->rapid_noreg)->first();
+            $changeregstatus = RegisterPasien::where('reg_no',$changepenstatus->pen_noreg)->first();
             $changeregstatus->reg_statusreg = 4;
             $changeregstatus->update();
           }
