@@ -1,7 +1,6 @@
 @extends('layouts.web')
 @section('title','- Penerimaan Sampel')
 @section('css')
-        <!-- plugin css -->
         <link href="{{asset('assets/libs/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/libs/datatables/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/libs/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
@@ -88,7 +87,7 @@
                         <div class="card-body">  
                             <h4 class="header-title mt-0 mb-1">Status yang telah dikirim</h4>
                             <p class="sub-header">Berikut adalah status yang telah dikirimkan ke Lab Ekstraksi</p>
-                                <table id="basic-datatable"  class="table table-striped dt-responsive table-bordered" style="width:100%">
+                                <table id="basic-datatable2"  class="table table-striped dt-responsive table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Sampel</th>
@@ -136,37 +135,13 @@
         <script src="{{asset('assets/libs/datatables/dataTables.select.min.js')}}"></script>
 <script>
 $(document).ready(function(){
-    
-
-    $(document).on('click', '.deletebtn', function(e) {
-       var href = $(this).attr('href');
-       Swal.fire({
-   title: 'Yakin untuk menghapus data ini ? ',
-   text: 'Data yang sudah dihapus tidak dapat dikembalikan!',
-   icon: 'warning',
-   showCancelButton: true,
-   confirmButtonColor: '#95000c',
-   confirmButtonText: 'Ya, Hapus!',
-   cancelButtonText: 'Tidak, batalkan'
- }).then((result) => {
-   if (result.value) {
-      window.location.href = href;
-  
-   // For more information about handling dismissals please visit
-   // https://sweetalert2.github.io/#handling-dismissals
-   } else if (result.dismiss === Swal.DismissReason.cancel) {
-     Swal.fire(
-       'Dibatalkan',
-       'Data tidak jadi dihapus',
-       'error'
-     )
-   }
- });
- 
-      });
- 
-  
     $("#basic-datatable").DataTable({
+        language:{
+            paginate:{
+                previous:"<i class='uil uil-angle-left'>",
+                    next:"<i class='uil uil-angle-right'>"}}});
+
+    $("#basic-datatable2").DataTable({
         language:{
             paginate:{
                 previous:"<i class='uil uil-angle-left'>",

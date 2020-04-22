@@ -36,7 +36,7 @@
 <label class="form-check-label" for="sampeldiambilya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="sampeldiambilno" name="pen_sampel_diambil" value="0"  @if($show->pen_sampel_diambil == 0) checked @endif>
+<input class="form-check-input" type="radio" id="sampeldiambilno" name="pen_sampel_diambil" value="0"  @if($show->pen_sampel_diambil == 0 && !is_null($show->pen_sampel_diambil)) checked @endif>
 <label class="form-check-label" for="sampeldiambilno">Tidak</label>
 </div>
       </div>
@@ -50,7 +50,7 @@
 <label class="form-check-label" for="sampelditerimaya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="sampelditerimaya" name="pen_sampel_diterima" value="0" @if($show->pen_sampel_diterima == 0) checked @endif>
+<input class="form-check-input" type="radio" id="sampelditerimaya" name="pen_sampel_diterima" value="0" @if($show->pen_sampel_diterima == 0 && !is_null($show->pen_sampel_diterima)) checked @endif>
 <label class="form-check-label" for="sampelditerimano">Tidak</label>
 </div>
       </div>
@@ -64,7 +64,7 @@
 <label class="form-check-label" for="fasyankesya">Ya</label>
 </div>
 <div class="form-check form-check-inline">
-<input class="form-check-input" type="radio" id="fasyankesno" name="pen_sampel_diterima_dari_fas_rujukan" value="0" @if($show->pen_sampel_diterima_dari_fas_rujukan == 0) checked  @endif>
+<input class="form-check-input" type="radio" id="fasyankesno" name="pen_sampel_diterima_dari_fas_rujukan" value="0" @if($show->pen_sampel_diterima_dari_fas_rujukan == 0 && !is_null($show->pen_sampel_diterima_dari_fas_rujukan)) checked  @endif>
 <label class="form-check-label" for="fasyankesno">Tidak</label>
 </div>
       </div>

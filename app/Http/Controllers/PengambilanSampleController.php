@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Sampel;
 use App\PengambilanSampel;
 use App\RegisterPasien;
 use App\GroupSampel;
+
 use Illuminate\Database\QueryException as QE;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Auth;
 use DB;
-use Illuminate\Support\Str;
+
 class PengambilanSampleController extends Controller
 {
      /**
@@ -20,24 +22,26 @@ class PengambilanSampleController extends Controller
      */
     public function index()
     {   
+        /** menampilkan status pengambilan sampel yang sudah bisa diakses oleh ekstraksi */
         $not_avail_regis = PengambilanSampel::join('sampel','sampel.sam_penid','=','pengambilansampel.pen_id')
         ->select('pengambilansampel.*','sampel.sam_barcodenomor_sampel')
         ->where('pengambilansampel.pen_statuspen',1)->get();
 
+         /** menampilkan status pengambilan sampel berasal dari register dimana sampel belum diberikan jenis sampel apa, tanggal penerimaan dan catatan sampel */
         $avail_regis = PengambilanSampel::join('sampel','sampel.sam_penid','=','pengambilansampel.pen_id')
         ->select('pengambilansampel.*','sampel.sam_barcodenomor_sampel')
         ->where('pengambilansampel.pen_statuspen',0)->get();
         $group = $avail_regis->groupby('pen_id');
-        
         $group2 = $not_avail_regis->groupby('pen_id');
+        
         return view('penerimaan.index')->with(compact('avail_regis','not_avail_regis','group', 'group2'));
      // return $group;
     }
 
     /*
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Tidak dipakai lagi
+     * Tidak dipakai lagi
+     * Tidak dipakai lagi
     
     public function create($noreg)
     {
@@ -88,12 +92,12 @@ class PengambilanSampleController extends Controller
     
     }
  */
-    /**
+    /*
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         $show = PengambilanSampel::join('register','register.reg_no', '=','pengambilansampel.pen_noreg')
@@ -102,6 +106,7 @@ class PengambilanSampleController extends Controller
         $sampel = Sampel::where('sam_penid',$show->pen_id)->get();
         return view('penerimaan.show')->with(compact('show','sampel'));
     }
+     */
     /**
      * Show the form for editing the specified resource.
      *
@@ -110,15 +115,14 @@ class PengambilanSampleController extends Controller
      */
     public function edit($id)
     {
-        $show = PengambilanSampel::where('pengambilansampel.pen_id',$id)->first();
-        $sampel = Sampel::where('sam_penid',$id)->get();
+        $show = PengambilanSampel::where('pengambilansampel.pen_id',$id)->first(); //cari status pengambilan sampel dengan id yg dimaksud
+        $sampel = Sampel::where('sam_penid',$id)->get(); //cari sampel sampelnya dari pengmbilansampel tersebut, informasinya akan tampil di Modal
         return view('penerimaan.edit')->with(compact('show','sampel'));
-       // return $show;
     }
 
     /**
      * Update the specified resource in storage.
-     *
+     * untuk store update pembaruan ketika admin sampel edit
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -126,9 +130,10 @@ class PengambilanSampleController extends Controller
     public function update(Request $request)
     {
         $pen = PengambilanSampel::where('pen_id',$request->pen_id)->first();
-        $pen->pen_statuspen = 1;
+        $pen->pen_statuspen = 1; //ubah status pengambilan sampel
+
         $store = collect($request->all());
-        $sampelArray= array();
+        $sampelArray= array(); //menampung informasi sampel yang lama (apakah ada yg dihapus atau diubah keterangannya) dan baru
         if($request->eks_samid){
         for($i = 0; $i<count($request->eks_samid); $i++){
         $sam = Sampel::where('sam_id',$request->eks_samid[$i])->first();
@@ -143,11 +148,11 @@ class PengambilanSampleController extends Controller
         }
     }
 
-        if($request->sam_jenis_sampel){
+        if($request->sam_jenis_sampel){ //apabila ada sampel baru selain yang diatas 
             for($i = 0; $i<count($request->sam_jenis_sampel); $i++){
                 $newsam = new Sampel;
-                $newsam->sam_penid = $pen->pen_id;
-                $newsam->sam_noreg = $pen->pen_noreg;
+                $newsam->sam_penid = $pen->pen_id; //id pengambilan sampel
+                $newsam->sam_noreg = $pen->pen_noreg; //nomor registrasi
                 $newsam->sam_jenis_sampel = $request->sam_jenis_sampel[$i];
                 $newsam->sam_namadiluarjenis = $request->namadiluarjenis[$i];
                 $newsam->sam_petugas_pengambil_sampel = $request->petugas_pengambil[$i];
@@ -155,16 +160,20 @@ class PengambilanSampleController extends Controller
                 $newsam->sam_pukul_sampel = $request->pukulsampel[$i];
                 $newsam->sam_barcodenomor_sampel = $request->nomorsampel[$i];
                 $newsam->save();
-                 array_push($sampelArray,$newsam->sam_id);
+                 array_push($sampelArray,$newsam->sam_id); //masukan juga ke array informasi sampel
                  }
         }
        
-    //    if(!is_null($pen->pen_noreg)){
-      //      $pasienstatus = RegisterPasien::where('reg_no',$pen->pen_noreg)->first();
-        //    $pasienstatus->reg_statusreg = 3;
-          //  $pasienstatus->update();
-       // }
-            $store->put('pen_id_sampel',implode(",",$sampelArray));
+        $store->put('pen_id_sampel',implode(",",$sampelArray));
+    /**
+     * Unused, awalnya untuk mengubah status registrasi 
+     * if(!is_null($pen->pen_noreg)){
+     *     $pasienstatus = RegisterPasien::where('reg_no',$pen->pen_noreg)->first();
+     *   //    $pasienstatus->reg_statusreg = 3;
+     *    //  $pasienstatus->update();
+     * }
+    */
+
             try{
             $pen->update($store->all());
                  }catch(QE $e){  return $e; } //show db error message
@@ -175,7 +184,7 @@ class PengambilanSampleController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * Unused, ada permintaan untuk tidak bisa dihapus datanya jadi hanya ubah
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -196,6 +205,9 @@ class PengambilanSampleController extends Controller
             return redirect('pengambilansampel');
     }
 
+     /**
+      * fungsi delete dari tombol delete ajax yang ada di edit pengambilan sampel
+      */
     public function apidelete(Request $request)
     {
         $sampeldelete = Sampel::where('sam_id',$request->sam_id)->first();
@@ -207,21 +219,26 @@ class PengambilanSampleController extends Controller
         return response('Success', 200);
     }
 
+    //form tambah sampel dari rujukan, dengan register kosong jadi nanti pengambilan sampel memberikan code sampel ke register
     public function tambahsampelrujukan(){
         return view('penerimaan.tambahsampel');
     }
 
+     /**
+     * Store data dari pengisian form tambah sampel dari rujuan diatas
+     * function are same as above
+     */
     public function storesampelrujukan(Request $request){
         $insert = collect($request->all());
         $insert->put('pen_userid',Auth::user()->id);
         $sampelArray = array();
         $store = PengambilanSampel::create($insert->all());
         $id_pen = $store->pen_id;
-        $duplicate = 0;
+        $duplicate = 0; //counter untuk mengecek duplikasi sampel karena ada nomor sampel yang sama 
         for($i=0; $i< count($request->sam_jenis_sampel); $i++){
             $ceksam = Sampel::where('sam_barcodenomor_sampel',$request->nomorsampel[$i])->first();
             if($ceksam){
-               $duplicate++;
+               $duplicate++; //tambah counter duplicate
             }else {
                 $sampel = new Sampel();
                 $sampel->sam_penid = $id_pen;
@@ -238,6 +255,11 @@ class PengambilanSampleController extends Controller
             }
            
         }
+        /** Jadi
+         *  karena tidak ada pengikat antara sampel sampel baru
+         * semua sampel yang dari rujukan dimasukan kedalam 1 group
+         * jadi informasi di group ini untuk mencari tahu apa saja sampel yang dimasukan ketika pengisian sampel rujukan
+         */
         $inserttopensampel = PengambilanSampel::where('pen_id',$id_pen)->first();
         $inserttopensampel->pen_id_sampel = implode(",",$sampelArray);
         $inserttopensampel->pen_statuspen = 1;
@@ -249,7 +271,7 @@ class PengambilanSampleController extends Controller
         $inserttogroup->save();
              }catch(QE $e){  return $e; } //show db error message
 
-             if($duplicate > 0){
+             if($duplicate > 0){ //kalau ada duplicate beritahu user, 
                 notify()->warning('Ada Sampel yang bernomor sama ! Sampel bernomor sama tidak akan dimasukan ke pengambilan!');
              }else {
              notify()->success('Status Pengambilan telah sukses ditambahkan !');
@@ -257,6 +279,10 @@ class PengambilanSampleController extends Controller
                 return redirect('pengambilansampel');
     
     }
+     /*
+    * Tidak dipakai lagi
+    * fungsi scanning barcode sampel di halaman Pengambilan Sampel, akan diredirect ke halaman edit karena isinya masih kosong
+    */
 
     public function labscanbarcode(Request $request){
     $sam = Sampel::where('sam_barcodenomor_sampel',$request->sam_barcodenomor_sampel)->first();
@@ -280,7 +306,9 @@ class PengambilanSampleController extends Controller
     }
     }
     /*
-
+    * Tidak dipakai lagi
+    * Tidak dipakai lagi
+    * Tidak dipakai lagi
     public function savebyscan(Request $request){
         $pen = PengambilanSampel::where('pen_id',$request->pen_id)->first();
         $store = collect($request->all());
