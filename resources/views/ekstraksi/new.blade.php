@@ -15,8 +15,6 @@
                            <a href="{{url('ekstraksi')}}" class="btn btn-md btn-primary float-right"><i class="uil-arrow-left"></i> Kembali</a>
                         </div>
                     </div>
-
-
                     <!-- content -->
   <div class="row">
       <div class="col-12">
@@ -213,11 +211,7 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-         
-
                 </div>
             </div> <!-- content -->
           

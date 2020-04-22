@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Database\QueryException as QE;
 use App\Sampel;
 use App\PengambilanSampel;
 use App\Ekstraksi;
@@ -12,30 +9,25 @@ use App\RegisterPasien;
 use App\Notes;
 use App\PenyimpananSampel;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Database\QueryException as QE;
 
 class EkstraksiController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * register 
-     * 1 = masih di register
-     * 2 = di lab 1
-     * 3 = di lab 2
-     * 4 = di lab 3
-     * 5 = di validator
-     * 6 = beres
-     * pengambilan sampel
-     * 0 = di lab 1
-     * 1 = di lab 2
-     * 2 = di lab 3
-     * 4 = di validator
+     * list pemeriksaan
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $arr = array();
-        $avail_pen = PengambilanSampel::where('pen_statuspen', 1)->where('pen_rdt', 0)->orderBy('pen_nomor_ekstraksi','ASC')->get();
-        foreach($avail_pen as $a){
+      /** List pengambilan sampel yang sudah diisi keterangan sampelnya (jenis dll) dan bukan sampel RDT */
+        $avail_pen = PengambilanSampel::where('pen_statuspen', 1)->where('pen_rdt', 0)
+        //->orderBy('pen_nomor_ekstraksi','ASC') sort by nomor ekstraksi, tidak dipakai lagi setelah rapat terbaru, todo : hapus saja
+        ->get(); 
+        
+        $arr = array(); //array penampung informasi sampel untuk listing sampel di avail_pen
+        foreach($avail_pen as $a){ //untuk setiap pengambilansampel, cari sampelnya, masukin ke array tersebut
         $sampelarray = array();
            foreach(explode(",",$a->pen_id_sampel) as $b){
             $sampel = Sampel::where('sam_id',$b)->first();
@@ -45,10 +37,11 @@ class EkstraksiController extends Controller
            }
           array_push($arr,implode(",",$sampelarray));
         }
-        $not_avail_pen = Ekstraksi::join('sampel', 'sampel.sam_id','=','ekstraksisampel.eks_samid')
+
+        /** ekstraksi yang sudah dikirim ke pemeriksaan sampel */
+        $not_avail_pen = Ekstraksi::join('sampel', 'sampel.sam_id','=','ekstraksisampel.eks_samid') 
         ->select('sampel.sam_barcodenomor_sampel', 'ekstraksisampel.*')
         ->where('ekstraksisampel.eks_status', 1)->get();
-       //return $avail_pen;
       return view('ekstraksi.index')->with(compact('arr','avail_pen','not_avail_pen'));
     }
 
@@ -59,8 +52,8 @@ class EkstraksiController extends Controller
      */
     public function create($pen_id)
     {
-        $selected = PengambilanSampel::where('pen_id',$pen_id)->first();
-        $selected_sampel = Sampel::where('sam_penid',$pen_id)->get();
+        $selected = PengambilanSampel::where('pen_id',$pen_id)->first(); //pengambilan sampel 
+        $selected_sampel = Sampel::where('sam_penid',$pen_id)->get(); //sampel yang ada di pengambilan tersebut
         return view('ekstraksi.new')->with(compact('selected','selected_sampel'));
     }
 
@@ -75,30 +68,19 @@ class EkstraksiController extends Controller
       $not_selected_sam =  Sampel::where('sam_penid',$request->penid)
       ->whereNotIn('sam_id', [$request->eks_samid])->get();
 
-      /* 
-      foreach($request->penyimpanansampel as $key => $val){
-        if(!is_null($val)){
-        $simpan_sampel = new PenyimpananSampel;
-        $simpan_sampel->sim_penid = intval($request->penid);
-        $simpan_sampel->sim_samid = intval($key);
-        $simpan_sampel->sim_lokasi_simpan = $val;
-        $simpan_sampel->sim_tanggal_simpan = Carbon::now()->toDateString();
-        $simpan_sampel->save();
-        }
-        
-      }
-      */
       $changepenstatus = PengambilanSampel::where('pen_id',$request->penid)->first();
-      $changepenstatus->pen_statuspen = 2;
-      if(!is_null($request->regno)){
+      $changepenstatus->pen_statuspen = 2; //ubah status pengambilan sampel jadi 2 jadi artinya tidak bisa diisi lagi oleh ekstraksi
+
+      if(!is_null($request->regno)){ //jika ada nomor registrasinya
         $changeregstatus = RegisterPasien::where('reg_no',$request->regno)->first();
-        $changeregstatus->reg_statusreg = 3;
+        $changeregstatus->reg_statusreg = 3; //ubah ke 3 statusnya
       }
         $changestatusam = Sampel::where('sam_id',$request->eks_samid)->first();
-        $changestatusam->sam_statussam = 2;
+        $changestatusam->sam_statussam = 2; //not used anymore, untuk track samples
+
         $insert = collect($request->all());
-        $insert->put('eks_userid',Auth::user()->id);
-        $insert->put('eks_status',1);
+        $insert->put('eks_userid',Auth::user()->id); //log the user
+        $insert->put('eks_status',1); //ubah status ekstraksi jadi 1
         
         try{
            Ekstraksi::create($insert->all());
@@ -106,14 +88,11 @@ class EkstraksiController extends Controller
            $changestatusam->update();
            if(!is_null($request->regno)){
             $changeregstatus->update();
-          }
-           
-                 }catch(QE $e){  return $e; } //show db error message
-                 
+               }
+           }catch(QE $e){  return $e; } //show db error message
              notify()->success('Status Ekstraksi dan Pengiriman RNA telah sukses ditambahkan !');
           return redirect('ekstraksi');
-       
-            //return $request->penyimpanansampel;
+    
     }
 
     /**
@@ -127,8 +106,7 @@ class EkstraksiController extends Controller
         $show = Ekstraksi::join('sampel', 'sampel.sam_id','=','ekstraksisampel.eks_samid')
         ->select('sampel.sam_barcodenomor_sampel', 'ekstraksisampel.*')
         ->where('eks_id',$id)->first();
-        $notes = Notes::where('note_item_id',$show->eks_id)->where('note_item_type',1)->orderBy('created_at','desc')->get();
-        //tambahin tambahin berita acara
+        $notes = Notes::where('note_item_id',$show->eks_id)->where('note_item_type',1)->orderBy('created_at','desc')->get(); // TYPE 1 = Ekstraksi, untuk item type lihat readme
         return view('ekstraksi.show')->with(compact('show','notes'));
     }
 
@@ -143,7 +121,7 @@ class EkstraksiController extends Controller
         $edit = Ekstraksi::where('eks_id',$id)->first();
         $selected = PengambilanSampel::where('pen_id',$edit->eks_penid)->first();
         $selected_sampel = Sampel::where('sam_penid',$edit->eks_penid)->get();
-        $notes = Notes::where('note_item_id',$edit->eks_id)->where('note_item_type',1)->orderBy('created_at','desc')->get();
+        $notes = Notes::where('note_item_id',$edit->eks_id)->where('note_item_type',1)->orderBy('created_at','desc')->get(); // TYPE 1 = Ekstraksi
 
         return view('ekstraksi.edit')->with(compact('selected','selected_sampel','edit','notes'));
     }
@@ -162,6 +140,7 @@ class EkstraksiController extends Controller
         $newsampel = Sampel::where('sam_id', $request->eks_samid)->first();
         $insert = collect($request->all());
 
+        /** masukan keterangan edit, apa aja yang diubah dan menjadi apa */
         $notes = new Notes;
         $perubahan = "<p>Pengubahan pilihan sampel dari sampel <b>#".$oldsampel->sam_barcodenomor_sampel."</b> menjadi <b>#".$newsampel->sam_barcodenomor_sampel."</b>"
         ."<br>Tanggal penerimaan <b>".$update->eks_tanggal_penerimaan_sampel."</b> menjadi <b>".$request->eks_tanggal_penerimaan_sampel."</b>"
@@ -178,8 +157,8 @@ class EkstraksiController extends Controller
         ."<br>Catatan lain  <b>".$update->eks_catatan."</b> menjadi <b>".$request->eks_catatan."</b></p>";
         
         $notes->note_isi = $request->note_isi."</br>".$perubahan;
-        $notes->note_item_id  = $request->note_item_id;
-        $notes->note_item_type = 1;
+        $notes->note_item_id  = $request->note_item_id; //ekstraksi id
+        $notes->note_item_type = 1; // 1 = ekstraksi
         $notes->note_userid  = $request->note_userid;
      try{
           $update->update($insert->all());
@@ -188,8 +167,6 @@ class EkstraksiController extends Controller
                  
        notify()->success('Status Ekstraksi dan Pengiriman RNA telah sukses diubah !');
          return redirect('ekstraksi');
-       // return $request->all();
-       
     
     }
 

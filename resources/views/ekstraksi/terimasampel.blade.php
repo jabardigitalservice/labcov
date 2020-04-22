@@ -12,7 +12,7 @@
                             <h4 class="mb-1 mt-0">Pengembalian Sampel</h4>
                         </div>
                         <div class="col-sm-8 col-xl-6">
-                           <a href="{{url('ekstraksi')}}" class="btn btn-md btn-primary float-right"><i class="uil-arrow-left"></i> Kembali</a>
+                           <a href="{{url('ekstraksi/sampeldikembalikan')}}" class="btn btn-md btn-primary float-right"><i class="uil-arrow-left"></i> Kembali</a>
                         </div>
                     </div>
 
@@ -239,17 +239,16 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-         
-
                 </div>
             </div> <!-- content -->
           
 @section('js')
 <script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 <script>
+$("#tglpenerimaansampel").flatpickr();
+$("#tglmulaiekstraksi").flatpickr();
+$("#tanggalpengirimanrna").flatpickr();
     $(document).ready(function(){
   $(".modals").click(function(){
     document.getElementById("sam_id").innerHTML = this.getAttribute("data-samid"); 
@@ -260,12 +259,5 @@
   });
 });
 </script>
-</script>
-<script>
-$("#tglpenerimaansampel").flatpickr();
-$("#tglmulaiekstraksi").flatpickr();
-$("#tanggalpengirimanrna").flatpickr();
-</script>
 @endsection
-
 @endsection

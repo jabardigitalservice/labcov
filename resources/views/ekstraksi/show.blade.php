@@ -3,7 +3,6 @@
 @section('css')
 @endsection
 @section('content')
-
             <div class="content">
                 <div class="container-fluid">
                     <div class="row page-title align-items-center">
@@ -21,9 +20,8 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">  
-                                    <h4 class="mt-0 mb-1">Detail Ekstraksi & Pengiriman Sampel </h4>
-                                    
-    <hr>
+                                    <h4 class="mt-0 mb-1">Detail Ekstraksi & Pengiriman Sampel </h4>                         
+                                    <hr>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h3 class="header-title mt-2 mb-2">Informasi Ekstraksi & Pengiriman Sampel</h3>
@@ -125,47 +123,11 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-         
-
                 </div>
             </div> <!-- content -->
 
 @section('js')
-<script>
-$(document).ready(function(){
-    
-
-    $(document).on('click', '.deletebtn', function(e) {
-       var href = $(this).attr('href');
-       Swal.fire({
-   title: 'Yakin untuk menghapus data ini ? ',
-   text: 'Data yang sudah dihapus tidak dapat dikembalikan!',
-   icon: 'warning',
-   showCancelButton: true,
-   confirmButtonColor: '#95000c',
-   confirmButtonText: 'Ya, Hapus!',
-   cancelButtonText: 'Tidak, batalkan'
- }).then((result) => {
-   if (result.value) {
-      window.location.href = href;
-  
-   // For more information about handling dismissals please visit
-   // https://sweetalert2.github.io/#handling-dismissals
-   } else if (result.dismiss === Swal.DismissReason.cancel) {
-     Swal.fire(
-       'Dibatalkan',
-       'Data tidak jadi dihapus',
-       'error'
-     )
-   }
- });
- 
-      });
-});
-                        </script>
 @endsection
 
 @endsection
