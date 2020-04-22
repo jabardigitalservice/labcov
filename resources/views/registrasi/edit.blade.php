@@ -1,5 +1,5 @@
 @extends('layouts.web')
-@section('title','- Ubah data Registrasi')
+@section('title','- Ubah Data Registrasi')
 @section('css')
 <link rel="stylesheet" href="{{asset('assets/libs/smartwizard/smart_wizard.min.css')}}" type="text/css" />
 @endsection
@@ -35,7 +35,7 @@
     <div class="p-3">
         <div id="sw-default-step-1">
   <div class="form-group row mt-4">
-      <label class="col-md-2">Nomor Registrasi</label>
+      <label class="col-md-2">Nomor Registrasi  <span style="color:red;">*</span></label>
       <div class="col-md-6">
      <input class="multisteps-form__input form-control" type="text" name="reg_no" value="{{$edit->reg_no}}" required/>
       </div>
@@ -188,32 +188,14 @@
                <input class="multisteps-form__input form-control" type="text" name="reg_nama_pasien" value="{{$edit->reg_nama_pasien}}"/>
                 </div>
               </div>
-              <div class="form-group row mt-4">
-                <label class="col-md-2" >Nomor Identitas <span style="color:red;">*</span></label>
-                <div class="col-md-6">
-                <div class="form-check form-check-inline">
-  <input class="form-check-input" id="selectktpid" type="radio" name="reg_jenisidentitas" value="KTP" onclick="ktpselect();"  @if($edit->reg_jenisidentitas == "KTP") checked @endif required>
-  <label class="form-check-label" for="selectktpid">Nomor Induk Kependudukan</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" id="selectsimid" type="radio" name="reg_jenisidentitas" value="SIM" onclick="simselect();"  @if($edit->reg_jenisidentitas == "SIM") checked @endif>
-  <label class="form-check-label" for="selectsimid">Nomor Sim</label>
-</div>
-                </div>
-              </div>
-              <div class="mt-4" id="sim" style="display: none;">
-                <div class="form-group row">
-                  <label class="col-md-2" >Nomor SIM (Surat Izin Mengemudi)</label>
-                  <div class="col-md-6">
-                 <input class="multisteps-form__input form-control" type="text" id="idsim" name="reg_nosim" maxlength="12" value="{{$edit->reg_nosim}}"/>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-4" id="ktp" style="display: none;">
+              
+              <input type="hidden" name="reg_jenisidentitas" value="KTP">
+            
+              <div class="mt-4" id="ktp" >
                 <div class="form-group row">
                   <label class="col-md-2" >NIK KTP (Nomor Induk Kependudukan)</label>
                   <div class="col-md-6">
-                 <input class="multisteps-form__input form-control" type="text" id="idktp" name="reg_nik" maxlength="16" value="{{$edit->reg_nik}}"/>
+                 <input class="multisteps-form__input form-control" type="text" id="idktp" name="reg_nik" maxlength="16" value="{{$edit->reg_nik}}" required/>
                   </div>
                 </div>
               </div>
@@ -1373,15 +1355,6 @@ function show2(){
   document.getElementById('ifcewe').style.display = 'block';
 };
 
-function simselect(){
-  document.getElementById('sim').style.display ='block';
-  document.getElementById('ktp').style.display ='none';
-};
-function ktpselect(){
-  document.getElementById('sim').style.display ='none';
-  document.getElementById('ktp').style.display ='block';
-};
-
 function showRDT(){
   document.getElementById('ifrdt').style.display ='none';
 };
@@ -1390,14 +1363,6 @@ function showRDT2(){
 };
    
 $(document).ready(function(){
-if(document.getElementById('selectktpid').checked) {
-  document.getElementById('sim').style.display ='none';
-  document.getElementById('ktp').style.display ='block';
-  }
-if(document.getElementById('selectsimid').checked) {
-  document.getElementById('sim').style.display ='block';
-  document.getElementById('ktp').style.display ='none';
-}
 if(document.getElementById('pernahrdt').checked) {
   document.getElementById('ifrdt').style.display = 'block';
 }
@@ -1415,13 +1380,17 @@ if(document.getElementById("rsfasyankes").value == "Other"){
 $("#smartwizard-default").smartWizard({
 useURLhash:!1,
 showStepURLhash:!1, 
+anchorSettings: {
+          anchorClickable: true, // Enable/Disable anchor navigation
+          enableAllAnchors: true, // Activates all anchors clickable all times
+      },
 keyNavigation:false, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
 lang: {  // Language variables
 next: 'Selanjutnya', 
 previous: 'Sebelumnya'
 }
 });
- });
+});
 </script>
 <script>
 $("#tanggalkunjungan").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});

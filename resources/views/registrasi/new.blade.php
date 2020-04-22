@@ -187,32 +187,13 @@
                <input class="multisteps-form__input form-control" type="text" name="reg_nama_pasien" placeholder="Nama Lengkap Pasien" required/>
                 </div>
               </div>
-              <div class="form-group row mt-4">
-                <label class="col-md-2" >Nomor Identitas <span style="color:red;">*</span></label>
-                <div class="col-md-6">
-                <div class="form-check form-check-inline">
-  <input class="form-check-input" id="selectktpid" type="radio" name="reg_jenisidentitas" value="KTP" onclick="ktpselect();" required>
-  <label class="form-check-label" for="selectktpid">Nomor Induk Kependudukan</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" id="selectsimid" type="radio" name="reg_jenisidentitas" value="SIM" onclick="simselect();" >
-  <label class="form-check-label" for="selectsimid">Nomor Sim</label>
-</div>
-                </div>
-              </div>
-   <div class="mt-4" id="sim" style="display: none;">
+              <input type="hidden" name="reg_jenisidentitas" value="KTP">
+        
+ <div class="mt-4" id="ktp">
    <div class="form-group row">
-     <label class="col-md-2" >Nomor SIM (Surat Izin Mengemudi)</label>
+     <label class="col-md-2" >NIK KTP (Nomor Induk Kependudukan)  <span style="color:red;">*</span></label>
      <div class="col-md-6">
-    <input class="multisteps-form__input form-control" type="text" id="idsim" name="reg_nosim" maxlength="12" placeholder="Nomor SIM Pasien"/>
-     </div>
-   </div>
- </div>
- <div class="mt-4" id="ktp" style="display: none;">
-   <div class="form-group row">
-     <label class="col-md-2" >NIK KTP (Nomor Induk Kependudukan)</label>
-     <div class="col-md-6">
-    <input class="multisteps-form__input form-control" type="text" id="idktp" name="reg_nik" maxlength="16" placeholder="NIK Pasien"/>
+    <input class="multisteps-form__input form-control" type="text" id="idktp" name="reg_nik" maxlength="16" placeholder="NIK Pasien" required/>
      </div>
    </div>
  </div>
@@ -275,7 +256,7 @@
                 
               <div class="form-group row mt-4">
                 <label class="col-md-2" >Alamat <span style="color:red;">*</span></label>
-                <div class="col-md-8">
+                <div class="col-md-10">
                   <div class="row">
                   <select class="multisteps-form__input col-md-3 form-control" id="domisilikotakab" name="reg_domisilikotakab" required>
                     <option value="Kota Bandung">Kota Bandung</option>
@@ -355,7 +336,7 @@
               <div class="form-group row">
                 <label class="col-md-2 col-form-label">Keterangan lain</label>
                 <div class="col-md-10">
-      <textarea class="form-control" rows="3" name="reg_keteranganpasien">Keterangan lain</textarea>
+      <textarea class="form-control" rows="3" name="reg_keteranganpasien" placeholder="Keterangan lain"></textarea>
                 </div>
               </div>
 
@@ -448,7 +429,7 @@
           <div class="form-group row">
           <label class="col-md-2 col-form-label">Keterangan RDT</label>
           <div class="col-md-10">
-<textarea class="form-control" rows="3" name="rar_keterangan">isikan Jenis sampel dan keterangan penting lainnya</textarea>
+<textarea class="form-control" rows="3" name="rar_keterangan">Isikan Jenis sampel dan keterangan penting lainnya</textarea>
           </div>
         </div>
     </div>
@@ -1288,7 +1269,7 @@
         <h4 class="mb-1 mt-0">Sampel</h4>
         <p><b>Arahkan Kursor ke kotak lalu scan barcode sampel</b></p>
         <center>
-          <input class="form-control col-md-4" type="text" placeholder="Klik disini lalu scan barcode sampel" id="scanInput" autofocus>
+          <input class="form-control col-md-4" type="text" placeholder="Klik disini lalu scan barcode sampel" id="scanInput">
         </center>
           <div class="field_wrapper mt-3">
           </div>
@@ -1482,14 +1463,6 @@ $(document).on('click', '.remove_field', function() {
 
 $(document).ready(function(){
 
-if(document.getElementById('selectktpid').checked) {
-  document.getElementById('sim').style.display ='none';
-  document.getElementById('ktp').style.display ='block';
-  }
-if(document.getElementById('selectsimid').checked) {
-  document.getElementById('sim').style.display ='block';
-  document.getElementById('ktp').style.display ='none';
-}
 if(document.getElementById('pernahrdt').checked) {
   document.getElementById('ifrdt').style.display = 'block';
 }

@@ -41,7 +41,7 @@
   <div class="p-3">
       <div id="sw-default-step-1">
 <div class="form-group row mt-4">
-    <label class="col-md-2">Nomor Registrasi</label>
+    <label class="col-md-2">Nomor Registrasi  <span style="color:red;">*</span></label>
     <div class="col-md-6">
    <input class="multisteps-form__input form-control" type="text" name="reg_no" placeholder="Nomor Registrasi" required/>
     </div>
@@ -193,32 +193,11 @@
              <input class="multisteps-form__input form-control" type="text" name="reg_nama_pasien" placeholder="Nama Lengkap Pasien" required/>
               </div>
             </div>
-            <div class="form-group row mt-4">
-              <label class="col-md-2" >Nomor Identitas <span style="color:red;">*</span></label>
-              <div class="col-md-6">
-              <div class="form-check form-check-inline">
-<input class="form-check-input" id="selectktpid" type="radio" name="reg_jenisidentitas" value="KTP" onclick="ktpselect();" required>
-<label class="form-check-label" for="selectktpid">Nomor Induk Kependudukan</label>
-</div>
-<div class="form-check form-check-inline">
-<input class="form-check-input" id="selectsimid" type="radio" name="reg_jenisidentitas" value="SIM" onclick="simselect();" >
-<label class="form-check-label" for="selectsimid">Nomor Sim</label>
-</div>
-              </div>
-            </div>
- <div class="mt-4" id="sim" style="display: none;">
+<div class="mt-4" id="ktp">
  <div class="form-group row">
-   <label class="col-md-2" >Nomor SIM (Surat Izin Mengemudi)</label>
+   <label class="col-md-2" >NIK KTP (Nomor Induk Kependudukan)  <span style="color:red;">*</span></label>
    <div class="col-md-6">
-  <input class="multisteps-form__input form-control" type="text" id="idsim" name="reg_nosim" maxlength="12" placeholder="Nomor SIM Pasien"/>
-   </div>
- </div>
-</div>
-<div class="mt-4" id="ktp" style="display: none;">
- <div class="form-group row">
-   <label class="col-md-2" >NIK KTP (Nomor Induk Kependudukan)</label>
-   <div class="col-md-6">
-  <input class="multisteps-form__input form-control" type="text" id="idktp" name="reg_nik" maxlength="16" placeholder="NIK Pasien"/>
+  <input class="multisteps-form__input form-control" type="text" id="idktp" name="reg_nik" maxlength="16" placeholder="NIK Pasien" required/>
    </div>
  </div>
 </div>
@@ -353,15 +332,15 @@
           
             
             <div class="form-group row mt-4">
-              <label class="col-md-2" >Nomor Telp/HP</label>
+              <label class="col-md-2" >Nomor Telp/HP  <span style="color:red;">*</span></label>
               <div class="col-md-6">
-             <input class="multisteps-form__input form-control" type="text" name="reg_notelp_pasien" placeholder="Nomor Telp/HP Pasien"/>
+             <input class="multisteps-form__input form-control" type="text" name="reg_notelp_pasien" placeholder="Nomor Telp/HP Pasien" required/>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-2 col-form-label">Keterangan lain</label>
               <div class="col-md-10">
-    <textarea class="form-control" rows="3" name="reg_keteranganpasien">Keterangan lain</textarea>
+    <textarea class="form-control" rows="3" name="reg_keteranganpasien" placeholder="Keterangan lain"></textarea>
               </div>
             </div>
         
@@ -1321,15 +1300,6 @@ function show2(){
 document.getElementById('ifcewe').style.display = 'block';
 };
 
-function simselect(){
-document.getElementById('sim').style.display ='block';
-document.getElementById('ktp').style.display ='none';
-};
-function ktpselect(){
-document.getElementById('sim').style.display ='none';
-document.getElementById('ktp').style.display ='block';
-};
-
 function showRDT(){
 document.getElementById('ifrdt').style.display ='none';
 };
@@ -1340,14 +1310,6 @@ document.getElementById('ifrdt').style.display = 'block';
 
     $(document).ready(function(){
 
-if(document.getElementById('selectktpid').checked) {
-  document.getElementById('sim').style.display ='none';
-  document.getElementById('ktp').style.display ='block';
-  }
-if(document.getElementById('selectsimid').checked) {
-  document.getElementById('sim').style.display ='block';
-  document.getElementById('ktp').style.display ='none';
-}
 if(document.getElementById('pernahrdt').checked) {
   document.getElementById('ifrdt').style.display = 'block';
 }
@@ -1362,21 +1324,21 @@ if(document.getElementById("rsfasyankes").value == "Other"){
   document.getElementById("inputrslain").style.display = "block";
 }
 
-    $("#smartwizard-default").smartWizard(
-        {useURLhash:!1,
-            showStepURLhash:!1,
+    $("#smartwizard-default").smartWizard({
+useURLhash:!1,
+showStepURLhash:!1, 
 anchorSettings: {
           anchorClickable: true, // Enable/Disable anchor navigation
           enableAllAnchors: true, // Activates all anchors clickable all times
       },
 keyNavigation:false, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
-            lang: {  // Language variables
-                next: 'Selanjutnya', 
-                previous: 'Sebelumnya'
-            }
-        }
-        );
- });
+lang: {  // Language variables
+next: 'Selanjutnya', 
+previous: 'Sebelumnya'
+}
+});
+
+});
 </script>
 <script>
   $("#tanggalkunjungan").flatpickr({maxDate: new Date(),dateFormat: "Y/m/d",allowInput: true});
@@ -1413,6 +1375,15 @@ keyNavigation:false, // Enable/Disable keyboard navigation(left and right keys a
         document.getElementById("ifYes").style.display = "none";
     }
 }
+
+
+function rsotheroptionselect(that) {
+    if (that.value == "Other") {
+        document.getElementById("inputrslain").style.display = "block";
+    } else {
+        document.getElementById("inputrslain").style.display = "none";
+    }
+  }
 </script>
 @endsection
 

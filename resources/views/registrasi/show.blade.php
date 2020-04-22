@@ -24,8 +24,7 @@
                             <div class="card">
                                 <div class="card-body">  
                                     <h4 class="mt-0 mb-1">Register Pasien #{{$reg->reg_no}}</h4>
-                                    
-    <hr>
+                                       <hr>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h3 class="header-title mt-2 mb-2">Identitas Pasien</h3>
@@ -36,12 +35,10 @@
               <td width="60%">{{$reg->reg_nama_pasien}}</td>
             </tr>
             <tr>
-                <td width="40%"><b>Nomor Induk Kependudukan</b></td>  <td width="60%"> {{$reg->reg_nik}} </td>
-              </tr>
-              <tr>
-                <td width="40%"><b>Nomor Surat Izin Mengemudi</b></td>
-                <td width="60%">{{$reg->reg_nosim}}</td>
-              </tr>
+                <td width="40%"><b>Nomor Induk Kependudukan</b></td>  
+                <td width="60%"> {{$reg->reg_nik}} </td>
+            </tr>
+              
               <tr>
                 <td width="40%"><b>Nomor Kartu Keluarga</b></td>
                 <td width="60%">{{$reg->reg_nkk}}</td>
