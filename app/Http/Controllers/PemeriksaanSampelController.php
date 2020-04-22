@@ -67,6 +67,10 @@ class PemeriksaanSampelController extends Controller
         $changestatusam = Sampel::where('sam_id',$request->pem_samid)->first();
         $changestatusam->sam_statussam = 3;
 
+        if(!is_null($request->metode_pemeriksaan_lainnya)){
+            $request->pem_metode_pemeriksaan = $request->metode_pemeriksaan_lainnya;
+        }
+
         if(!is_null($changepenstatus->pen_noreg)){
             $changeregstatus = RegisterPasien::where('reg_no',$changepenstatus->pen_noreg)->first();
             $changeregstatus->reg_statusreg = 4;
@@ -119,7 +123,8 @@ class PemeriksaanSampelController extends Controller
         $show = PemeriksaanSampel::join('sampel','sampel.sam_id','=','pemeriksaansampel.pem_samid')
         ->join('pengambilansampel','pengambilansampel.pen_id','=','pemeriksaansampel.pem_penid')
         ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
-        ->select('pemeriksaansampel.*','ekstraksisampel.eks_operator_ekstraksi',
+        ->join('register','register.reg_no','=','pengambilansampel.pen_noreg')
+        ->select('pemeriksaansampel.*','register.reg_nik','register.reg_no','ekstraksisampel.eks_operator_ekstraksi',
         'ekstraksisampel.eks_tanggal_mulai_ekstraksi',
         'ekstraksisampel.eks_metode_ekstraksi',
         'ekstraksisampel.eks_nama_kit_ekstraksi',
@@ -141,7 +146,8 @@ class PemeriksaanSampelController extends Controller
         $edit = PemeriksaanSampel::join('sampel','sampel.sam_id','=','pemeriksaansampel.pem_samid')
         ->join('pengambilansampel','pengambilansampel.pen_id','=','pemeriksaansampel.pem_penid')
         ->join('ekstraksisampel','ekstraksisampel.eks_id','=','pemeriksaansampel.pem_eksid')
-        ->select('pemeriksaansampel.*','ekstraksisampel.eks_operator_ekstraksi',
+        ->join('register','register.reg_no','=','pengambilansampel.pen_noreg')
+        ->select('pemeriksaansampel.*','ekstraksisampel.eks_operator_ekstraksi','register.reg_nik','register.reg_no',
         'ekstraksisampel.eks_tanggal_mulai_ekstraksi',
         'ekstraksisampel.eks_metode_ekstraksi',
         'ekstraksisampel.eks_nama_kit_ekstraksi',
@@ -292,6 +298,10 @@ class PemeriksaanSampelController extends Controller
             $changeregstatus->reg_statusreg = 4;
             $changeregstatus->update();
           }
+
+          if(!is_null($request->metode_pemeriksaan_lainnya)){
+            $request->pem_metode_pemeriksaan = $request->metode_pemeriksaan_lainnya;
+        }
 
         $notes = new Notes;
         $notes->note_isi = $request->note_isi."<br> Pengubahan Hasil Pemeriksaan ID : ".$request->pem_id." sesuai permintaan validator Pada ".Carbon::now();

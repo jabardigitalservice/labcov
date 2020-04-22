@@ -13,7 +13,7 @@
                         </div>
                         <div class="col-sm-8 col-xl-6">
                         <a href="{{url('pemeriksaansampel')}}" class="btn btn-sm btn-primary float-right"><i class="uil-arrow-left"></i>Kembali</a>
-                        <a href="{{url('pemeriksaansampel/kembalikan/'.$periksa->pem_eksid)}}" class="btn btn-sm btn-danger float-right"><i class="uil-backward"></i> Kembalikan ke Lab Ekstraksi</a>
+                        <a href="{{url('pemeriksaansampel/kembalikan/'.$periksa->eks_id)}}" class="btn btn-sm btn-danger float-right"><i class="uil-backward"></i> Kembalikan ke Lab Ekstraksi</a>
                         </div>
                     </div>
 
@@ -105,13 +105,11 @@
       <label class="col-md-2" >Metode pemeriksaan <span style="color:red">*</span></label>
       <div class="col-md-6">
         <select class="multisteps-form__input form-control " id="metodepemeriksaan" name="pem_metode_pemeriksaan" onchange="otheroptionselect(this);">
-          <option value="RSUP Dr. Hasan Sadikin">RSUP Dr. Hasan Sadikin</option>
-          <option value="RSUP Dr. Hasan Sadikin">RSUP Dr. Hasan Sadikin</option>
-          <option value="RSUP Dr. Hasan Sadikin">RSUP Dr. Hasan Sadikin</option>
-          <option value="Other">RS Lainnya, Sebutkan</option>
+          <option value="Multiplex">Multiplex</option>
+          <option value="Singleplex">Singleplex</option>
+          <option value="Others">Lainnya..</option>
         </select>
-
-     <input class="form-control" type="text" name="metode_pemeriksaan_lainnya" placeholder="Metode pemeriksaan lainnya" required/>
+     <input class="form-control" style="display: none;" id="metodelain" type="text" name="metode_pemeriksaan_lainnya" placeholder="Metode pemeriksaan lainnya"/>
       </div>
     </div>
     <div class="form-group row mt-4">
@@ -203,7 +201,13 @@
 });
 </script>
 <script>
-  
+   function otheroptionselect(that) {
+    if (that.value == "Others") {
+        document.getElementById("metodelain").style.display = "block";
+    } else {
+        document.getElementById("metodelain").style.display = "none";
+    }
+  }
   function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

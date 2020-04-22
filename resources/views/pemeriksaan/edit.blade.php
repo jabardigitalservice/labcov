@@ -23,9 +23,9 @@
       <div class="col-12">
           <div class="card">
               <div class="card-body">  
-              @if(!is_null($edit->pem_noreg) && !is_null($edit->pem_nik))
-              <h4 class="header-title mt-0 mb-1">No. Registrasi : <u>#{{$edit->pem_noreg}}</u></h4>
-              <h4 class="header-title mt-0 mb-1">No. Induk Kependudukan : <u>{{$edit->pem_nik}}</u></h4>
+              @if(!is_null($edit->reg_no) && !is_null($edit->reg_nik))
+              <h4 class="header-title mt-0 mb-1">No. Registrasi : <u>#{{$edit->reg_no}}</u></h4>
+              <h4 class="header-title mt-0 mb-1">No. Induk Kependudukan : <u>{{$edit->reg_nik}}</u></h4>
               @else
              <p><span class="badge badge-danger">Identitas Pasien Belum Dimasukan Register</span></p>
               @endif
@@ -35,8 +35,8 @@
     @csrf
     <p><b>Sampel yang diperiksa : <span class="badge badge-primary">Sampel #{{$edit->sam_barcodenomor_sampel}}</span></b></p>
   
-    @if(!is_null($edit->pem_noreg))
- <input type="hidden" name="pem_noreg" value="{{$edit->pem_noreg}}">
+    @if(!is_null($edit->reg_no))
+ <input type="hidden" name="pem_noreg" value="{{$edit->reg_no}}">
  @endif
     <div class="form-group row mt-4">
       <label class="col-md-2">Tanggal penerimaan sampel <span style="color:red">*</span></label>
@@ -194,7 +194,10 @@
 @section('js')
 <script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 <script>
-    $(document).ready(function(){
+$("#tglmulaipemeriksaan").flatpickr();
+
+  //untuk informasi sampel yang ada di Modal
+  $(document).ready(function(){
   $(".modals").click(function(){
     document.getElementById("sam_id").innerHTML = this.getAttribute("data-samid"); 
     document.getElementById("sam_petugas_pengambil_sampel").innerHTML = this.getAttribute("data-petugas");
@@ -203,26 +206,6 @@
     $("#myModal").modal();
   });
 });
-</script>
-<script>
-  
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-  
-        reader.onload = function (e) {
-            $('#preview').attr('src', e.target.result);
-        }
-  
-        reader.readAsDataURL(input.files[0]);
-    }
-  }
-  
-  $("#gambargrafik").change(function () {
-    readURL(this);
-  });
-  
-$("#tglmulaipemeriksaan").flatpickr();
 </script>
 @endsection
 @endsection

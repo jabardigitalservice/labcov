@@ -31,18 +31,18 @@
           <tbody>
             <tr>
               <td width="40%"><b>Nomor Registrasi</b></td>
-              <td width="60%">@if(is_null($show->pem_noreg))
+              <td width="60%">@if(is_null($show->reg_no))
               <span class="badge badge-danger">Identitas Pasien belum dimasukan Register</span>
               @else
-              {{$show->pem_noreg}}
+              {{$show->reg_no}}
               @endif</td>
             </tr>
             <tr>
                 <td width="40%"><b>Nomor Induk Kependudukan</b></td>
-                <td width="60%">@if(is_null($show->eks_nik))
+                <td width="60%">@if(is_null($show->reg_nik))
               <span class="badge badge-danger">Identitas Pasien belum dimasukan Register</span>
               @else
-              {{$show->pem_noreg}}
+              {{$show->reg_nik}}
               @endif</td>
               </tr>
               <tr>
